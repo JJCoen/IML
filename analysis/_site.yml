@@ -1,7 +1,7 @@
-name: "Interpretable-ML-Models"
+name: Interpretable-ML-Models
 output_dir: ../docs
 navbar:
-  title: "Interpretable-ML-Models"
+  title: Interpretable-ML-Models
   left:
   - text: Home
     href: index.html
@@ -9,6 +9,10 @@ navbar:
     href: about.html
   - text: License
     href: license.html
+  right:
+  - icon: fab fa-github
+    text: Source code
+    href: https://github.com/JJCoen/Interpretable-ML-Models
 output:
   workflowr::wflow_html:
     toc: yes
