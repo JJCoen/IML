@@ -8,21 +8,21 @@
 
 .columns {display: flex; }
 
-body{ /* Normal  */     font-size: 14px; }
-td {  /* Table  */      font-size: 14px; }
-title { font-size: 20px; color: darkred; }
+body{ /* Normal  */     font-size: 18px; }
+td {  /* Table  */      font-size: 18px; }
+title { font-size: 24px; color: darkred; }
 h1 { /* Header 1 */
-   font-size: 18px; color: DarkBlue; margin-top: 20px;}
+   font-size: 22px; color: DarkBlue; margin-top: 20px;}
 
 h2 { /* Header 2 */
-    font-size: 16px; color: DarkBlue; margin-top: 20px;}
+    font-size: 20px; color: DarkBlue; margin-top: 20px;}
 
 h3 {
-    /* Header 3 */     font-size: 14px; font-family: "Times New Roman", Times, serif; color: DarkBlue;
+    /* Header 3 */     font-size: 18px; font-family: "Times New Roman", Times, serif; color: DarkBlue;
 }
 
 blockquote {
-  font-style: italic
+  font-size: 18px; font-style: italic
 }
 
 .indigotext {

@@ -372,16 +372,16 @@ This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysi
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree6c0b3ae71e5f181c0c3a293431d98b1915c7900atargetblank6c0b3aea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/6c0b3ae71e5f181c0c3a293431d98b1915c7900a" target="_blank">6c0b3ae</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree602b811850d5f0360001eeb8062e2504c9d457ddtargetblank602b811a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/602b811850d5f0360001eeb8062e2504c9d457dd" target="_blank">602b811</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree6c0b3ae71e5f181c0c3a293431d98b1915c7900atargetblank6c0b3aea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree602b811850d5f0360001eeb8062e2504c9d457ddtargetblank602b811a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/6c0b3ae71e5f181c0c3a293431d98b1915c7900a" target="_blank">6c0b3ae</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/602b811850d5f0360001eeb8062e2504c9d457dd" target="_blank">602b811</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -438,6 +438,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/JJCoen/Interpretable-ML-Models/blob/602b811850d5f0360001eeb8062e2504c9d457dd/analysis/index.Rmd" target="_blank">602b811</a>
+</td>
+<td>
+JJCoen
+</td>
+<td>
+2022-03-01
+</td>
+<td>
+wflow_publish(files = “analysis/index.Rmd”)
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/JJCoen/Interpretable-ML-Models/3120e807a13cc294fc5c27d957ed2ec186e238ee/docs/index.html" target="_blank">3120e80</a>
+</td>
+<td>
+JJCoen
+</td>
+<td>
+2022-03-01
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -566,25 +600,35 @@ Start workflowr project.
 </div>
 <div id="background" class="section level2">
 <h2>Background</h2>
-<p>There are many stakeholders that interact with a Machine Learning (ML) model: - Data Analyst or creator / developer of the ML model<br />
-- Financial Officer that applies the ML model<br />
-- Client wants to understand decisions that the ML model make in regards to themselves<br />
-- Internal Audit<br />
-- Regulatory Oversight</p>
-<p>While a highly complex, “black-box” model can give high predictive accuracy, it is not clear how it arrives at particular outcomes. As a result, organisations and their personnel have been reluctant to put ML models into practice. And so, there are two main reasons for improving the interpretability of ML models:<br />
-1. To improve confidence in and utilisation of ML models.<br />
-2. In the case of high-stakes decision making, such as credit assessment of corporate clients.</p>
+<p>There are many stakeholders that interact with a Machine Learning (ML) model:</p>
+<ul>
+<li>Data Analyst or creator / developer of the ML model</li>
+<li>Financial Officer that applies the ML model</li>
+<li>Client wants to understand decisions that the ML model make in regards to themselves</li>
+<li>Internal Audit</li>
+<li>Regulatory Oversight</li>
+</ul>
+<p>While a highly complex, “black-box” model can give high predictive accuracy, it is not clear how it arrives at particular outcomes. As a result, organisations and their personnel have been reluctant to put ML models into practice. And so, there are two main reasons for improving the interpretability of ML models:</p>
+<ol style="list-style-type: decimal">
+<li>To improve confidence in and utilisation of ML models.</li>
+<li>In the case of high-stakes decision making, such as credit assessment of corporate clients.</li>
+</ol>
 </div>
 </div>
 <div class="col-sm-6">
-<p><img src="./images/corporate-finance-inst.png" width = "20%"></p>
+<div style="text-align: right;">
+<img src="./images/corporate-finance-inst.png" width="20%">
+</div>
 <p><strong>Data Science</strong></p>
+<blockquote>
 <p>“Success in a data science project comes, not from access to any one exotic tool, but from having quantifiable goals, good methodology, cross-discipline interactions, and a repeatable workflow”<br />
 Nina Zumel and John Mount, Practical Data Science with R</p>
+</blockquote>
 <p><strong>Information content of available data</strong></p>
+<blockquote>
 <p>“The combination of some data and an aching desire for an answer does not ensure that a reasonable answer can be extracted from a given body of data”<br />
 John W. Tukey</p>
-<p></a></p>
+</blockquote>
 </div>
 
 
