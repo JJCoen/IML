@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Jim Coen" />
+
+
+<title>HELOC Data Cleaning</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Interpretable ML Models</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-bar-chart"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="Purpose.html">
+    <span class="fa fa-info"></span>
+     
+    Purpose
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-analytics"></span>
+     
+    Datasets
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="HELOC-data-dictionary.html">HELOC Data Dictionary</a>
+    </li>
+    <li class="dropdown-header">HELOC Data Cleaning</li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/JJCoen/ML-Interpretation">
+    <span class="fab fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">HELOC Data Cleaning</h1>
+<h4 class="author">Jim Coen</h4>
+<h4 class="date">Friday, January 28, 2022</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2022-01-28
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+</p>
+<p>
+<strong>Knit directory:</strong> <code>Interpretable-ML-Models/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version 1.7.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The R Markdown is untracked by Git. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20220121code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20220121)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20220121code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20220121)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree8c96ca578849cdd7d9d69c8e3ed57feee998fa04targetblank8c96ca5a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/8c96ca578849cdd7d9d69c8e3ed57feee998fa04" target="_blank">8c96ca5</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree8c96ca578849cdd7d9d69c8e3ed57feee998fa04targetblank8c96ca5a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/8c96ca578849cdd7d9d69c8e3ed57feee998fa04" target="_blank">8c96ca5</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    analysis/.Rhistory
+
+Untracked files:
+    Untracked:  analysis/HELOC-data-cleaning.Rmd
+    Untracked:  analysis/HELOC-data-dictionary.Rmd
+    Untracked:  analysis/Harvard.csl
+    Untracked:  analysis/Purpose.Rmd
+    Untracked:  analysis/style.css
+    Untracked:  data/heloc_data_dictionary-2.xlsx
+    Untracked:  data/heloc_dataset_v1.csv
+
+Unstaged changes:
+    Modified:   analysis/_site.yml
+    Deleted:    analysis/about.Rmd
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+<p>
+There are no past versions. Publish this analysis with <code>wflow_publish()</code> to start tracking its development.
+</p>
+<hr>
+</div>
+</div>
+</div>
+<pre class="r"><code>heloc &lt;- read.csv(&quot;./data/heloc_dataset_v1.csv&quot;)
+setDT(heloc)</code></pre>
+<div id="missing-values" class="section level1">
+<h1>Missing Values</h1>
+<p>Missing values may be ignored by taking complete cases only or they may be replaced with an incorrect value. However, this can lead to unstable model operation or biased predictions.</p>
+<p>In the HELOC dataset, a negative numeric indicates a missing value. Reasons for this are:</p>
+<ul>
+<li><p>A credit report for an applicant was not found or not investigated. In this case, all features receive a value of -9.</p></li>
+<li><p>Information in the credit report on a particular feature was considered “not usable” and that feature receives a value of -8.</p></li>
+<li><p>In the case where there is “no information of that type”, the feature receives a value of -7. This occurs in the features <code>MSinceMostRecentDelq</code> and <code>MSinceMostRecentInqexcl7days</code>.</p></li>
+</ul>
+<p>When there is no credit report for all observations in a loan applications (all the feature variables are -9), they provide no information and need to be removed.</p>
+<pre class="r"><code>features &lt;- subset (heloc, select = -RiskPerformance)
+has.neg &lt;- apply(features, 1, function(row) all(row &lt; 0))
+which(has.neg) %&gt;% 
+  length()</code></pre>
+<pre><code>[1] 588</code></pre>
+<pre class="r"><code>heloc &lt;- heloc[!has.neg,]
+rm(has.neg)</code></pre>
+<p>588 rows, that contained -9 in all features, were removed.</p>
+<div id="features-containing-missing-values" class="section level2">
+<h2>Features containing missing values</h2>
+<pre class="r"><code>has.neg8 &lt;- apply(features, 1, function(row) any(row == -8))
+num_neg8 &lt;- which(has.neg8) %&gt;% 
+  length()
+cat(&quot;There are&quot;, num_neg8, &quot;observations that have at least one feature with an entry of -8.\n and\n&quot;)</code></pre>
+<pre><code>There are 4226 observations that have at least one feature with an entry of -8.
+ and</code></pre>
+<pre class="r"><code>has.neg7 &lt;- apply(features, 1, function(row) any(row == -7))
+num_neg7 &lt;- which(has.neg7) %&gt;% 
+  length()
+cat(&quot;there are&quot;, num_neg7, &quot;observations that have at least one feature with an entry of -7.&quot;)</code></pre>
+<pre><code>there are 5687 observations that have at least one feature with an entry of -7.</code></pre>
+<pre class="r"><code># cleanup
+rm(&quot;has.neg7&quot;, &quot;has.neg8&quot;, &quot;num_neg7&quot;, &quot;num_neg8&quot;)</code></pre>
+<p>In effect, these entries are missing values and it is better to encode them as “NA”.</p>
+<div id="factor-variables" class="section level3">
+<h3>Factor Variables</h3>
+<p>As described in the data dictionary, the two factor variables and their levels are:</p>
+<table>
+<thead>
+<tr class="header">
+<th>MaxDelq2PublicRecLast12M</th>
+<th>MaxDelqEver</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0 - derogatory comment</td>
+<td>1 - No such value</td>
+</tr>
+<tr class="even">
+<td>1 - 120+ days delinquent</td>
+<td>2 - derogatory comment</td>
+</tr>
+<tr class="odd">
+<td>2 - 90 days delinquent</td>
+<td>3 - 120+ days delinquent</td>
+</tr>
+<tr class="even">
+<td>3 - 60 days delinquent</td>
+<td>4 - 90 days delinquent</td>
+</tr>
+<tr class="odd">
+<td>4 - 30 days delinquent</td>
+<td>5 - 60 days delinquent</td>
+</tr>
+<tr class="even">
+<td>5,6 - unknown delinquency</td>
+<td>6 - 30 days delinquent</td>
+</tr>
+<tr class="odd">
+<td>7 - current and never delinquent</td>
+<td>7 - unknown delinquency</td>
+</tr>
+<tr class="even">
+<td>8, 9 - all other</td>
+<td>8 - current and never delinquent</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>9 - all other</td>
+</tr>
+</tbody>
+</table>
+<p>For the two factor variables above, entries with “derogatory comment” and “No such value” are equivalent to missing values and need to be recorded as such.</p>
+<pre class="r"><code># Encode missing values as &#39;NA&#39;
+heloc[ heloc &lt; 0] &lt;- NA
+ 
+# &quot;derogatory comment&quot;
+heloc[MaxDelq2PublicRecLast12M == 0, MaxDelq2PublicRecLast12M := NA] 
+heloc[MaxDelqEver == 2, MaxDelqEver := NA]
+# &quot;No such Value&quot;
+heloc[MaxDelqEver == 1, MaxDelqEver := NA]</code></pre>
+<p>Convert <code>MaxDelq2PublicRecLast12M</code> and <code>MaxDelqEver</code> from numeric to factor data type.</p>
+<pre class="r"><code># features &lt;- subset (heloc, select = -RiskPerformance)
+change_columns &lt;- c(&quot;MaxDelq2PublicRecLast12M&quot;, &quot;MaxDelqEver&quot;)
+# Change class of certain columns
+heloc[ , (change_columns) := lapply(.SD, as.factor),
+           .SDcols = change_columns]
+
+# record the counts of missing values in each column
+missing_counts &lt;- heloc %&gt;% 
+  is.na() %&gt;% 
+  colSums() %&gt;% 
+    sort(decreasing = TRUE) 
+# features with missing values 
+missing_counts[missing_counts &gt; 0] %&gt;% 
+  kable()</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+x
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+MSinceMostRecentDelq
+</td>
+<td style="text-align:right;">
+4840
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NetFractionInstallBurden
+</td>
+<td style="text-align:right;">
+3419
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MSinceMostRecentInqexcl7days
+</td>
+<td style="text-align:right;">
+2331
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NumInstallTradesWBalance
+</td>
+<td style="text-align:right;">
+861
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MaxDelqEver
+</td>
+<td style="text-align:right;">
+739
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NumBank2NatlTradesWHighUtilization
+</td>
+<td style="text-align:right;">
+583
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MaxDelq2PublicRecLast12M
+</td>
+<td style="text-align:right;">
+336
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MSinceOldestTradeOpen
+</td>
+<td style="text-align:right;">
+239
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NetFractionRevolvingBurden
+</td>
+<td style="text-align:right;">
+186
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NumRevolvingTradesWBalance
+</td>
+<td style="text-align:right;">
+156
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PercentTradesWBalance
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ExternalRiskEstimate
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code># record features with missing values
+miss &lt;- names(missing_counts[missing_counts &gt; 0])
+heloc_miss &lt;- heloc[, ..miss]</code></pre>
+<p>Given the large proportion of missing values, dealing with them appropriately is a critical aspect of the overall analysis of the HELOC dataset.</p>
+<p>The majority of missing values are in the variables<br />
+<code>MSinceMostRecentDelq</code>, <code>MSinceMostRecentInqexcl7days</code>, <code>NetFractionInstallBurden</code>, and <code>NumInstallTradesWBalance</code></p>
+</div>
+</div>
+</div>
+<div id="recognizing-missing-data-mechanisms" class="section level1">
+<h1>Recognizing missing data mechanisms</h1>
+<p>In order to formulate a strategy to deal with missing values, it is important to identify the reasons why a variable has a missing entry.</p>
+<ul>
+<li><p>If the reason for missingness is purely random, it’s MCAR.<br />
+This is generally due to poor test design, absence of output from a faulty sensor, or failure to record the value of a feature. Missing values could potentially occur across all instances / rows in a dataset. Removing such missing values will not introduce bias in subsequent analysis. However, other features for a specific observation are likely to contain relevant information.</p></li>
+<li><p>If the reason for missingness can be explained by another variable, it’s MAR.<br />
+In this case, the missing values occur relative to the observed data but they are not related to the specific missing value itself. They are found within a subset to the observed data. For instance, in a certain location the county council has not registered new builds and so, no address is recorded for them.</p></li>
+<li><p>If the reason for missingness depends on the missing value itself, it’s MNAR.<br />
+For example, those with high income tend not to record a value for their income. The missing data is simply unknown and cannot be estimated from other observations. Because there are reasons within the data for the occurrence of missing values, removing them would lead to bias. There needs to be a method of estimation that minimises bias.</p></li>
+<li><p>The missing value may depend on a predictor that has not been recorded. For instance, people with prior infection are unlikely record if they took an experimental inoculation or not. But the dataset does not record prior infection.</p></li>
+</ul>
+<p>To determine whether a variable is MCAR or MAR, it is necessary to check if missing values on one variable are related to missing values on another variable.</p>
+<div id="visualizing-missing-values" class="section level2">
+<h2>Visualizing Missing Values</h2>
+<p>An aggregation plot displays features in columns and sections each into missing (red cells) and valid entries (blue cells). Limiting the plot to the top four features with missing values facilitates inspection of relationships.</p>
+<p>Columns in the plot below represent the features <code>MSinceMostRecentDelq</code>, <code>NetFractionInstallBurden</code>, <code>MSinceMostRecentInqexcl7days</code>, and <code>NumInstallTradesWBalance</code> in that order.</p>
+<pre class="r"><code># Draw an aggregation plot of HELOC variables with missing values
+heloc_miss[, c(&quot;MSinceMostRecentDelq&quot;, &quot;NetFractionInstallBurden&quot;, &quot;MSinceMostRecentInqexcl7days&quot;,  &quot;NumInstallTradesWBalance&quot;)] %&gt;% 
+    aggr(combined = TRUE, numbers = TRUE,
+         cex.axis=.7,cex.numbers=0.7)</code></pre>
+<p><img src="figure/HELOC-data-cleaning.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<ul>
+<li>27% of <code>MSinceMostRecentDelq</code> entries are not related to other variables (MCAR).</li>
+<li>10% of <code>NetFractionInstallBurden</code> and 7.7% of <code>MSinceMostRecentInqexcl7days</code> are also MCAR.</li>
+<li>10% of observations have missing entries in both <code>MSinceMostRecentDelq</code> and <code>NetFractionInstallBurden</code>.</li>
+<li>7% of observations have missing entries in both <code>MSinceMostRecentDelq</code> and <code>MSinceMostRecentInqexcl7days</code>.</li>
+</ul>
+<div id="correlation-between-variables-with-missing-values-ranked-by-r-value." class="section level3">
+<h3>Correlation between variables with missing values, ranked by r value.</h3>
+<pre class="r"><code># devtools::install_github(&quot;laresbernardo/lares&quot;)
+library(lares)
+
+# Create dataframe, derived from heloc, where &#39;1&#39; indicates a missing value
+x &lt;- as.data.frame(abs(is.na(heloc_miss)))
+
+corr_cross(x, # name of dataset
+  max_pvalue = 0.05, # display only significant correlations (at 5% level)
+  top = 10 # display top 10 couples of variables (by correlation coefficient)
+)</code></pre>
+<pre><code>Returning only the top 10. You may override with the &#39;top&#39; argument</code></pre>
+<pre><code>Warning in .font_global(font, quiet = FALSE): Font &#39;Arial Narrow&#39; is not
+installed, has other name, or can&#39;t be found</code></pre>
+<p><img src="figure/HELOC-data-cleaning.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><code>NetFractionRevolvingBurden</code> and <code>NumRevolvingTradesWBalance</code> have highest correlation for missing values. This is most likely due to absence of data on the revolving balance. However, for both these features, the number of missing values is relatively low (&lt;200). Given the low correlation between missing entries in pairs of features, it is possible that some features could be classified as Missing Completely at Random.</p>
+</div>
+<div id="all-features-with-missing-entries" class="section level3">
+<h3>All Features with Missing Entries</h3>
+<p>In the matrixplot below, missing values have a red colour. Observed values are recorded in a gray scale, with low values having a light grey while higher values are darker.</p>
+<pre class="r"><code># identify features that have missing values
+miss_cols &lt;- names(missing_counts[missing_counts &gt; 0])
+
+# Explore missing values
+heloc_miss &lt;- (heloc[, miss_cols, with = FALSE])
+ 
+library(&quot;VIM&quot;)
+matrixplot(heloc_miss)</code></pre>
+<p><img src="figure/HELOC-data-cleaning.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>This plot indicates that most of the missing entries occur in combination with other features. So they are unlikely to be MCAR.</p>
+</div>
+</div>
+</div>
+<div id="strategy-for-dealing-with-missing-values" class="section level1">
+<h1>Strategy for Dealing with Missing Values</h1>
+<p>Donor-based imputation, such as mean/median substitution or K nearest neighbours, is appropriate when the variable of concern has a normal distribution and missingness is MCAR. However, such methods may introduce bias in the estimates themselves and with subsequent models.</p>
+<p>In the HELOC dataset, there is a high number of missing values (about 50% of observations in the <code>MSinceMostRecentDelq</code> variable). In addition, missing values occur in 12 out of the 23 features. Given the exploratory analysis above, it is not appropriate to assume that any of these are MCAR and donor-based imputation cannot be applied.</p>
+<p>Unfortunately, it is not possible to ascertain whether data is missing at random, missing due to unobserved predictors, or due to the missing value itself <span class="citation">(Gelman and Hill, 2006)</span>. A practical response to this problem is to create a model of the missing data that includes as many predictors as possible .</p>
+<div id="model-based-imputation" class="section level2">
+<h2>Model-based Imputation</h2>
+<p>Model-based imputation creates a statistical or machine learning model for each variable with missing entries. In effect, these models estimate an imputation value as a function of the values of all the other variables in the dataset. Statistical methods can be used when relationship between variables is known. The Machine Learning (ML) approach makes no assumptions about the underlying relationships. So this approach has particular advantages:</p>
+<ul>
+<li>It is not necessary to specify relationships between variables since the ML model can “learn” this from the data itself by means of induction.</li>
+<li>It is capable of capturing complex non-linear patterns in the data.</li>
+</ul>
+<div id="imputation-methods" class="section level3">
+<h3>Imputation Methods</h3>
+<p>Researchers at the University of Michigan carried out a comparison of four imputation methods when dealing with missing laboratory data <span class="citation">(Waljee <em>et al.</em>, 2013)</span>. The methods studied were:<br />
+missForest;<br />
+mean imputation;<br />
+nearestneighbour imputation;<br />
+and multivariate imputation by chained equations (MICE).</p>
+<p>Two ML models had been fit apriori to the data with no missing values. Evaluation of imputation results occurred following multiple schemes:</p>
+<ol style="list-style-type: decimal">
+<li>A proportion of the test data was randomly assigned as “NA” to simulate data missing completely at random (MCAR). This test data was imputed with the four methods and compared to the valid test data.</li>
+<li>The imputed test data was used to make predictions using the apriori models and compared to predictions made with the valid test data.</li>
+<li>To take account for differences in feature importance, the frequency of missing values across features in the test data was varied. Following this, steps 1 and 2 repeated.</li>
+</ol>
+<p>When dealing with both continuous and categorical data in two separate datasets, the missForest algorithm had the least imputation error. Also, it had the smallest prediction difference when models used imputed and valid (original) values.</p>
+</div>
+<div id="missforest-algorithm-for-imputation" class="section level3">
+<h3><code>missForest</code> algorithm for imputation</h3>
+<p>The missForest algorithm creates a Random Forest model to predict missing values for each variable. This is an iterative approach that makes initial estimates of missing values and updates these with a random forest model until reaching convergence:</p>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>For each variable x<br />
+<span class="math inline">\(\quad\)</span> Impute initial value with mean substitution</li>
+<li>Sort variables by number of missing values, in ascending order</li>
+<li>Repeat until imputed values converge<br />
+<span class="math inline">\(\quad\)</span>For each variable x<br />
+<span class="math inline">\(\quad\)</span> <span class="math inline">\(\quad\)</span>Fit a random forest model to the observed values of x using all other variables as predictors<br />
+<span class="math inline">\(\quad\)</span> <span class="math inline">\(\quad\)</span>Use model to predict missing values of x</li>
+</ol>
+</blockquote>
+<p>Finally, it is possible to extract the “filled-in” values and estimate imputation error.</p>
+<p>This algorithm is based on a random forest model. It uses <em>predictive mean matching</em> to calculate the predicted mean for each observation. It then imputes using the observed value for the instance with the predicted mean that is the closest match to the missing instance.</p>
+<p>Functionality unique to <code>mi</code> includes:</p>
+<ol style="list-style-type: decimal">
+<li>detection of high collinearity</li>
+<li>adding noise to the prediction process do handle additive constraints between variables.</li>
+<li>dealing with semi-continuous data.</li>
+</ol>
+<pre class="r"><code># library(mi)
+# mi.info(heloc)
+# mi.</code></pre>
+</div>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body">
+<div id="ref-Gelman-Missing" class="csl-entry">
+Gelman, A. and Hill, J. (2006) <span>‘<span>Chapter 25. Missing Data Imputation</span>’</span>, in <em>Data analysis using regression and multilevel/hierarchical models</em>. Cambridge University Press, pp. 529–544. doi: <a href="https://doi.org/10.1017/CBO9780511790942">10.1017/CBO9780511790942</a>.
+</div>
+<div id="ref-Waljee" class="csl-entry">
+Waljee, A. K. <em>et al.</em> (2013) <span>‘<span class="nocase">Comparison of imputation methods for missing laboratory data in medicine</span>’</span>, <em>BMJ Open</em>, 3(8). doi: <a href="https://doi.org/10.1136/BMJOPEN-2013-002847">10.1136/BMJOPEN-2013-002847</a>.
+</div>
+</div>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.1.2 (2021-11-01)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 22000)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=English_United States.1252 
+[2] LC_CTYPE=English_United States.1252   
+[3] LC_MONETARY=English_United States.1252
+[4] LC_NUMERIC=C                          
+[5] LC_TIME=English_United States.1252    
+
+attached base packages:
+[1] grid      stats     graphics  grDevices utils     datasets  methods  
+[8] base     
+
+other attached packages:
+[1] lares_5.0.5       VIM_6.1.1         colorspace_2.0-2  kableExtra_1.3.4 
+[5] data.table_1.14.2 purrr_0.3.4       dplyr_1.0.7       ggplot2_3.3.5    
+
+loaded via a namespace (and not attached):
+ [1] httr_1.4.2        tidyr_1.1.4       sass_0.4.0        jsonlite_1.7.3   
+ [5] viridisLite_0.4.0 carData_3.0-5     bslib_0.3.1       assertthat_0.2.1 
+ [9] sp_1.4-6          highr_0.9         yaml_2.2.1        robustbase_0.93-9
+[13] pillar_1.6.4      lattice_0.20-45   glue_1.5.1        pROC_1.18.0      
+[17] digest_0.6.29     promises_1.2.0.1  rvest_1.0.2       plyr_1.8.6       
+[21] htmltools_0.5.2   httpuv_1.6.5      Matrix_1.4-0      pkgconfig_2.0.3  
+[25] patchwork_1.1.1   scales_1.1.1      webshot_0.5.2     ranger_0.13.1    
+[29] svglite_2.0.0     openxlsx_4.2.5    later_1.3.0       git2r_0.29.0     
+[33] tibble_3.1.6      proxy_0.4-26      farver_2.1.0      generics_0.1.1   
+[37] car_3.0-12        ellipsis_0.3.2    withr_2.4.3       nnet_7.3-17      
+[41] magrittr_2.0.1    crayon_1.4.2      evaluate_0.14     laeken_0.5.2     
+[45] fs_1.5.1          fansi_1.0.2       MASS_7.3-55       xml2_1.3.3       
+[49] class_7.3-20      tools_4.1.2       lifecycle_1.0.1   rpart.plot_3.1.0 
+[53] stringr_1.4.0     munsell_0.5.0     zip_2.2.0         compiler_4.1.2   
+[57] jquerylib_0.1.4   e1071_1.7-9       vcd_1.4-9         systemfonts_1.0.3
+[61] rlang_0.4.12      RCurl_1.98-1.5    rstudioapi_0.13   labeling_0.4.2   
+[65] bitops_1.0-7      rmarkdown_2.11    boot_1.3-28       gtable_0.3.0     
+[69] abind_1.4-5       DBI_1.1.2         R6_2.5.1          zoo_1.8-9        
+[73] lubridate_1.8.0   knitr_1.37        fastmap_1.1.0     utf8_1.2.2       
+[77] workflowr_1.7.0   rprojroot_2.0.2   h2o_3.36.0.1      stringi_1.7.6    
+[81] Rcpp_1.0.7        rpart_4.1-15      vctrs_0.3.8       DEoptimR_1.0-10  
+[85] tidyselect_1.1.1  xfun_0.28         lmtest_0.9-39    </code></pre>
+</div>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

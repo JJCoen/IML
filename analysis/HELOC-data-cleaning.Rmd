@@ -1,0 +1,401 @@
+---
+title: "HELOC Data Cleaning"
+type: inverse
+author: "Jim Coen"
+date: "`r format(Sys.Date(), '%A, %B %d, %Y') `"
+geometry: "left=3cm,right=3cm,top=2cm,bottom=2cm"
+output: workflowr::wflow_html
+documentclass: article
+bibliography: C:/Users/jimco/Documents/Mendeley-Bib/Financial-Analytics-Thesis.bib
+csl: Harvard.csl
+---
+
+```{r r-parameters, include=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(digits = 7)
+
+# prevent numeric values as exponential
+knitr::opts_chunk$set(scipen = 999)
+
+# prevent '##' in output from code chunk
+knitr::opts_chunk$set(comment = NA)
+
+# prevent '[n]' prefix in output.  Also removes '##'
+knitr::opts_chunk$set(opts.label="kill_prefix")
+
+#knitr::opts_chunk$set(fig.width = 4, fig.height = 4)
+
+# Load libraries
+library(ggplot2)
+library(dplyr)
+library(purrr)
+library(data.table)
+library(kableExtra)
+library(VIM)
+```
+
+```{r}
+heloc <- read.csv("../data/heloc_dataset_v1.csv")
+setDT(heloc)
+```
+
+# Missing Values
+
+Missing values may be ignored by taking complete cases only or they may be replaced with an fixed value, such as the mean or median. However, this can lead to unstable model operation or biased predictions.
+
+In the HELOC dataset, a negative numeric indicates a missing value. Reasons for this are:
+
+-   A credit report for an applicant was not found or not investigated. In most of these cases, all features receive a value of -9.
+
+-   Information in the credit report on a particular feature was considered "not usable" and that feature receives a value of -8.
+
+-   In the case where there is "no information of that type", the feature receives a value of -7. This is due to lack of data on delinquency and occurs in the features `MSinceMostRecentDelq` and `MSinceMostRecentInqexcl7days`.
+
+When there is no credit report for all observations in a loan applications (all the feature variables are -9), they provide no information and need to be removed.
+
+```{r}
+features <- subset (heloc, select = -RiskPerformance)
+# rows containing negative values in each feature
+all_neg <- apply(features, 1, function(row) all(row < 0))
+which(all_neg) %>% 
+  length()
+heloc <- heloc[!all_neg,]
+rm(all_neg)
+
+# features containing negative values
+features <- subset (heloc, select = -RiskPerformance)
+any_neg <- apply(features, 2, function(col) any(col < 0))
+features_neg <- which(any_neg) %>% 
+  names()
+
+feature_cols <- colnames(features)
+```
+
+588 rows, that contained -9 in all features, were removed.
+
+## Features containing missing values
+
+```{r}
+has.neg9 <- apply(heloc, 1, function(row) any(row == -9))
+num_neg9 <- which(has.neg9) %>% 
+  length()
+cat("There are", num_neg9, "observations that have at least one feature with an entry of -9.\n and\n")
+
+has.neg8 <- apply(heloc, 1, function(row) any(row == -8))
+num_neg8 <- which(has.neg8) %>% 
+  length()
+cat("there are", num_neg8, "observations that have at least one feature with an entry of -8.\n and\n")
+
+has.neg7 <- apply(heloc, 1, function(row) any(row == -7))
+num_neg7 <- which(has.neg7) %>% 
+  length()
+cat("there are", num_neg7, "observations that have at least one feature with an entry of -7.")
+
+# cleanup
+rm("has.neg9", "num_neg9",  "has.neg7", "has.neg8", "num_neg7", "num_neg8")
+```
+
+In effect, these entries are missing values and it is better to encode them as "NA". However, the HELOC dataset does distinguish between different types of missing values, as described above. It is possible to capture these distinctions through the use of indicator variables [@Bucker].
+
+```{r}
+# suggestion to improve code:
+# use replace_with_na fn from naniar package
+no_report_rows <- heloc[, which(.SD == -9), .SDcols = feature_cols]
+no_report_cols <- heloc[, heloc == -9] %>% 
+  colSums() 
+no_report <- names(no_report_cols)[no_report_cols > 0]
+paste(c("Features with an entry of -9: \n", no_report), collapse=" ") %>%   cat()
+      
+# Add and initialise an indicator variable for the "no report" condition
+heloc[, no_report_externalRisk := as.factor(0)]
+# Set the indicator to "1" where value is -9 (missing due to no report)
+heloc[ExternalRiskEstimate == -9, 
+      no_report_externalRisk := as.factor(1)]
+
+not_valid_cols <- heloc[, heloc == -8] %>% 
+  colSums() 
+not_valid <- names(not_valid_cols)[not_valid_cols > 0]
+paste(c("\n\nFeatures with an entry of -8: \n", not_valid), collapse=" ") %>%   cat()
+# Add and initialise an indicator variable for the "not_valid" condition
+not_valid_indicators <- c(paste0(c("not_valid_"), c(not_valid)))
+heloc[, c(not_valid_indicators) := as.factor(0)]
+
+# Set indicator variable to "1" for values of -8
+heloc[MSinceOldestTradeOpen == -8, 
+      not_valid_MSinceOldestTradeOpen := as.factor(1)]
+heloc[MSinceMostRecentDelq == -8, 
+      not_valid_MSinceMostRecentDelq := as.factor(1)]
+heloc[MSinceMostRecentInqexcl7days == -8, 
+      not_valid_MSinceMostRecentInqexcl7days := as.factor(1)] 
+heloc[NetFractionRevolvingBurden == -8, 
+      not_valid_NetFractionRevolvingBurden := as.factor(1)] 
+heloc[NetFractionInstallBurden == -8, 
+      not_valid_NetFractionInstallBurden := as.factor(1)] 
+heloc[NumRevolvingTradesWBalance == -8, 
+      not_valid_NumRevolvingTradesWBalance := as.factor(1)] 
+heloc[NumInstallTradesWBalance == -8, 
+      not_valid_NumInstallTradesWBalance := as.factor(1)] 
+heloc[NumBank2NatlTradesWHighUtilization == -8, 
+      not_valid_NumBank2NatlTradesWHighUtilization := as.factor(1)] 
+heloc[PercentTradesWBalance == -8, 
+      not_valid_PercentTradesWBalance := as.factor(1)] 
+
+no_info_rows <- heloc[, which(.SD == -7), .SDcols = feature_cols]
+no_info_cols <- heloc[, heloc == -7] %>% 
+  colSums() 
+no_info <- names(no_info_cols)[no_info_cols > 0]
+paste(c("\n\nFeatures with an entry of -7: \n", no_info), collapse=" ") %>%     cat()
+
+# Add and initialise an indicator variable for the "no report" condition
+no_info_indicators <- c(paste0(c("no_info_"), c(no_info)))
+heloc[, c(no_info_indicators) := as.factor(0)]
+# Set indicator variable to "1" for values of -7
+heloc[MSinceMostRecentInqexcl7days == -7, 
+      no_info_MSinceMostRecentInqexcl7days := as.factor(1)]
+heloc[MSinceMostRecentDelq == -7, 
+      no_info_MSinceMostRecentDelq := as.factor(1)]
+
+# Replace entries with -9, -8 or -7 with NA since 
+# there are indicators showing where entries are missing
+# Replace -9 with NA since the entry is missing
+heloc[ExternalRiskEstimate == -9,
+      ExternalRiskEstimate := NA]
+
+# Replace -8 with NA since the entry is missing
+heloc[MSinceOldestTradeOpen == -8, MSinceOldestTradeOpen := NA]
+heloc[MSinceMostRecentDelq == -8, 
+      MSinceMostRecentDelq := NA]
+heloc[MSinceMostRecentInqexcl7days == -8, 
+      MSinceMostRecentInqexcl7days := NA] 
+heloc[NetFractionRevolvingBurden == -8, 
+      NetFractionRevolvingBurden := NA] 
+heloc[NetFractionInstallBurden == -8, 
+      NetFractionInstallBurden := NA] 
+heloc[NumRevolvingTradesWBalance == -8, 
+      NumRevolvingTradesWBalance := NA] 
+heloc[NumInstallTradesWBalance == -8, 
+      NumInstallTradesWBalance := NA] 
+heloc[NumBank2NatlTradesWHighUtilization == -8, 
+      NumBank2NatlTradesWHighUtilization := NA] 
+heloc[PercentTradesWBalance == -8, 
+      PercentTradesWBalance := NA] 
+
+heloc[MSinceMostRecentInqexcl7days == -7, 
+      MSinceMostRecentInqexcl7days := NA]
+heloc[MSinceMostRecentDelq == -7, 
+      MSinceMostRecentDelq := NA]
+
+## remove not_valid_PercentTradesWBalance (only 18)
+heloc[ , not_valid_PercentTradesWBalance := NULL]
+
+# cleanup
+# define "not in" operator
+"%ni%" = Negate( "%in%" )
+cleanup <- ls()
+cleanup <- cleanup[ cleanup %ni% c("heloc", "feature_cols", "%ni%") ]
+rm(list=(cleanup))
+rm(cleanup)
+```
+
+### Factor Variables
+
+As described in the data dictionary, the two factor variables and their levels are:
+
+| MaxDelq2PublicRecLast12M         | MaxDelqEver                      |
+|----------------------------------|----------------------------------|
+| 0 - derogatory comment           | 1 - No such value                |
+| 1 - 120+ days delinquent         | 2 - derogatory comment           |
+| 2 - 90 days delinquent           | 3 - 120+ days delinquent         |
+| 3 - 60 days delinquent           | 4 - 90 days delinquent           |
+| 4 - 30 days delinquent           | 5 - 60 days delinquent           |
+| 5,6 - unknown delinquency        | 6 - 30 days delinquent           |
+| 7 - current and never delinquent | 7 - unknown delinquency          |
+| 8, 9 - all other                 | 8 - current and never delinquent |
+|                                  | 9 - all other                    |
+
+First, convert `MaxDelq2PublicRecLast12M` and `MaxDelqEver` from numeric to factor data type.
+
+In `MaxDelqEver`, entries with "No such value" are equivalent to missing values and need to be recorded as such.
+
+```{r, echo=FALSE}
+# Categorical features
+change_columns <- c("MaxDelq2PublicRecLast12M", "MaxDelqEver")
+# Change class of certain columns
+heloc[ , (change_columns) := lapply(.SD, as.factor),
+           .SDcols = change_columns]
+features <- heloc[, 2:24]
+# select numeric variables
+features_num <- features[, -c("MaxDelq2PublicRecLast12M", "MaxDelqEver")]
+features_cat <- features[, c("MaxDelq2PublicRecLast12M", "MaxDelqEver")]
+
+# Encode negative values as missing values ('NA')
+#heloc[ heloc < 0] <- NA
+ 
+# # "derogatory comment"
+# heloc[MaxDelq2PublicRecLast12M == 0, MaxDelq2PublicRecLast12M := NA] 
+# heloc[MaxDelqEver == 2, MaxDelqEver := NA]
+# "No such Value"
+heloc[MaxDelqEver == 1, MaxDelqEver := NA]
+
+```
+
+```{r num_missing, echo=FALSE, fig.cap="Features ranked by number of missing entries"}
+
+# record the counts of missing values in each column
+missing_counts <- heloc %>% 
+  is.na() %>% 
+  colSums() %>% 
+    sort(decreasing = TRUE) 
+# features with missing values 
+missing_counts[missing_counts > 0] %>% 
+  kable(col.names = c("counts"))
+
+
+# record features with missing values
+miss <- names(missing_counts[missing_counts > 0])
+heloc_miss <- heloc[, ..miss]
+```
+
+Given the large proportion of missing values, dealing with them appropriately is a critical aspect of the overall analysis of the HELOC dataset.
+
+The majority of missing values are in the variables\
+`MSinceMostRecentDelq`, `MSinceMostRecentInqexcl7days`, `NetFractionInstallBurden`, and `NumInstallTradesWBalance`
+
+# Recognizing missing data mechanisms
+
+In order to formulate a strategy to deal with missing values, it is important to identify the reasons why a variable has a missing entry.
+
+-   If the reason for missingness is purely random, it's MCAR.\
+    When the probability of a missing entry occurring is not related to either observed or missing data, then it is Missing Completely At Random. This is generally due to poor test design, absence of output from a faulty sensor, or failure to record the value of a feature. Missing values could potentially occur across all instances / rows in a dataset. Removing such missing values will not introduce bias in subsequent analysis. However, other features for a specific observation are likely to contain relevant information.
+-   If the reason for missingness can be explained by another variable, it's MAR.\
+    In this case, the missing values occur conditional upon the observed data but they are independent of unobserved data. They are found within a subset to the observed data. For instance, in a certain location the county council has not registered new builds and so, no address is recorded for them.
+-   If the reason for missingness depends on the instance (table row) where the missing value occurs, it is Missing Not At Random (MNAR).\
+    For example, those with high income tend not to record a value for their income. The probability of missing is conditional upon observed data (attributes of high earners) and are also dependent upon unobserved data (whether the high earner chooses to record income). The missing data is simply unknown and cannot be estimated from other observations. Because there are reasons within the data for the occurrence of missing values, removing them would lead to bias. There needs to be a method of estimation that minimises bias.
+-   The missing value may depend on a predictor that has not been recorded. For instance, people with prior infection are unlikely record if they took an experimental inoculation or not. But the dataset does not record prior infection.
+
+To determine whether a variable is MCAR or MAR, it is necessary to check if missing values on one variable are related to missing values on another variable.
+
+## Visualizing Missing Values
+
+An aggregation plot displays features in columns and sections each into missing (red cells) and valid entries (blue cells). Limiting the plot to the top four features with missing values facilitates inspection of relationships.
+
+Columns in the plot below represent the features `MSinceMostRecentDelq`, `NetFractionInstallBurden`, `MSinceMostRecentInqexcl7days`, and `NumInstallTradesWBalance` in that order.
+
+```{r}
+# Draw an aggregation plot of HELOC variables with missing values
+heloc_miss[, c("MSinceMostRecentDelq", "NetFractionInstallBurden", "MSinceMostRecentInqexcl7days",  "NumInstallTradesWBalance")] %>% 
+	aggr(combined = TRUE, numbers = TRUE,
+	     cex.axis=.7,cex.numbers=0.7)
+```
+
+-   27% of `MSinceMostRecentDelq` entries are not related to other variables (MCAR).
+-   10% of `NetFractionInstallBurden` and 7.7% of `MSinceMostRecentInqexcl7days` are also MCAR.
+-   10% of observations have missing entries in both `MSinceMostRecentDelq` and `NetFractionInstallBurden` (MNAR).
+-   7% of observations have missing entries in both `MSinceMostRecentDelq` and `MSinceMostRecentInqexcl7days` (MNAR).
+
+Full aggregation plot
+
+```{r}
+res <- summary(aggr(heloc_miss, sortVar = TRUE))$combinations
+```
+
+```{r}
+head(res[rev(order(res[,2])),])
+
+res
+```
+
+### Correlation between variables with missing values, ranked by r value.
+
+```{r}
+# devtools::install_github("laresbernardo/lares")
+library(lares)
+
+# Create dataframe, derived from heloc, where '1' indicates a missing value
+# features with missings  only
+# x <- as.data.frame(abs(is.na(heloc_miss)))
+# complete dataset
+x <- as.data.frame(abs(is.na(features_num)))
+corr_cross(x,  # name of dataset
+  max_pvalue = 0.05, # display only significant correlations (at 5% level)
+  top = 10 # display top 10 couples of variables (by correlation coefficient)
+)
+```
+
+`NetFractionRevolvingBurden` and `NumRevolvingTradesWBalance` have highest correlation for missing values. This is most likely due to absence of data on the revolving balance. Missing entries are dependent upon missings in another variable and both are MNAR. However, for these two features, the number of missing values is relatively low (\<200). For the remainder of features with missing entries, the correlation between pairs of features is low (\<= 0.5). So they could be classified as Missing Completely at Random or Missing At Random.
+
+### All Features with Missing Entries
+
+In the matrixplot below, missing values have a red colour. Observed values are recorded in a gray scale, with low values having a light grey while higher values are darker.
+
+```{r}
+# identify features that have missing values
+miss_cols <- names(missing_counts[missing_counts > 0])
+
+# Explore missing values
+heloc_miss <- (heloc[, miss_cols, with = FALSE])
+ 
+library("VIM")
+matrixplot(heloc_miss)
+```
+
+This plot indicates that most of the missing entries occur in combination with other features. So they are unlikely to be MCAR.
+
+# Strategy for Dealing with Missing Values
+
+Donor-based imputation, such as mean/median substitution or K nearest neighbours, is appropriate when the variable of concern has a normal distribution and missingness is MCAR. However, such methods may introduce bias in the estimates themselves and with subsequent models.
+
+In the HELOC dataset, there is a high number of missing values (about 50% of observations in the `MSinceMostRecentDelq` variable). In addition, missing values occur in 12 out of the 23 features. Given the exploratory analysis above, it is not appropriate to assume that any of these are MCAR and donor-based imputation cannot be applied.
+
+Unfortunately, it is not possible to ascertain whether data is missing at random, missing due to unobserved predictors, or due to the missing value itself [@Gelman-Missing]. A practical response to this problem is to create a model of the missing data that includes as many predictors as possible .
+
+## Model-based Imputation
+
+Model-based imputation creates a statistical or machine learning model for each variable with missing entries. In effect, these models estimate an imputation value as a function of the values of all the other variables in the dataset. Statistical methods can be used when relationship between variables is known. The Machine Learning (ML) approach makes no assumptions about the underlying relationships. So this approach has particular advantages:
+
+-   It is not necessary to specify relationships between variables since the ML model can "learn" this from the data itself by means of induction.
+-   It is capable of capturing complex non-linear patterns in the data.
+
+### Imputation Methods
+
+Researchers at the University of Michigan carried out a comparison of four imputation methods when dealing with missing laboratory data [@Waljee]. The methods studied were:\
+missForest;\
+mean imputation;\
+nearestneighbour imputation;\
+and multivariate imputation by chained equations (MICE).
+
+Two ML models had been fit apriori to the data with no missing values. Evaluation of imputation results occurred following multiple schemes:
+
+1.  A proportion of the test data was randomly assigned as "NA" to simulate data missing completely at random (MCAR). This test data was imputed with the four methods and compared to the valid test data.
+2.  The imputed test data was used to make predictions using the apriori models and compared to predictions made with the valid test data.
+3.  To take account for differences in feature importance, the frequency of missing values across features in the test data was varied. Following this, steps 1 and 2 repeated.
+
+When dealing with both continuous and categorical data in two separate datasets, the `missForest`algorithm had the least imputation error. Also, it had the smallest prediction difference when models used imputed and valid (original) values.
+
+### `missForest` algorithm for imputation
+
+The missForest algorithm creates a Random Forest model to predict missing values for each variable. This is an iterative approach that makes initial estimates of missing values and updates these with a random forest model until reaching convergence:
+
+> 1.  For each variable x\
+>     $\quad$ Impute initial value with mean substitution
+> 2.  Sort variables by number of missing values, in ascending order
+> 3.  Repeat until imputed values converge\
+>     $\quad$For each variable x\
+>     $\quad$ $\quad$Fit a random forest model to the observed values of x using all other variables as predictors\
+>     $\quad$ $\quad$Use model to predict missing values of x
+
+Finally, it is possible to extract the "filled-in" values and estimate imputation error.
+
+## Co-ordination between Training and Testing Sets
+
+The overall strategy to handle missing entries that occur in training and test sets [@Morgan]:
+
+1.  Impute the training set using missForest and store in `train_imp`
+2.  Create interpretable model based on the imputed training data
+3.  Combine imputed training set with the test set and store in `train_test`
+4.  Impute missing entries in the combined `train_test` set and extract test data (`test_imp`)
+5.  Apply the interpretable model to the imputed test set to obtain probability predictions.
+
+## References
+
+\bibliography{Financial-Analytics-Thesis.bib}
