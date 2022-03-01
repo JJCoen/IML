@@ -1,0 +1,219 @@
+---
+title: "HELOC Data Dictionary"
+author: "Jim Coen"
+date: "`r format(Sys.Date(), '%A, %B %d, %Y') `"
+geometry: "left=3cm,right=3cm,top=2cm,bottom=2cm"
+output:
+  pdf_document: 
+    df_print: kable
+documentclass: article
+bibliography: C:/Users/jimco/Documents/Mendeley-Bib/Financial-Analytics-Thesis.bib
+csl: Harvard.csl
+---
+
+```{r r-parameters, include=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+options(digits = 7)
+
+# prevent numeric values as exponential
+knitr::opts_chunk$set(scipen = 999)
+
+# prevent '##' in output from code chunk
+knitr::opts_chunk$set(comment = NA)
+
+# prevent '[n]' prefix in output.  Also removes '##'
+knitr::opts_chunk$set(opts.label="kill_prefix")
+
+#knitr::opts_chunk$set(fig.width = 4, fig.height = 4)
+
+# Load libraries
+library(ggplot2)
+library(dplyr)
+library(purrr)
+library(data.table)
+library(kableExtra)
+```
+
+```{r}
+heloc <- read.csv("./Data/heloc_dataset_v1.csv") 
+setDT(heloc)
+```
+
+# Home Equity Line of Credit (HELOC) Dataset
+
+The dataset contains annonyised attributes of actual loan applications to banks by homeowners. Credit is extended to an borrower based upon the equity in their home, that is, the difference between the current market value and the purchase price of the home. Borrowers request loans in the range of \\\$5,000 to \\\$150,000.
+
+It is standard practice in Credit Risk Modelling to record two types of features. Application data consists of details about a loan application itself. And behavioural information contains data related to the financial circumstances of a loan applicant.
+
+The HELOC data-set only has application data. Features are transaction-related (such as credit exposure) or account-related (days past due, account tenure, delinquincy).
+
+## Description of the study:
+
+In 2018, Fair Isaac Corporation (FICO) created the HELOC dataset from real-world home equity loan applications. It is the source data for the FICO Explainable Machine Learning Challenge. This challenge is sponsored by FICO, Google, Imperial College London, MIT, University of Oxford, UC Irvine and UC Berkeley.
+
+## Sampling information:
+
+There are problems with missing values.
+
+\- It negatively impacts machine learning accuracy.
+
+\- A model may interpret NA values as defaults which can lead to bias. Such a model could become unstable.
+
+\- For some ML models, a NA value for a numeric or character variable raises an error.
+
+Features containing data about delinquency are coded to numeric scale and missing values are labeled with negative integer number.
+
+## Structure of the data within the file:
+
+Data is organised as a csv file containing 24 columns and 10,459 rows for each loan application. Apart from the target variable, `RiskPerformance,` all 23 feature variables are numeric. Of the 10,459 observations, 5,000 had a `RiskPerformance` of "Good" which means they had paid back loans within 2 years. The remaining 5,459 are classified as "Bad".
+
+## Details about the data:
+
+Descriptions for column headers comes from work carried out by the University of Warsaw and the Warsaw University of Technology [@XAIStories].
+
+### Variable ID and label
+
+#### Target Variable
+
+`RiskPerformance` = "Good": These are customers that are unlikely to default on loan payments. Not approving a loan, due to miss-classification, results in lost business to the bank.
+
+`RiskPerformance` = "Bad": These are customers that were 90 days past due or worse at least once over a period of 24 months from when the credit account was opened.. Approving a loan, due to miss-classification, results in loss of capital to the bank.
+
+```{r}
+table(heloc$RiskPerformance) 
+```
+
+This is a balanced dataset with about the same number of observations in each target class.
+
+#### Feature Variables
+
+-   `ExternalRiskEstimate` - consolidated indicator of risk markers (equivalent of polish BIK's rate)
+
+-   `MSinceOldestTradeOpen` - number of months that have elapsed since first trade
+
+-   `MSinceMostRecentTradeOpen` - number of months that have elapsed since last opened trade
+
+-   `AverageMInFile` - average months in file
+
+-   `NumSatisfactoryTrades` - number of satisfactory trades
+
+-   `NumTrades60Ever2DerogPubRec` - number of trades which are more than 60 past due
+
+-   `NumTrades90Ever2DerogPubRec` - number of trades which are more than 90 past due
+
+-   `PercentTradesNeverDelq` - percent of trades, that were not delinquent
+
+-   `MSinceMostRecentDelq` - number of months that have elapsed since last delinquent trade
+
+-   `MaxDelq2PublicRecLast12M` - the longest delinquency period in last 12 months
+
+-   `MaxDelqEver` - the longest delinquency period
+
+-   `NumTotalTrades` - total number of trades
+
+-   `NumTradesOpeninLast12M` - number of trades opened in last 12 months
+
+-   `PercentInstallTrades` - percent of installments trades
+
+-   `MSinceMostRecentInqexcl7days` - months since last inquiry (excluding last 7 days)
+
+-   `NumInqLast6M` - number of inquiries in last 6 months
+
+-   `NumInqLast6Mexcl7days` - number of inquiries in last 6 months (excluding last 7 days)
+
+-   `NetFractionRevolvingBurden` - revolving balance divided by credit limit
+
+-   `NetFractionInstallBurden` - installment balance divided by original loan amount
+
+-   `NumRevolvingTradesWBalance` - number of revolving trades with balance
+
+-   `NumInstallTradesWBalance` - number of installment trades with balance
+
+-   `NumBank2NatlTradesWHighUtilization` - number of trades with high utilization ratio (credit utilization ratio - the amount of a credit card balance compared to the credit limit)
+
+-   `PercentTradesWBalance` - percent of trades with balance
+
+## Missing Values
+
+A negative numeric indicates a missing value. Remove rows with all missing values
+
+```{r}
+df <- subset (heloc, select = -RiskPerformance)
+has.neg <- apply(df, 1, function(row) all(row < 0))
+which(has.neg) %>% 
+  length()
+heloc <- heloc[!has.neg,]
+rm(df)
+rm(has.neg)
+```
+
+588 rows, that had all negative values, were removed
+
+### Variables containing missing values
+
+```{r}
+# Encode missing values as 'NA'
+heloc[heloc < 0] <- NA
+neg_vec <- colSums(is.na(heloc)) > 0
+neg_cols <- heloc[, neg_vec, with = FALSE] %>% 
+  colnames()
+
+# Explore missing values
+heloc_miss <- (heloc[, neg_cols, with = FALSE])
+
+library("VIM")
+colnames(heloc_miss)
+matrixplot(heloc_miss)
+```
+
+Columns 3, 4, 6, and 8 have most missing values\
+"MSinceMostRecentDelq", "MSinceMostRecentInqexcl7days", and "NetFractionInstallBurden"
+
+```{r}
+# Create dataframe, derived from heloc, where '1' indicates a missing value
+x <- as.data.frame(abs(is.na(heloc_miss)))
+head(x, n=5)
+```
+
+Plot correlations between variables with missing values, ranked by r value.
+
+```{r}
+# devtools::install_github("laresbernardo/lares")
+library(lares)
+
+corr_cross(x, # name of dataset
+  max_pvalue = 0.05, # display only significant correlations (at 5% level)
+  top = 10 # display top 10 couples of variables (by correlation coefficient)
+)
+```
+
+*NetFractionRevolvingBurden* and *NumRevolvingTradesWBalance* have highest correlation for missing values. This is due to absence of data on the revolving balance.
+
+### Justification for using `missForest` package for imputation
+
+Similar to other imputation methods, it uses *predictive mean matching*. This calculates the predicted mean for each observation. It then imputes using the observed value for the instance with the predicted mean that is the closest match to the missing instance.
+
+Functionality unique to `mi` includes:
+
+1.  detection of high collinearity
+2.  adding noise to the prediction process do handle additive constraints between variables.
+3.  dealing with semi-continuous data.
+
+
+```{r}
+library(skimr)
+
+features <- subset(heloc, select = -c(RiskPerformance))
+skim_format(numeric=list(digits=3))
+skimmed <- skim(features) 
+setDT(skimmed)
+options(digits = 2)
+skimmed <- setnames(skimmed, c("numeric.mean","numeric.sd", "numeric.p0", "numeric.p25",  "numeric.p50", "numeric.p75", "numeric.p100"),
+         c("mean","sd", "p0", "p25",  "p50", "p75", "p100"))
+skimmed[, c(2, 5, 6, 7, 9, 11)] %>% 
+  kable()
+```
+
+## References
+
+\bibliography{Financial-Analytics-Thesis.bib}
