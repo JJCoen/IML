@@ -8,4 +8,56 @@ editor_options:
   chunk_output_type: console
 ---
 
-Interpretable Machine Learning Models
+<style type="text/css">
+.title {
+  display: none;
+}
+
+#getting-started img {
+  margin-right: 10px;
+}
+
+</style>
+
+<div class="row" style="padding-top: 10px;">
+<div class="col-sm-6">
+
+# **Interpretable Machine Learning Models**
+
+## Objective
+The purpose of this research is to improve the acceptance and deployment of Machine Learning in financial settings through inherently interpretable models. 
+
+## Background
+There are many stakeholders that interact with a Machine Learning (ML) model:
+- Data Analyst or creator / developer of the ML model  
+- Financial Officer that applies the ML model  
+- Client wants to understand decisions that the ML model make in regards to themselves  
+- Internal Audit  
+- Regulatory Oversight
+
+While a highly complex, "black-box" model can give high predictive accuracy, it is not clear how it arrives at particular outcomes.  As a result, organisations and their personnel have been reluctant to put ML models into practice.  And so, there are two main reasons for improving the interpretability of ML models:  
+1. To improve confidence in and utilisation of ML models.  
+2. In the case of high-stakes decision making, such as credit assessment of corporate clients.  
+
+</div>
+<div class="col-sm-6">
+
+<img src="./images/corporate-finance-inst.png" width = "20%">
+
+__Data Science__
+
+"Success in a data science project comes, not from access to any one exotic tool, 
+but from having quantifiable goals, good methodology, cross-discipline interactions,
+and a repeatable workflow"  
+Nina Zumel and John Mount, Practical Data Science with R
+
+
+
+__Information content of available data__  
+
+"The combination of some data and an aching desire for an answer does not ensure 
+that a reasonable answer can be extracted from a given body of data"     
+John W. Tukey
+  
+</a>
+</div>
