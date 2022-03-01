@@ -1,14 +1,24 @@
 name: Interpretable-ML-Models
 output_dir: ../docs
 navbar:
-  title: Interpretable-ML-Models
+  title: Interpretable ML Models
+  type: inverse
   left:
   - text: Home
+    icon: fa-bar-chart
     href: index.html
-  - text: About
-    href: about.html
-  - text: License
-    href: license.html
+  - text: Purpose
+    icon: fa-info
+    href: Purpose.html
+  - text: Dataset
+    icon: fa-analytics
+    menu:
+    - text: HELOC Data Dictionary
+      href: HELOC-data-dictionary.html
+    - text: HELOC Data Cleaning
+      href: HELOC-Data-Cleaning.html
+    - text: More
+      icon: fa-gear
   right:
   - icon: fab fa-github
     text: Source code
@@ -17,5 +27,7 @@ output:
   workflowr::wflow_html:
     toc: yes
     toc_float: yes
-    theme: cosmo
+    theme: readable
     highlight: textmate
+    code_folding: hide
+    css: style.css
