@@ -34,8 +34,8 @@ library(kableExtra)
 library(VIM)
 ```
 
-```{r}
-heloc <- read.csv("../data/heloc_dataset_v1.csv")
+```{r, load_data}
+heloc <- read.csv("./data/heloc_dataset_v1.csv")
 setDT(heloc)
 ```
 
