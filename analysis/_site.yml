@@ -7,8 +7,8 @@ navbar:
   - text: Home
     icon: fa-bar-chart
     href: index.html
-  - text: Purpose
-    icon: fa-info
+  - text: Methodology
+    icon: fa-clipboard-list
     href: Purpose.html
   - text: Dataset
     icon: fa-analytics
