@@ -57,13 +57,10 @@ When there is no credit report for all observations in a loan applications (all 
 features <- subset (heloc, select = -RiskPerformance)
 # rows containing negative values in each feature
 all_neg <- apply(features, 1, function(row) all(row < 0))
-which(all_neg) %>% 
-  length()
 heloc <- heloc[!all_neg,]
 rm(all_neg)
 
-# features containing negative values
-features <- subset (heloc, select = -RiskPerformance)
+# features containing any negative values
 any_neg <- apply(features, 2, function(col) any(col < 0))
 features_neg <- which(any_neg) %>% 
   names()
@@ -107,38 +104,38 @@ no_report <- names(no_report_cols)[no_report_cols > 0]
 paste(c("Features with an entry of -9: \n", no_report), collapse=" ") %>%   cat()
       
 # Add and initialise an indicator variable for the "no report" condition
-heloc[, no_report_externalRisk := as.factor(0)]
+heloc[, no_report := as.factor(0)]
 # Set the indicator to "1" where value is -9 (missing due to no report)
 heloc[ExternalRiskEstimate == -9, 
-      no_report_externalRisk := as.factor(1)]
+      no_report := as.factor(1)]
 
-not_valid_cols <- heloc[, heloc == -8] %>% 
+No_valid_cols <- heloc[, heloc == -8] %>% 
   colSums() 
-not_valid <- names(not_valid_cols)[not_valid_cols > 0]
-paste(c("\n\nFeatures with an entry of -8: \n", not_valid), collapse=" ") %>%   cat()
+no_valid <- names(No_valid_cols)[No_valid_cols > 0]
+paste(c("\n\nFeatures with an entry of -8: \n", no_valid), collapse=" ") %>%   cat()
 # Add and initialise an indicator variable for the "not_valid" condition
-not_valid_indicators <- c(paste0(c("not_valid_"), c(not_valid)))
-heloc[, c(not_valid_indicators) := as.factor(0)]
+No_valid_indicators <- c(paste0(c("No_valid_"), c(no_valid)))
+heloc[, c(No_valid_indicators) := as.factor(0)]
 
 # Set indicator variable to "1" for values of -8
 heloc[MSinceOldestTradeOpen == -8, 
-      not_valid_MSinceOldestTradeOpen := as.factor(1)]
+      No_valid_MSinceOldestTradeOpen := as.factor(1)]
 heloc[MSinceMostRecentDelq == -8, 
-      not_valid_MSinceMostRecentDelq := as.factor(1)]
+      No_valid_MSinceMostRecentDelq := as.factor(1)]
 heloc[MSinceMostRecentInqexcl7days == -8, 
-      not_valid_MSinceMostRecentInqexcl7days := as.factor(1)] 
+      No_valid_MSinceMostRecentInqexcl7days := as.factor(1)] 
 heloc[NetFractionRevolvingBurden == -8, 
-      not_valid_NetFractionRevolvingBurden := as.factor(1)] 
+      No_valid_NetFractionRevolvingBurden := as.factor(1)] 
 heloc[NetFractionInstallBurden == -8, 
-      not_valid_NetFractionInstallBurden := as.factor(1)] 
+      No_valid_NetFractionInstallBurden := as.factor(1)] 
 heloc[NumRevolvingTradesWBalance == -8, 
-      not_valid_NumRevolvingTradesWBalance := as.factor(1)] 
+      No_valid_NumRevolvingTradesWBalance := as.factor(1)] 
 heloc[NumInstallTradesWBalance == -8, 
-      not_valid_NumInstallTradesWBalance := as.factor(1)] 
+      No_valid_NumInstallTradesWBalance := as.factor(1)] 
 heloc[NumBank2NatlTradesWHighUtilization == -8, 
-      not_valid_NumBank2NatlTradesWHighUtilization := as.factor(1)] 
+      No_valid_NumBank2NatlTradesWHighUtilization := as.factor(1)] 
 heloc[PercentTradesWBalance == -8, 
-      not_valid_PercentTradesWBalance := as.factor(1)] 
+      No_valid_PercentTradesWBalance := as.factor(1)] 
 
 no_info_rows <- heloc[, which(.SD == -7), .SDcols = feature_cols]
 no_info_cols <- heloc[, heloc == -7] %>% 
@@ -147,13 +144,13 @@ no_info <- names(no_info_cols)[no_info_cols > 0]
 paste(c("\n\nFeatures with an entry of -7: \n", no_info), collapse=" ") %>%     cat()
 
 # Add and initialise an indicator variable for the "no report" condition
-no_info_indicators <- c(paste0(c("no_info_"), c(no_info)))
+no_info_indicators <- c(paste0(c("No_"), c(no_info)))
 heloc[, c(no_info_indicators) := as.factor(0)]
 # Set indicator variable to "1" for values of -7
 heloc[MSinceMostRecentInqexcl7days == -7, 
       no_info_MSinceMostRecentInqexcl7days := as.factor(1)]
 heloc[MSinceMostRecentDelq == -7, 
-      no_info_MSinceMostRecentDelq := as.factor(1)]
+      No_MSinceMostRecentDelq := as.factor(1)]
 
 # Replace entries with -9, -8 or -7 with NA since 
 # there are indicators showing where entries are missing
@@ -185,8 +182,8 @@ heloc[MSinceMostRecentInqexcl7days == -7,
 heloc[MSinceMostRecentDelq == -7, 
       MSinceMostRecentDelq := NA]
 
-## remove not_valid_PercentTradesWBalance (only 18)
-heloc[ , not_valid_PercentTradesWBalance := NULL]
+## remove No_valid_PercentTradesWBalance (only 18)
+heloc[ , No_valid_PercentTradesWBalance := NULL]
 
 # cleanup
 # define "not in" operator
