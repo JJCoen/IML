@@ -26,6 +26,8 @@ knitr::opts_chunk$set(opts.label="kill_prefix")
 #knitr::opts_chunk$set(fig.width = 4, fig.height = 4)
 
 # Load libraries
+library(workflowr)
+library(knitr)
 library(ggplot2)
 library(dplyr)
 library(purrr)
@@ -42,6 +44,13 @@ setDT(heloc)
 # Missing Values
 
 Missing values may be ignored by taking complete cases only or they may be replaced with an fixed value, such as the mean or median. However, this can lead to unstable model operation or biased predictions.
+
+The main pre-processing action required to prepare the HELOC data-set for further analysis is dealing with missing values. For instance, for one particular feature, over 50% of the entries are missing.
+
+```{r, echo = FALSE, fig.cap="Imputation Workflow", out.width="0.75\\linewidth", fig.align="center"}
+include_graphics(path = "docs/images/imputation-workflow.png")
+
+```
 
 In the HELOC dataset, a negative numeric indicates a missing value. Reasons for this are:
 
