@@ -1,5 +1,6 @@
 ---
 title: "Home"
+type: inverse
 site: workflowr::wflow_site
 output:
   workflowr::wflow_html:
@@ -41,7 +42,7 @@ There are many stakeholders that interact with a Machine Learning (ML) model:
 While a highly complex, "black-box" model can give high predictive accuracy, it is not clear how it arrives at particular outcomes. As a result, organisations and their personnel have been reluctant to put ML models into practice. And so, there are two main reasons for improving the interpretability of ML models:
 
 1.  To improve confidence in and utilisation of ML models.
-2.  In the case of high-stakes decision making, such as credit assessment of corporate clients.
+2.  Interpretability is essential in the case of high-stakes decision making, such as credit assessment of corporate clients.
 
 </div>
 
