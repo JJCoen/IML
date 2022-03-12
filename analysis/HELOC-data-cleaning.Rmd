@@ -5,7 +5,7 @@ author: "Jim Coen"
 date: "`r format(Sys.Date(), '%A, %B %d, %Y') `"
 geometry: "left=3cm,right=3cm,top=2cm,bottom=2cm"
 output: workflowr::wflow_html
-documentclass: article
+
 bibliography: C:/Users/jimco/Documents/Mendeley-Bib/Financial-Analytics-Thesis.bib
 csl: Harvard.csl
 ---
@@ -35,7 +35,7 @@ library(VIM)
 ```
 
 ```{r, load_data}
-heloc <- read.csv("./data/heloc_dataset_v1.csv")
+heloc <- read.csv("data/heloc_dataset_v1.csv")
 setDT(heloc)
 ```
 
@@ -104,10 +104,10 @@ no_report <- names(no_report_cols)[no_report_cols > 0]
 paste(c("Features with an entry of -9: \n", no_report), collapse=" ") %>%   cat()
       
 # Add and initialise an indicator variable for the "no report" condition
-heloc[, no_report := as.factor(0)]
+heloc[, No_report := as.factor(0)]
 # Set the indicator to "1" where value is -9 (missing due to no report)
 heloc[ExternalRiskEstimate == -9, 
-      no_report := as.factor(1)]
+      No_report := as.factor(1)]
 
 No_valid_cols <- heloc[, heloc == -8] %>% 
   colSums() 
@@ -148,7 +148,7 @@ no_info_indicators <- c(paste0(c("No_"), c(no_info)))
 heloc[, c(no_info_indicators) := as.factor(0)]
 # Set indicator variable to "1" for values of -7
 heloc[MSinceMostRecentInqexcl7days == -7, 
-      no_info_MSinceMostRecentInqexcl7days := as.factor(1)]
+      No_MSinceMostRecentInqexcl7days := as.factor(1)]
 heloc[MSinceMostRecentDelq == -7, 
       No_MSinceMostRecentDelq := as.factor(1)]
 
@@ -297,9 +297,8 @@ res <- summary(aggr(heloc_miss, sortVar = TRUE))$combinations
 ```
 
 ```{r}
-head(res[rev(order(res[,2])),])
-
-res
+head(res[rev(order(res[,2])),]) %>% 
+  kable()
 ```
 
 ### Correlation between variables with missing values, ranked by r value.
@@ -334,6 +333,12 @@ heloc_miss <- (heloc[, miss_cols, with = FALSE])
  
 library("VIM")
 matrixplot(heloc_miss)
+
+# cleanup
+cleanup <- ls()
+cleanup <- cleanup[ cleanup %ni% c("heloc") ]
+rm(list=(cleanup))
+rm(cleanup)
 ```
 
 This plot indicates that most of the missing entries occur in combination with other features. So they are unlikely to be MCAR.
@@ -383,15 +388,101 @@ The missForest algorithm creates a Random Forest model to predict missing values
 
 Finally, it is possible to extract the "filled-in" values and estimate imputation error.
 
-## Co-ordination between Training and Testing Sets
+## Consolidation of Imputation between Training and Testing Sets
 
-The overall strategy to handle missing entries that occur in training and test sets [@Morgan]:
+The overall strategy to handle missing entries that occur in training and testing sets [@Morgan2020]:
 
-1.  Impute the training set using missForest and store in `train_imp`
-2.  Create interpretable model based on the imputed training data
-3.  Combine imputed training set with the test set and store in `train_test`
-4.  Impute missing entries in the combined `train_test` set and extract test data (`test_imp`)
-5.  Apply the interpretable model to the imputed test set to obtain probability predictions.
+1.  Impute the training set using `missForest` and store in `train_imp`
+2.  Combine imputed training set with the test set and store in `train_test`
+3.  Impute missing entries in the combined `train_test` set and extract test data (`test_imp`)
+
+### Partition
+
+Convert `RiskPerformance` to a categorical (factor) variable.
+
+```{r}
+heloc[, RiskPerformance := as.factor(RiskPerformance)]
+levels(heloc$RiskPerformance)
+```
+
+"Bad" is the reference level since it appears first
+
+```{r}
+table(heloc$RiskPerformance)
+```
+
+$\rightarrow$ The response variable is balanced between "Bad" and "Good" classes, so stratified sampling is not necessary.
+
+```{r, warning=FALSE, message=FALSE}
+library(tidymodels) 
+library(visdat)   # visualise missing data
+library(missForest)
+
+set.seed(123)
+# Create data split for train and test
+split <- initial_split(heloc, prop = 0.75)
+
+# Create training data
+train <- split %>%
+                    training()
+
+# Create testing data
+test <- split %>%
+                    testing()
+
+# Check for equal proportions in training and testing
+cat("train: \n")
+with(train, margin.table(prop.table(table(RiskPerformance)), 1) )
+cat("test: \n")
+with(test, margin.table(prop.table(table(RiskPerformance)), 1) )
+```
+
+### Occurrence of Missing Entries
+
+There is no need to consider the indicator variables since they contain no missing entries.
+
+```{r, fig.cap="Distribution of Missing Entries"}
+vis_miss(rbind(train[, 2:24], test[, 2:24]), show_perc = FALSE) + 
+  coord_flip()
+```
+
+Figure shows that most features have no missing entries. This suggests that model-based imputation would be appropriate.
+
+**Step 1** Impute trainS
+
+Enabling parallel processing was recommended by Morgan (2020).
+
+```{r}
+# parallelize = 'variables'
+# splits the data in to equal portions matching the number of cores.
+
+# doParallel::registerDoParallel(cores = 4) # set based on number of CPU cores
+# doRNG::registerDoRNG(seed = 123)
+# train_imp <- missForest(train, verbose = TRUE,
+#                         parallelize = 'variables')$ximp
+```
+
+The 'difference' given with each iteration is between the new and previously imputed values. As given above, the difference comes down and then increases on the third iteration, so the algorithm stops.
+
+**Step 2** Combine train_imp and test
+
+```{r}
+#train_test <- rbind(test, train_imp)
+```
+
+**Step 3** Impute with combined train and test. Then extract imputed test.
+
+```{r}
+# doParallel::registerDoParallel(cores = 4) 
+# doRNG::registerDoRNG(seed = 123)
+# test_imp <- missForest(train_test, 
+#                        verbose = TRUE,
+#                        parallelize = 'variables')$ximp[1:nrow(test), ]
+```
+
+```{r}
+#save( train_imp, test_imp, file = "data/train_test_imp")
+```
 
 ## References
 
