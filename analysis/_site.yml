@@ -16,7 +16,7 @@ navbar:
     - text: HELOC Data Dictionary
       href: HELOC-data-dictionary.html
     - text: HELOC Data Cleaning
-      href: HELOC-Data-Cleaning.html
+      href: HELOC-data-cleaning.html
     - text: More
       icon: fa-gear
   right:
