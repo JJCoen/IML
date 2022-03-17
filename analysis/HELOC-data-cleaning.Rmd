@@ -47,10 +47,7 @@ Missing values may be ignored by taking complete cases only or they may be repla
 
 The main pre-processing action required to prepare the HELOC data-set for further analysis is dealing with missing values. For instance, for one particular feature, over 50% of the entries are missing.
 
-```{r, echo = FALSE, fig.cap="Imputation Workflow", out.width="0.75\\linewidth", fig.align="center"}
-include_graphics(path = "docs/images/imputation-workflow.png")
-
-```
+<div style="text-align: right;"><img src="./images/imputation-workflow.png" width="100%"></div>
 
 In the HELOC dataset, a negative numeric indicates a missing value. Reasons for this are:
 
