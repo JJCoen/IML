@@ -17,7 +17,7 @@ The QII model is a separate model used to identify the influence of features on 
 ### Type 1 Explanations 
 These answer questions related to individual predictions.  Plots are generated for specific applicants showing feature influence in terms of log(Odds of default) compared to the average log odds across all applicants.  
 
-```{r, out.width=100}
+```{r, out.width="100%"}
 knitr::include_graphics("images/QII-type-1.png", error = FALSE)
 ```
 
