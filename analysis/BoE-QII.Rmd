@@ -1,0 +1,23 @@
+---
+title: "BoE-QII"
+type: inverse
+author: "Jim Coen"
+date: "`r format(Sys.Date(), '%A, %B %d, %Y') `"
+geometry: "left=3cm,right=3cm,top=2cm,bottom=2cm"
+output: workflowr::wflow_html
+bibliography: C:/Users/jimco/Documents/Mendeley-Bib/Financial-Analytics-Thesis.bib
+csl: Harvard.csl
+editor_options:
+  chunk_output_type: console
+---
+
+## Quantitative Input Influences Model
+The QII model is a separate model used to identify the influence of features on the output.  These measures are derived from Shapley values, which are based on Game Theory.  By varying  inputs and observing the effect on output, it is possible to determine the influence of individual features over a large range of instances.  This allows for the presentation of four types of explanations, that are relevant to some or all of the stakeholders.
+
+### Type 1 Explanations 
+These answer questions related to individual predictions.  Plots are generated for specific applicants showing feature influence in terms of log(Odds of default) compared to the average log odds across all applicants.  
+
+```{r, out.width=100}
+knitr::include_graphics("images/QII-type-1.png", error = FALSE)
+```
+
