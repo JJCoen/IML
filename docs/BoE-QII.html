@@ -431,7 +431,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">BoE-QII</h1>
 <h4 class="author">Jim Coen</h4>
-<h4 class="date">Friday, March 18, 2022</h4>
+<h4 class="date">Saturday, March 19, 2022</h4>
 
 </div>
 
@@ -456,7 +456,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-03-18
+<strong>Last updated:</strong> 2022-03-19
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -547,16 +547,16 @@ This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysi
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree86b92ecec6bf8eb3264220557973b34f1cada813targetblank86b92eca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/86b92ecec6bf8eb3264220557973b34f1cada813" target="_blank">86b92ec</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree354233b0819427b372438a72dbdbe62e5f545bbetargetblank354233ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/354233b0819427b372438a72dbdbe62e5f545bbe" target="_blank">354233b</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree86b92ecec6bf8eb3264220557973b34f1cada813targetblank86b92eca" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree354233b0819427b372438a72dbdbe62e5f545bbetargetblank354233ba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/86b92ecec6bf8eb3264220557973b34f1cada813" target="_blank">86b92ec</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/354233b0819427b372438a72dbdbe62e5f545bbe" target="_blank">354233b</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -620,6 +620,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/JJCoen/Interpretable-ML-Models/blob/354233b0819427b372438a72dbdbe62e5f545bbe/analysis/BoE-QII.Rmd" target="_blank">354233b</a>
+</td>
+<td>
+JJCoen
+</td>
+<td>
+2022-03-19
+</td>
+<td>
+wflow_publish(c(“analysis/BoE-QII.Rmd”, “analysis/HELOC-data-cleaning.Rmd”))
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/JJCoen/Interpretable-ML-Models/d7f5517ee48935b4c2f9be30d752bcf073df9417/docs/BoE-QII.html" target="_blank">d7f5517</a>
+</td>
+<td>
+JJCoen
+</td>
+<td>
+2022-03-18
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/JJCoen/Interpretable-ML-Models/blob/86b92ecec6bf8eb3264220557973b34f1cada813/analysis/BoE-QII.Rmd" target="_blank">86b92ec</a>
 </td>
 <td>
@@ -673,14 +707,33 @@ wflow_publish(files = c(“analysis/BoE-QII.Rmd”))
 </div>
 </div>
 </div>
-<div id="quantitative-input-influences-model" class="section level2">
-<h2>Quantitative Input Influences Model</h2>
+<div id="quantitative-input-influences-qii-model" class="section level2">
+<h2>Quantitative Input Influences (QII) Model</h2>
 <p>The QII model is a separate model used to identify the influence of features on the output. These measures are derived from Shapley values, which are based on Game Theory. By varying inputs and observing the effect on output, it is possible to determine the influence of individual features over a large range of instances. This allows for the presentation of four types of explanations, that are relevant to some or all of the stakeholders.</p>
-<div id="type-1-explanations" class="section level3">
-<h3>Type 1 Explanations</h3>
-<p>These answer questions related to individual predictions. Plots are generated for specific applicants showing feature influence in terms of log(Odds of default) compared to the average log odds across all applicants.</p>
+<p>Two distinct models, logistic regression (logit) and Gradient Boosted Trees, were created. Each has a seperate QII model to assess the influence of features.</p>
+<div id="type-1-explanations" class="section level3 unnumbered">
+<h3 class="unnumbered">Type 1 Explanations</h3>
+<p>These answer questions related to individual predictions. Plots are generated for specific applicants showing feature influence in terms of log(Odds of default) compared to the average log odds across all applicants. Figure shows plots for two individual applicants.</p>
+<p>as shown in Figure @ref(fig:keyword)</p>
+<p>(ref:keyword) Caption, with optional Markdown links, but no endnotes.</p>
 <pre class="r"><code>knitr::include_graphics(&quot;images/QII-type-1.png&quot;, error = FALSE)</code></pre>
-<p><img src="images/QII-type-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center">
+<img src="images/QII-type-1.png" alt="(ref:keyword)" width="100%" />
+<p class="caption">
+(ref:keyword)
+</p>
+</div>
+<p>The reference level is the mean log(Odds). Features increase or decrease the probability of default depending upon a positive or negative value for log(Odds) respectively.</p>
+<p>Type 1 explanations are directed at the Developer and Conduct Regulator and allow them to answer questions, such as, “Which features mattered most to individual applicant predictions”? As the name might imply, explanations are not given in textual terms. Graphical display facilitates explanation.</p>
+<p>Type 1 explanations show local influence. The QII co-explainer model also gives global influence.</p>
+</div>
+<div id="type-2-explanations" class="section level3 unnumbered">
+<h3 class="unnumbered">Type 2 Explanations</h3>
+<p>These answer questions concerning the influence of features across a range of instances, such as the complete test set. This allows for a general characterisation of a model and its operation. The QII model determines feature influence simply by averaging absolute values for each individual in the test set. This enables comparison of ML models, as in figure , which has plots for the logit and GBT models.</p>
+</div>
+<div id="assessment" class="section level3 unnumbered">
+<h3 class="unnumbered">Assessment</h3>
+<p>While the magnitude and sign of the log(Odds) give relative importance of features, these values are not intuitive. It unlikely that anyone, apart from the Developer or Data Analyst, understands this metric. Nevertheless, the same criticism can be made of the percentage <span class="math inline">\(R^2\)</span> of a given feature in multiple linear regression <span class="citation">(<strong>Johnson2000?</strong>)</span>.</p>
 <div id="refs">
 
 </div>
