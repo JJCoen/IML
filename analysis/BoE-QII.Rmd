@@ -11,13 +11,33 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Quantitative Input Influences Model
+## Quantitative Input Influences (QII) Model
 The QII model is a separate model used to identify the influence of features on the output.  These measures are derived from Shapley values, which are based on Game Theory.  By varying  inputs and observing the effect on output, it is possible to determine the influence of individual features over a large range of instances.  This allows for the presentation of four types of explanations, that are relevant to some or all of the stakeholders.
 
-### Type 1 Explanations 
-These answer questions related to individual predictions.  Plots are generated for specific applicants showing feature influence in terms of log(Odds of default) compared to the average log odds across all applicants.  
+Two distinct models, logistic regression (logit) and Gradient Boosted Trees, were created.  Each has a seperate QII model to assess the influence of features.
 
-```{r, out.width="100%"}
+### Type 1 Explanations {.unnumbered}
+These answer questions related to individual predictions.  Plots are generated for specific applicants showing feature influence in terms of log(Odds of default) compared to the average log odds across all applicants.  Figure shows plots for two individual applicants.  
+
+as shown in Figure \@ref(fig:keyword)
+
+(ref:keyword) Caption, with optional Markdown links, but no endnotes.
+
+```{r keyword, fig.cap="(ref:keyword)", out.width="100%"}
 knitr::include_graphics("images/QII-type-1.png", error = FALSE)
 ```
 
+The reference level is the mean log(Odds).  Features increase or decrease the probability of default depending upon a positive or negative value for log(Odds) respectively.  
+
+Type 1 explanations are directed at the Developer and Conduct Regulator and allow them to answer questions, such as, "Which features mattered most to individual applicant predictions"?  As the name might imply, explanations are not given in textual terms.  Graphical display facilitates explanation.
+
+Type 1 explanations show local influence.  The QII co-explainer model also gives global influence.
+
+### Type 2 Explanations {.unnumbered}
+These answer questions concerning the influence of features across a range of instances, such as the complete test set.  This allows for a general characterisation of a model and its operation.  The QII model determines feature influence simply by averaging absolute values for each individual in the test set.  This enables comparison of ML models, as in figure , which has plots for the logit and GBT models.    
+
+
+
+
+### Assessment {.unnumbered}
+While the magnitude and sign of the log(Odds) give relative importance of features, these values are not intuitive.  It unlikely that anyone, apart from the Developer or Data Analyst, understands this metric.  Nevertheless, the same criticism can be made of the percentage $R^2$ of a given feature in multiple linear regression [@Johnson2000].  

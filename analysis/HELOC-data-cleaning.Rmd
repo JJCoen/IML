@@ -220,7 +220,7 @@ First, convert `MaxDelq2PublicRecLast12M` and `MaxDelqEver` from numeric to fact
 
 In `MaxDelqEver`, entries with "No such value" are equivalent to missing values and need to be recorded as such.
 
-```{r, echo=FALSE}
+```{r}
 # Categorical features
 change_columns <- c("MaxDelq2PublicRecLast12M", "MaxDelqEver")
 # Change class of certain columns
@@ -242,7 +242,7 @@ heloc[MaxDelqEver == 1, MaxDelqEver := NA]
 
 ```
 
-```{r num_missing, echo=FALSE, fig.cap="Features ranked by number of missing entries"}
+```{r num_missing, fig.cap="Features ranked by number of missing entries"}
 
 # record the counts of missing values in each column
 missing_counts <- heloc %>% 
@@ -252,7 +252,6 @@ missing_counts <- heloc %>%
 # features with missing values 
 missing_counts[missing_counts > 0] %>% 
   kable(col.names = c("counts"))
-
 
 # record features with missing values
 miss <- names(missing_counts[missing_counts > 0])
