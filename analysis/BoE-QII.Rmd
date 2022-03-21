@@ -17,10 +17,14 @@ The QII model is a separate model used to identify the influence of features on 
 Two distinct models, logistic regression (logit) and Gradient Boosted Trees, were created.  Each has a seperate QII model to assess the influence of features.
 
 ### Type 1 Explanations {.unnumbered}
-These answer questions related to individual predictions.  Plots are generated for specific applicants showing feature influence in terms of log(Odds of default) compared to the average log odds across all applicants.  Figure \@ref(fig:type1) shows plots for two individual applicants.  
+These answer questions related to individual predictions.  Plots are generated for specific applicants showing feature influence in terms of log(Odds of default) compared to the average log odds across all applicants.  Figure 1 shows plots for two individual applicants.  
+
+![]("./images/QII-type-1.png")
 
 ```{r type1, fig.cap="Sign and Magnitude of Feature Influence", out.width="1.0\\linewidth", fig.align="center"}
-knitr::include_graphics(path = "images/QII-type-1.png", error = FALSE)
+
+# \@ref(fig:type1)
+# knitr::include_graphics(path = "docs/images/QII-type-1.png", error = FALSE)
 ```
 
 The reference level is the mean log(Odds).  Features increase or decrease the probability of default depending upon a positive or negative value for log(Odds) respectively.  
