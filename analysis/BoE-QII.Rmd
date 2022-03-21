@@ -17,19 +17,15 @@ The QII model is a separate model used to identify the influence of features on 
 Two distinct models, logistic regression (logit) and Gradient Boosted Trees, were created.  Each has a seperate QII model to assess the influence of features.
 
 ### Type 1 Explanations {.unnumbered}
-These answer questions related to individual predictions.  Plots are generated for specific applicants showing feature influence in terms of log(Odds of default) compared to the average log odds across all applicants.  Figure shows plots for two individual applicants.  
+These answer questions related to individual predictions.  Plots are generated for specific applicants showing feature influence in terms of log(Odds of default) compared to the average log odds across all applicants.  Figure \@ref(fig:type1) shows plots for two individual applicants.  
 
-as shown in Figure \@ref(fig:keyword)
-
-(ref:keyword) Caption, with optional Markdown links, but no endnotes.
-
-```{r keyword, fig.cap="(ref:keyword)", out.width="100%"}
-knitr::include_graphics("images/QII-type-1.png", error = FALSE)
+```{r type1, fig.cap="Sign and Magnitude of Feature Influence", out.width="1.0\\linewidth", fig.align="center"}
+knitr::include_graphics(path = "images/QII-type-1.png", error = FALSE)
 ```
 
 The reference level is the mean log(Odds).  Features increase or decrease the probability of default depending upon a positive or negative value for log(Odds) respectively.  
 
-Type 1 explanations are directed at the Developer and Conduct Regulator and allow them to answer questions, such as, "Which features mattered most to individual applicant predictions"?  As the name might imply, explanations are not given in textual terms.  Graphical display facilitates explanation.
+Type 1 explanations are directed at the Developer and Conduct Regulator and allow them to answer questions, such as, "Which features mattered most to individual applicant predictions"?  Explanations are not given in textual terms, rather graphical display facilitates explanation.
 
 Type 1 explanations show local influence.  The QII co-explainer model also gives global influence.
 

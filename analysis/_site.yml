@@ -19,6 +19,11 @@ navbar:
       href: HELOC-data-cleaning.html
     - text: More
       icon: fa-gear
+  - text: Models
+    icon: fa-analytics
+    menu:
+    - text: Logistic Regression Baseline
+      href: Logistic-Regression.html
   right:
   - icon: fab fa-github
     text: Source code
