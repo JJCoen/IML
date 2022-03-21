@@ -25,7 +25,7 @@ navbar:
     - text: Logistic Regression Baseline
       href: Logistic-Regression.html
     - text: Bank of England QII
-      href: BOI-QII.html
+      href: BoE-QII.html
   right:
   - icon: fab fa-github
     text: Source code
