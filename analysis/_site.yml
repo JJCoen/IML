@@ -26,6 +26,10 @@ navbar:
       href: Logistic-Regression.html
     - text: Bank of England QII
       href: BoE-QII.html
+    - text: Data Scientist Interpretation
+      href: HELOC-Data-Scientist.html
+    - text: Service User Interpretation
+      href: HELOC-Service-User.html
   right:
   - icon: fab fa-github
     text: Source code
