@@ -29,7 +29,8 @@ knit_hooks$set(inline = function(x) {
 knit_hooks$set(plot = knitr:::hook_plot_html)
 ```
 
-```{r, load-libraries}
+
+```{r, load-libraries, echo=FALSE}
 
 # Packages
 library(tidyverse)  # data manipulation and visualization
@@ -44,7 +45,7 @@ library(kableExtra)
 
 ```
 
-Pre-processing has already performed in *HELOC-data-cleaning.Rmd*
+Pre-processing has already been performed in *HELOC-data-cleaning.Rmd*
 
 ```{r, load_data}
 load("data/train_test_imp")
@@ -59,7 +60,8 @@ The BoE QII model uses log(odds) and probability of default as metrics in graphs
 
 All these models are binary classifiers where the outcome is in one of two classes and can be represented by a binomial function with probability of success $p_i$.
 
-$$ y_i = \mathbf{Binom}(p_i)$$ $y_i$ is the **Risk** variable and it takes the values 0 or 1. Generally in credit management, **Risk** = 1 signifies default on a loan, while **Risk** = 0 is non-default.
+$$ y_i = \mathbf{Binom}(p_i)$$ 
+$y_i$ is the **Risk** variable and it takes the values 0 or 1. Generally in credit management, **Risk** = 1 signifies default on a loan, while **Risk** = 0 is non-default.
 
 In order to model the function $y$, linear logistic regression uses a linear combination of the features:
 
