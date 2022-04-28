@@ -87,3 +87,7 @@ The pitfall of presenting correlations and scatterplots is the possibility of "g
 It is apparent that the purpose of Figure 5 to display PD distribution and compare clusters.  Presentation of the data is unclear in the lack of scale units on the x-axis.  In addition, the message to be taken from the graph is absent.
 
 In summary, consider that a hospital will allow a patient access to clinical notes only when a doctor is present to explain what they mean.  In the explanations provided by the QII model would seem to require input from a developer or data analyst in order to elaborate on their significance.  As such, the criticism of an engineering focus in ML interpretability is borne out here.  
+
+## References
+<bibliography entry-spacing = "2" >
+

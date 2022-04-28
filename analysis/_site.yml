@@ -18,7 +18,7 @@ navbar:
       href: HELOC-data-cleaning.html
   - text: Models
     menu:
-    - text: Logistic Regression Baseline
+    - text: Logistic Regression Interpretation
       href: Logistic-Regression.html
     - text: Bank of England QII
       href: BoE-QII.html

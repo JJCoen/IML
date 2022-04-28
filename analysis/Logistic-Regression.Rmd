@@ -148,4 +148,4 @@ ggplot(data= train_sub, mapping = aes(x=ExternalRiskEstimate, y=RiskBin)) + geom
 
 ## References
 
-\\bibliography{Financial-Analytics-Thesis.bib}
+\bibliography
