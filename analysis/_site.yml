@@ -18,7 +18,7 @@ navbar:
       href: HELOC-data-cleaning.html
   - text: Models
     menu:
-    - text: Logistic Regression Interpretation
+    - text: Logistic Regression Overview
       href: Logistic-Regression.html
     - text: Bank of England QII
       href: BoE-QII.html
@@ -28,7 +28,7 @@ navbar:
     menu:
     - text: Data Scientist Interpretation
       icon: fa-analytics
-      href: HELOC-Data-Scientist.html
+      href: https://colab.research.google.com/drive/1g16X5H7MB2SZu9VfsTpZO-Lc0-lo6MhE
     - text: Service User Interpretation
       icon: fa-user-check
       href: HELOC-Service-User.html
