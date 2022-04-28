@@ -11,24 +11,26 @@ navbar:
     icon: fa-clipboard-list
     href: Purpose.html
   - text: Dataset
-    icon: fa-analytics
     menu:
     - text: HELOC Data Dictionary
       href: HELOC-data-dictionary.html
     - text: HELOC Data Cleaning
       href: HELOC-data-cleaning.html
-    - text: More
-      icon: fa-gear
   - text: Models
-    icon: fa-analytics
     menu:
     - text: Logistic Regression Baseline
       href: Logistic-Regression.html
     - text: Bank of England QII
       href: BoE-QII.html
+    - text: AIX 360
+      href: https://colab.research.google.com/drive/1y_t7kzeBOGKY0snLWF70MBrjqaOcZUiL#scrollTo=K8H28LcnJwrh
+  - text: Interpret
+    menu:
     - text: Data Scientist Interpretation
+      icon: fa-analytics
       href: HELOC-Data-Scientist.html
     - text: Service User Interpretation
+      icon: fa-user-check
       href: HELOC-Service-User.html
   right:
   - icon: fab fa-github
