@@ -394,7 +394,7 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="Logistic-Regression.html">Logistic Regression Baseline</a>
+      <a href="Logistic-Regression.html">Logistic Regression Interpretation</a>
     </li>
     <li>
       <a href="BoE-QII.html">Bank of England QII</a>
@@ -571,16 +571,16 @@ This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysi
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree110788341a32feffb22ab2b1ce3a1e440d919889targetblank1107883a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/110788341a32feffb22ab2b1ce3a1e440d919889" target="_blank">1107883</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree063a6fce45296d9d036a60a292917d6681e4ac11targetblank063a6fca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/063a6fce45296d9d036a60a292917d6681e4ac11" target="_blank">063a6fc</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree110788341a32feffb22ab2b1ce3a1e440d919889targetblank1107883a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree063a6fce45296d9d036a60a292917d6681e4ac11targetblank063a6fca" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/110788341a32feffb22ab2b1ce3a1e440d919889" target="_blank">1107883</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/063a6fce45296d9d036a60a292917d6681e4ac11" target="_blank">063a6fc</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -605,7 +605,6 @@ Untracked files:
     Untracked:  code/aix_360_credit_loan_data_scientist.py
 
 Unstaged changes:
-    Modified:   analysis/_site.yml
     Deleted:    analysis/about.Rmd
 
 </code></pre>
@@ -645,6 +644,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/JJCoen/Interpretable-ML-Models/blob/063a6fce45296d9d036a60a292917d6681e4ac11/analysis/BoE-QII.Rmd" target="_blank">063a6fc</a>
+</td>
+<td>
+JJCoen
+</td>
+<td>
+2022-04-28
+</td>
+<td>
+update bibliography in QII and LR Interpretation
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/JJCoen/Interpretable-ML-Models/34bb95886a69ad3492e9de23350c8fedd6a26a10/docs/BoE-QII.html" target="_blank">34bb958</a>
+</td>
+<td>
+JJCoen
+</td>
+<td>
+2022-04-28
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -992,6 +1025,11 @@ The attributes of type 1 explanations also apply for type 2 However, the message
 <p><strong>Type 4 Explanations</strong> The pitfall of presenting correlations and scatterplots is the possibility of “getting lost in the detail”, when there are many features.</p>
 <p>It is apparent that the purpose of Figure 5 to display PD distribution and compare clusters. Presentation of the data is unclear in the lack of scale units on the x-axis. In addition, the message to be taken from the graph is absent.</p>
 <p>In summary, consider that a hospital will allow a patient access to clinical notes only when a doctor is present to explain what they mean. In the explanations provided by the QII model would seem to require input from a developer or data analyst in order to elaborate on their significance. As such, the criticism of an engineering focus in ML interpretability is borne out here.</p>
+</div>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<p><bibliography entry-spacing = "2" ></p>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-Cleveland1985" class="csl-entry">
 Cleveland, W. S. and McGill, R. (1985) <span>‘<span class="nocase">Graphical perception and graphical methods for analyzing scientific data</span>’</span>, <em>Science</em>, 229(4716), pp. 828–833. doi: <a href="https://doi.org/10.1126/SCIENCE.229.4716.828">10.1126/SCIENCE.229.4716.828</a>.
@@ -1042,7 +1080,6 @@ loaded via a namespace (and not attached):
 [33] rmarkdown_2.11   callr_3.7.0      magrittr_2.0.2   whisker_0.4     
 [37] ps_1.6.0         promises_1.2.0.1 htmltools_0.5.2  ellipsis_0.3.2  
 [41] httpuv_1.6.5     utf8_1.2.2       stringi_1.7.6    crayon_1.5.0    </code></pre>
-</div>
 </div>
 </div>
 
