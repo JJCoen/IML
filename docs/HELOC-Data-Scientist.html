@@ -14261,9 +14261,8 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="HELOC-Data-Scientist">HELOC Data Scientist<a class="anchor-link" href="#HELOC-Data-Scientist">&#182;</a></h1><h2 id="Primary-Objective">Primary Objective<a class="anchor-link" href="#Primary-Objective">&#182;</a></h2><p>Provide graphical and summary explanations of three types of directly interpretable (glassbox) data-inductive (Machine Learning) models for credit risk assessment.  The dataset under investigation is the FICO Home Equity Loan data (HELOC).  This was compiled from real-world financial data and was used in the FICO Explainable ML Models Challenge.</p>
 <p>The models classify new instances as <code>nondefault</code> or <code>default</code>.  The components of the model need to be accessible in order to provide interpretations of model operation and predictions.</p>
-<p>There are four model types in the <code>interpretML</code> package.  The Decision Tree Classifier was not selected due to the potential for overfitting and the fact that the HELOC dataset contains 34 features with approximately 7,000 instances in the training set.</p>
-<p>The goal is to create a dashboard directed towards the requirements of a Data Scientist / Model Developer.
-The objective is to create a dashboard directed towards the requirements of a Service User / Customer seeking a loan.</p>
+<p>There are four model types in the <code>interpretML</code> package.  The Decision Tree Classifier was not selected due to the potential for overfitting since the HELOC dataset contains 34 features with approximately 7,000 instances in the training set.</p>
+<p>The end goal is to create a dashboard directed towards the requirements of a Data Scientist / Model Developer.</p>
 <h6 id="Contents">Contents<a class="anchor-link" href="#Contents">&#182;</a></h6><ol>
 <li><p><a href="#feature-importance">Feature Importance</a></p>
 </li>
@@ -14281,7 +14280,7 @@ The objective is to create a dashboard directed towards the requirements of a Se
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -14327,7 +14326,7 @@ The objective is to create a dashboard directed towards the requirements of a Se
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/JJCoen/Interpretable-ML-Models/master/data/train_imp.csv&#39;</span>
@@ -14347,7 +14346,7 @@ The objective is to create a dashboard directed towards the requirements of a Se
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span> <span class="n">train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
@@ -14393,7 +14392,7 @@ A negative classification (0) is a nondefault.  In $R$, this is the reference le
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">X_train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">features</span><span class="p">]</span>
@@ -14428,7 +14427,7 @@ A negative classification (0) is a nondefault.  In $R$, this is the reference le
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
 
 
 
@@ -14446,7 +14445,7 @@ A negative classification (0) is a nondefault.  In $R$, this is the reference le
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">X_test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="n">features</span><span class="p">]</span>
@@ -14490,7 +14489,7 @@ Name: RiskPerformance, dtype: int64
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">X_train</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
@@ -14509,7 +14508,7 @@ Name: RiskPerformance, dtype: int64
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
 
 
 
@@ -14826,7 +14825,7 @@ Name: RiskPerformance, dtype: int64
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">interpret</span> <span class="kn">import</span> <span class="n">show</span>
@@ -14849,7 +14848,7 @@ Name: RiskPerformance, dtype: int64
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ebm</span> <span class="o">=</span> <span class="n">ExplainableBoostingClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
@@ -14872,13 +14871,13 @@ Name: RiskPerformance, dtype: int64
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
 
 
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;interpret.glassbox.linear.LogisticRegression at 0x2bdcee39e20&gt;</pre>
+<pre>&lt;interpret.glassbox.linear.LogisticRegression at 0x1f592257e20&gt;</pre>
 </div>
 
 </div>
@@ -14896,7 +14895,7 @@ Name: RiskPerformance, dtype: int64
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ebm_global</span> <span class="o">=</span> <span class="n">ebm</span><span class="o">.</span><span class="n">explain_global</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;EBM-Loan&#39;</span><span class="p">)</span>
@@ -14919,10 +14918,37 @@ Name: RiskPerformance, dtype: int64
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>C:\Users\jimco\anaconda3\lib\site-packages\interpret\visual\udash.py:5: UserWarning: 
+The dash_html_components package is deprecated. Please replace
+`import dash_html_components as html` with `from dash import html`
+  import dash_html_components as html
+C:\Users\jimco\anaconda3\lib\site-packages\interpret\visual\udash.py:6: UserWarning: 
+The dash_core_components package is deprecated. Please replace
+`import dash_core_components as dcc` with `from dash import dcc`
+  import dash_core_components as dcc
+C:\Users\jimco\anaconda3\lib\site-packages\interpret\visual\udash.py:7: UserWarning: 
+The dash_table package is deprecated. Please replace
+`import dash_table` with `from dash import dash_table`
+
+Also, if you&#39;re using any of the table format helpers (e.g. Group), replace 
+`from dash_table.Format import Group` with 
+`from dash.dash_table.Format import Group`
+  import dash_table as dt
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
 
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
-<!-- http://127.0.0.1:7230/3014266185664/ -->
-<iframe src="http://127.0.0.1:7230/3014266185664/" width=100% height=800 frameBorder="0"></iframe>
+<!-- http://127.0.0.1:7001/2154230545184/ -->
+<iframe src="http://127.0.0.1:7001/2154230545184/" width=100% height=800 frameBorder="0"></iframe>
 </div>
 
 </div>
@@ -14952,7 +14978,7 @@ $$</p>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">lr_global</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">explain_global</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;LR-Loan&#39;</span><span class="p">)</span>
@@ -14977,8 +15003,8 @@ $$</p>
 
 
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
-<!-- http://127.0.0.1:7230/3014268459136/ -->
-<iframe src="http://127.0.0.1:7230/3014268459136/" width=100% height=800 frameBorder="0"></iframe>
+<!-- http://127.0.0.1:7001/2154249289008/ -->
+<iframe src="http://127.0.0.1:7001/2154249289008/" width=100% height=800 frameBorder="0"></iframe>
 </div>
 
 </div>
@@ -15001,7 +15027,7 @@ $$</p>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ebm_local</span> <span class="o">=</span> <span class="n">ebm</span><span class="o">.</span><span class="n">explain_local</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:</span><span class="mi">5</span><span class="p">],</span> <span class="n">y_test</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
@@ -15026,8 +15052,8 @@ $$</p>
 
 
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
-<!-- http://127.0.0.1:7230/3014267645376/ -->
-<iframe src="http://127.0.0.1:7230/3014267645376/" width=100% height=800 frameBorder="0"></iframe>
+<!-- http://127.0.0.1:7001/2154249289152/ -->
+<iframe src="http://127.0.0.1:7001/2154249289152/" width=100% height=800 frameBorder="0"></iframe>
 </div>
 
 </div>
@@ -15039,7 +15065,7 @@ $$</p>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">lr_local</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">explain_local</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:</span><span class="mi">5</span><span class="p">],</span> <span class="n">y_test</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
@@ -15064,8 +15090,8 @@ $$</p>
 
 
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
-<!-- http://127.0.0.1:7230/3014268708272/ -->
-<iframe src="http://127.0.0.1:7230/3014268708272/" width=100% height=800 frameBorder="0"></iframe>
+<!-- http://127.0.0.1:7001/2154252759104/ -->
+<iframe src="http://127.0.0.1:7001/2154252759104/" width=100% height=800 frameBorder="0"></iframe>
 </div>
 
 </div>
@@ -15103,7 +15129,7 @@ $$ Recall = \frac{TP}{TP + FN}$$</p>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">seed</span> <span class="o">=</span> <span class="mi">2022</span>
@@ -15133,10 +15159,25 @@ $$ Recall = \frac{TP}{TP + FN}$$</p>
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>C:\Users\jimco\anaconda3\lib\site-packages\sklearn\externals\six.py:28: FutureWarning:
+
+The module is deprecated in version 0.21 and will be removed in version 0.23 since we&#39;ve dropped support for Python 2.7. Please rely on the official version of six (https://pypi.org/project/six/).
+
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
 
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
-<!-- http://127.0.0.1:7230/3014268639648/ -->
-<iframe src="http://127.0.0.1:7230/3014268639648/" width=100% height=800 frameBorder="0"></iframe>
+<!-- http://127.0.0.1:7001/2154252674576/ -->
+<iframe src="http://127.0.0.1:7001/2154252674576/" width=100% height=800 frameBorder="0"></iframe>
 </div>
 
 </div>
@@ -15158,7 +15199,7 @@ $$ Recall = \frac{TP}{TP + FN}$$</p>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">interpret.perf</span> <span class="kn">import</span> <span class="n">ROC</span>
@@ -15202,7 +15243,7 @@ $$ Recall = \frac{TP}{TP + FN}$$</p>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[24]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Train Accuracy : </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span><span class="k">ebm</span>.score(X_train, y_train) )
@@ -15245,7 +15286,7 @@ Test Accuracy : 0.74
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[25]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">show</span><span class="p">([</span><span class="n">hist</span><span class="p">,</span> <span class="n">lr_global</span><span class="p">,</span> <span class="n">lr_perf</span><span class="p">,</span> <span class="n">dl_global</span><span class="p">,</span> <span class="n">dl_perf</span><span class="p">,</span> <span class="n">ebm_global</span><span class="p">,</span> <span class="n">ebm_perf</span><span class="p">],</span> <span class="n">share_tables</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -15269,8 +15310,8 @@ Test Accuracy : 0.74
 
 
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
-<!-- http://127.0.0.1:7230/3014288372992/ -->
-<a href="http://127.0.0.1:7230/3014288372992/" target="_new">Open in new window</a><iframe src="http://127.0.0.1:7230/3014288372992/" width=100% height=800 frameBorder="0"></iframe>
+<!-- http://127.0.0.1:7001/2154252612608/ -->
+<a href="http://127.0.0.1:7001/2154252612608/" target="_new">Open in new window</a><iframe src="http://127.0.0.1:7001/2154252612608/" width=100% height=800 frameBorder="0"></iframe>
 </div>
 
 </div>
@@ -15289,7 +15330,7 @@ Test Accuracy : 0.74
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Convert feature importance dict to a dataframe</span>
@@ -15310,7 +15351,7 @@ Test Accuracy : 0.74
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[26]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[17]:</div>
 
 
 
@@ -15328,7 +15369,7 @@ Test Accuracy : 0.74
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Sort by scores</span>
@@ -15344,7 +15385,7 @@ Test Accuracy : 0.74
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[28]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>  
@@ -15360,7 +15401,7 @@ Test Accuracy : 0.74
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[29]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Recalibrate training and test sets</span>
@@ -15376,7 +15417,7 @@ Test Accuracy : 0.74
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[30]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
@@ -15413,7 +15454,7 @@ Test Accuracy : 0.74
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[31]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Train EBM on reduced training set</span>
@@ -15441,8 +15482,8 @@ Test Accuracy : 0.74
 
 
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
-<!-- http://127.0.0.1:7230/3014267272448/ -->
-<iframe src="http://127.0.0.1:7230/3014267272448/" width=100% height=800 frameBorder="0"></iframe>
+<!-- http://127.0.0.1:7001/2154271938352/ -->
+<iframe src="http://127.0.0.1:7001/2154271938352/" width=100% height=800 frameBorder="0"></iframe>
 </div>
 
 </div>
@@ -15460,7 +15501,7 @@ Test Accuracy : 0.74
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[32]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Print out the classifier performance (F1-score)</span>
@@ -15498,7 +15539,7 @@ Test Accuracy : 0.74
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[33]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[24]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">eval</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
@@ -15521,7 +15562,7 @@ Test Accuracy : 0.74
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[33]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[24]:</div>
 
 
 
@@ -15582,7 +15623,7 @@ Test Accuracy : 0.74
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[34]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[25]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ebm_r_perf</span> <span class="o">=</span> <span class="n">ROC</span><span class="p">(</span><span class="n">ebm_r</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">)</span><span class="o">.</span><span class="n">explain_perf</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;EBM-R-Perf&#39;</span><span class="p">)</span>
@@ -15607,8 +15648,8 @@ Test Accuracy : 0.74
 
 
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
-<!-- http://127.0.0.1:7230/3014249075904/ -->
-<a href="http://127.0.0.1:7230/3014249075904/" target="_new">Open in new window</a><iframe src="http://127.0.0.1:7230/3014249075904/" width=100% height=800 frameBorder="0"></iframe>
+<!-- http://127.0.0.1:7001/2154229334144/ -->
+<a href="http://127.0.0.1:7001/2154229334144/" target="_new">Open in new window</a><iframe src="http://127.0.0.1:7001/2154229334144/" width=100% height=800 frameBorder="0"></iframe>
 </div>
 
 </div>
@@ -15626,7 +15667,7 @@ Test Accuracy : 0.74
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[35]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ebm_r_local</span> <span class="o">=</span> <span class="n">ebm_r</span><span class="o">.</span><span class="n">explain_local</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:</span><span class="mi">5</span><span class="p">],</span> <span class="n">y_test</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
@@ -15651,8 +15692,8 @@ Test Accuracy : 0.74
 
 
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
-<!-- http://127.0.0.1:7230/3014288082976/ -->
-<iframe src="http://127.0.0.1:7230/3014288082976/" width=100% height=800 frameBorder="0"></iframe>
+<!-- http://127.0.0.1:7001/2154230468080/ -->
+<iframe src="http://127.0.0.1:7001/2154230468080/" width=100% height=800 frameBorder="0"></iframe>
 </div>
 
 </div>
