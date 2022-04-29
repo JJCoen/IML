@@ -1,5 +1,5 @@
 ---
-title: "Duke"
+title: "Duke University 2 Level GAM"
 type: inverse
 author: "Jim Coen"
 date: "`r format(Sys.Date(), '%A, %B %d, %Y') `"
