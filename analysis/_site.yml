@@ -4,7 +4,7 @@ navbar:
 #  title: Interpretable ML Models
   type: inverse
   left:
-  - text: Home
+  - text: Interpretable ML Models
     icon: fa-bar-chart
     href: index.html
   - text: Methodology
