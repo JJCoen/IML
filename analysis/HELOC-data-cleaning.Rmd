@@ -37,7 +37,7 @@ library(VIM)
 ```
 
 ```{r, load_data}
-heloc <- read.csv("data/heloc_dataset_v1.csv")
+heloc <- read.csv("./data/heloc_dataset_v1.csv")
 setDT(heloc)
 ```
 
@@ -484,6 +484,31 @@ The 'difference' given with each iteration is between the new and previously imp
 #                        verbose = TRUE,
 #                        parallelize = 'variables')$ximp[1:nrow(test), ]
 ```
+  parallelizing over the variables of the input data matrix 'xmis'
+  missForest iteration 1 in progress...done!
+    estimated error(s): 0.2984354 0 
+    difference(s): 0.0003728205 0 
+    time: 349.13 seconds
+
+  missForest iteration 2 in progress...done!
+    estimated error(s): 0.2985256 0 
+    difference(s): 1.93276e-05 0 
+    time: 328 seconds
+
+  missForest iteration 3 in progress...done!
+    estimated error(s): 0.2954846 0 
+    difference(s): 1.645632e-05 0 
+    time: 378.67 seconds
+
+  missForest iteration 4 in progress...done!
+    estimated error(s): 0.2953382 0 
+    difference(s): 1.396596e-05 0 
+    time: 323.06 seconds
+
+  missForest iteration 5 in progress...done!
+    estimated error(s): 0.2978618 0 
+    difference(s): 1.491222e-05 0 
+    time: 320.72 seconds
 
 ```{r}
 #save( train_imp, test_imp, file = "data/train_test_imp")
@@ -491,4 +516,3 @@ The 'difference' given with each iteration is between the new and previously imp
 
 ## References
 
-\bibliography{Financial-Analytics-Thesis.bib}

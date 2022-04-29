@@ -35,7 +35,7 @@ library(kableExtra)
 ```
 
 ```{r}
-heloc <- read.csv("./Data/heloc_dataset_v1.csv") 
+heloc <- read.csv("./data/heloc_dataset_v1.csv") 
 setDT(heloc)
 ```
 
@@ -216,4 +216,4 @@ skimmed[, c(2, 5, 6, 7, 9, 11)] %>%
 
 ## References
 
-\bibliography{Financial-Analytics-Thesis.bib}
+
