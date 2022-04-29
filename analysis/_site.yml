@@ -17,11 +17,12 @@ navbar:
     - text: HELOC Data Cleaning
       href: HELOC-data-cleaning.html
   - text: Exemplars
+    icon: fa-bank
     href: exemplars.html
   - text: Interpret
     menu:
     - text: Data Scientist Interpretation
-      icon: fa-microscope
+      icon: fa-area-chart
       href: https://colab.research.google.com/drive/1g16X5H7MB2SZu9VfsTpZO-Lc0-lo6MhE
     - text: Service User Interpretation
       icon: fa-user-check
