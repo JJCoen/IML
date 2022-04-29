@@ -353,7 +353,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Interpretable ML Models</a>
+      <a class="navbar-brand" href="index.html"></a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -387,7 +387,11 @@ div.tocify {
   </ul>
 </li>
 <li>
-  <a href="exemplars.html">Exemplars</a>
+  <a href="exemplars.html">
+    <span class="fa fa-bank"></span>
+     
+    Exemplars
+  </a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -398,7 +402,7 @@ div.tocify {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="https://colab.research.google.com/drive/1g16X5H7MB2SZu9VfsTpZO-Lc0-lo6MhE">
-        <span class="fa fa-microscope"></span>
+        <span class="fa fa-area-chart"></span>
          
         Data Scientist Interpretation
       </a>
@@ -556,16 +560,16 @@ This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysi
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree8fec623396c72ea693f94d5e607b3b588c8c2be1targetblank8fec623a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/8fec623396c72ea693f94d5e607b3b588c8c2be1" target="_blank">8fec623</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree044320be0ccde5c5de2574303df9a1b653c9f8a2targetblank044320ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/044320be0ccde5c5de2574303df9a1b653c9f8a2" target="_blank">044320b</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree8fec623396c72ea693f94d5e607b3b588c8c2be1targetblank8fec623a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree044320be0ccde5c5de2574303df9a1b653c9f8a2targetblank044320ba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/8fec623396c72ea693f94d5e607b3b588c8c2be1" target="_blank">8fec623</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/044320be0ccde5c5de2574303df9a1b653c9f8a2" target="_blank">044320b</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -577,13 +581,11 @@ Ignored files:
     Ignored:    analysis/.Rhistory
 
 Untracked files:
-    Untracked:  analysis/Harvard.csl
-    Untracked:  analysis/style.css
-    Untracked:  code/.ipynb_checkpoints/
-    Untracked:  code/AIX_360_Credit_Data_Scientist.ipynb
+    Untracked:  code/.ipynb_checkpoints/HELOC-Data-Scientist-checkpoint.ipynb
+    Untracked:  code/.ipynb_checkpoints/HELOC-Service-User-checkpoint.ipynb
 
 Unstaged changes:
-    Modified:   README.md
+    Deleted:    analysis/AIX360.Rmd
     Deleted:    analysis/about.Rmd
 
 </code></pre>
@@ -628,6 +630,23 @@ Message
 html
 </td>
 <td>
+<a href="https://rawcdn.githack.com/JJCoen/Interpretable-ML-Models/8285ea9e9853d3e5adbfed66287be6540e39b556/docs/NYU.html" target="_blank">8285ea9</a>
+</td>
+<td>
+JJCoen
+</td>
+<td>
+2022-04-29
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
 <a href="https://rawcdn.githack.com/JJCoen/Interpretable-ML-Models/b743c905418d4e190f479dfd2c6942d6ecc2f242/docs/NYU.html" target="_blank">b743c90</a>
 </td>
 <td>
@@ -666,7 +685,7 @@ Add Duke and NYU
 </div>
 <div id="nyu-model" class="section level2">
 <h2>NYU Model</h2>
-<p>The primary objective of this tool is to assist a loan applicant who has been refused <span class="citation">(<strong>Gomez2020?</strong>)</span>. It suggests the changes in the level of features in order to counter the fact of refusal and obtain loan approval. Since the tool provides the ability to evaluate model decisions, it is of use to all stakeholders, not just the service user / loan applicant.</p>
+<p>The primary objective of this tool is to assist a loan applicant who has been refused <span class="citation">(Gomez <em>et al.</em>, 2020)</span>. It suggests the changes in the level of features in order to counter the fact of refusal and obtain loan approval. Since the tool provides the ability to evaluate model decisions, it is of use to all stakeholders, not just the service user / loan applicant.</p>
 <p>The visual tool highlights specific values that a numerical feature needs to reach. It gives the minimal set of changes needed to change a classification from one level to another. It is intended for use with tabular numerical data and so, is suitable for the HELOC data-set. However, this is a co-explainer model and is not conducive to inherently interpretable models. It is presented here since it is an exemplar model and due to the impact of the visual tool itself.</p>
 <p><img src="./images/NYU-vice.png" /> <strong>Figure 1.</strong> Change default to non-default. Source: Gomez (2020)</p>
 <p>The applicant in Figure @ref(fig:NYU-vice) received a probability score of 29% which results in a default classification (Y=0). The green polygon arrows give the least set of changes to give a non-default classification (Y=1). The shading on each feature shows where this applicant lies in relation to the distribution across the whole data-set.</p>
@@ -675,13 +694,18 @@ Add Duke and NYU
 <p>The NYU models is one approach to identifying corrective measures. Such information is especially important to the loan applicant to assist them to change from a “default” classification to “non-default”. An objective of this thesis is to move interpretability beyond the focus on engineering and to pay greater attention to the needs of auditor and loan applicant.</p>
 <p>The <code>interpretML</code> toolkit provides a package for Diverse Counterfactual Explanations (DiCE). A counterfactual gives the level that a feature needs to have in order to obtain a desired classification. Unfortunately, DiCE supports only certain classifiers based upon Tensorflow or PyTorch. This leads to the anomalous situation whereby the DiCE cannot work with models provided by the <code>ìnterpretML</code> package itself. Nevertheless, DiCE is an important advance for interpretable ML models. It is relatively simple to implement compared to the AIX 360 Contrastive Explanations package. Also, it also provides similar case profiles for a specific test instance.</p>
 <p>All of the packages investigated for the purpose of corrective measures and counterfactual explanations use models from Tensorflow, including Contrastive Explanation Method (AIX 360), CounterFactualProto (Alibi package), and Counterfactual Local Explanations viA Regression (CLEAR, University of London). The latter is particularly unfortunate since CLEAR produces graphs delineating corrective measures.</p>
-<p>The Contrastive Explanation (CE) package from the University of Utrecht <span class="citation">(<strong>Robeer2018?</strong>)</span> does work with most ML models, including the EBM. Interpretability measures considered thus far seek to answer the question “why this output?”. The contrastive approach considers “why this output and not that output?”. So there is a contrast between the actual outcome and the desired outcome. The system identifies those features that have the greatest impact on this contrast. In doing so, it specifies the value levels that features need to reach in order to obtain the desired result. In practice, Contrastive Explanations are unable to distinguish between actual and desired outcomes when there are a large number of features.</p>
+<p>The Contrastive Explanation (CE) package from the University of Utrecht <span class="citation">(Waa <em>et al.</em>, 2018)</span> does work with most ML models, including the EBM. Interpretability measures considered thus far seek to answer the question “why this output?”. The contrastive approach considers “why this output and not that output?”. So there is a contrast between the actual outcome and the desired outcome. The system identifies those features that have the greatest impact on this contrast. In doing so, it specifies the value levels that features need to reach in order to obtain the desired result. In practice, Contrastive Explanations are unable to distinguish between actual and desired outcomes when there are a large number of features.</p>
 </div>
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>
-<div id="refs">
-
+<div id="refs" class="references csl-bib-body">
+<div id="ref-Gomez2020" class="csl-entry">
+Gomez, O. <em>et al.</em> (2020) <span>‘<span class="nocase">ViCE: visual counterfactual explanations for machine learning models</span>’</span>, <em>International Conference on Intelligent User Interfaces, Proceedings IUI</em>, pp. 531–535. doi: <a href="https://doi.org/10.1145/3377325.3377536">10.1145/3377325.3377536</a>.
+</div>
+<div id="ref-Robeer2018" class="csl-entry">
+Waa, J. van der <em>et al.</em> (2018) <span>‘<span class="nocase">Contrastive Explanations with Local Foil Trees</span>’</span>, in <em>ICML workshop on human interpretability in machine learning</em>. Stockholm: International Conference on Machine Learning. Available at: <a href="http://arxiv.org/abs/1806.07470">http://arxiv.org/abs/1806.07470</a>.
+</div>
 </div>
 <br>
 <p>
