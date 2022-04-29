@@ -1,0 +1,107 @@
+---
+title: "AIX360"
+author: "AISHWARYA VERMA"
+date: "`r format(Sys.Date(), '%A, %B %d, %Y') `"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+```{r, echo=FALSE}
+library(knitr)
+# make this an external chunk that can be included in any file
+options(width = 100)
+knitr::opts_chunk$set(message = F, error = F, warning = F, comment = NA, fig.align = 'center', dpi = 100, tidy = F, cache.path = '.cache/')
+
+options(digits = 3)
+options(xtable.type = 'html')
+knit_hooks$set(inline = function(x) {
+  if(is.numeric(x)) {
+    round(x, getOption('digits'))
+  } else {
+    paste(as.character(x), collapse = ', ')
+  }
+})
+knit_hooks$set(plot = knitr:::hook_plot_html)
+```
+
+
+```{r, echo=FALSE}
+# Packages
+library(tidyverse)  # data manipulation and visualization
+library(tidymodels) # data split
+library(modelr)     # provides easy pipeline modeling functions
+library(broom)      # helps to tidy up model outputs
+
+library(ggplot2)
+library(dplyr)
+library(purrr)
+library(data.table)
+library(kableExtra)
+```
+
+## IBM AIX 360 Toolkit
+
+IBM takes a toolkit approach to providing explanations, based on the axiom that "one size does not fit all". It includes a set of methods for ML interpretation that are of use to different types of ML model "consumers". This approach takes account of both type of data-set and ML model is selecting the explanation method. In contrast to the domain-specific methodology of Duke University, greater emphasis is given to the particulars of a data-set.
+
+IBM claims that theses explanations are applicable in real-world scenarios.
+
+Broadly, they types of explanations are:
+
+-   Explanations based on samples, such as case-based reasoning.
+-   Explanations based on features and their "meaning".
+-   Local Explanations that give the effect of features on predictions.
+-   Global models that are directly interpretable.
+-   Global models that act as co-explainers and provide post hoc explanations.
+
+There are eight algorithms that produce the different types of explanations. Since the impetus for this thesis is inherently interpretable models, this research focuses on the Boolean Decision Rules via Column Generation (BDRCG) and the Generalised Linear Rules Model (GLRM).
+
+There is a plethora of demos and tutorials available on IBM's AIX 360. In order to avoid repetition, this thesis uses the HELOC data-set, with imputation and indicator variables, as described in Chapter @ref(ref-Application). There are 34 features in this pre-processed version of the HELOC data-set compared with 23 for IBM. The Python notebook is available on Google Colab.
+
+### Boolean Rules
+
+The BRCG and GLRM algorithms inductively "learn" boolean rules that classify a response variable. In order to implement this, a pre-processing step splits each numeric variable into discrete intervals or bins. A particular variable can be evaluated as to whether it is less than, equal to or greater than a specific value.
+
+![](./images/binarisation.png)
+
+**Figure 1:** Binarisation of `ExternalRiskEstimate` by splitting into intervals. 
+
+The occurrence of feature value falling into a specific interval forms a predicate to a logical clause.  Either a single clause or a set of conjunctions of clauses are the means of classifying the response.  
+
+### BRCG
+
+Fitting the HELOC training data on the BRCG algorithm resulted in a single clause that had 70.69% accuracy:
+
+> Training accuracy: 0.70688  
+> Test accuracy: 0.70688  
+> Predict Y=0 if ANY of the following rules are satisfied, otherwise Y=1:  
+> ['ExternalRiskEstimate <= 72.00']
+
+Note that the same rule was obtained from the `.explain` method of the `BooleanRuleCG` function and from the `BRCGExplainer` function itself.
+
+```{r, echo=FALSE}
+load("data/train_test_imp")
+# Set the reference level
+train_imp[, RiskPerformance := relevel(RiskPerformance, ref = "Good")]
+test_imp[, RiskPerformance := relevel(RiskPerformance, ref = "Good")]
+```
+
+This rule with a single predicate seems like an over-simplification.  However, the result was confirmed by measuring the accuracy directly as:  
+$$
+\text{Accuracy} = \frac{TP + TN}{\text{# samples}}
+$$
+```{r, echo=FALSE}
+# true positives
+n <- nrow(train_imp)
+TP <- train_imp[ ExternalRiskEstimate <= 72.00 &
+           RiskPerformance == "Bad", .N]
+
+# true negatives
+TN <- train_imp[ ExternalRiskEstimate > 72.00 &
+             RiskPerformance == "Good", .N]
+
+paste0(round( (TP + TN)/n * 100, 3 ), "%")
+```
+
+
+

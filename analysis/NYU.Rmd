@@ -1,0 +1,34 @@
+---
+title: "NYU"
+type: inverse
+author: "Jim Coen"
+date: "`r format(Sys.Date(), '%A, %B %d, %Y') `"
+output: workflowr::wflow_html
+bibliography: C:/Users/jimco/Documents/Mendeley-Bib/Financial-Analytics-Thesis.bib
+csl: Harvard.csl
+editor_options:
+  chunk_output_type: console
+---
+
+## NYU Model
+
+The primary objective of this tool is to assist a loan applicant who has been refused [@Gomez2020].  It suggests the changes in the level of features in order to counter the fact of refusal and obtain loan approval.  Since the tool provides the ability to evaluate model decisions, it is of use to all stakeholders, not just the service user / loan applicant.  
+
+The visual tool highlights specific values that a numerical feature needs to reach.  It gives the minimal set of changes needed to change a classification from one level to another.  It is intended for use with tabular numerical data and so, is suitable for the HELOC data-set.  However, this is a co-explainer model and is not conducive to inherently interpretable models.  It is presented here since it is an exemplar model and due to the impact of the visual tool itself.
+
+![](./images/NYU-vice.png)
+**Figure 1.** Change default to non-default.
+\newline \footnotesize Source: Gomez (2020)
+
+The applicant in Figure \@ref(fig:NYU-vice) received a probability score of 29% which results in a default classification (Y=0).  The green polygon arrows give the least set of changes to give a non-default classification (Y=1).  The shading on each feature shows where this applicant lies in relation to the distribution across the whole data-set.
+
+### Corrective Measures
+The NYU models is one approach to identifying corrective measures.  Such information is especially important to the loan applicant to assist them to change from a "default" classification to "non-default".  An objective of this thesis is to move interpretability beyond the focus on engineering and to pay greater attention to the needs of auditor and loan applicant.  
+
+The `interpretML` toolkit provides a package for Diverse Counterfactual Explanations (DiCE).  A counterfactual gives the level that a feature needs to have in order to obtain a desired classification.  Unfortunately, DiCE supports only certain classifiers based upon Tensorflow or PyTorch.  This leads to the anomalous situation whereby the DiCE cannot work with models provided by the `ìnterpretML` package itself.  Nevertheless, DiCE is an important advance for interpretable ML models.  It is relatively simple to implement compared to the AIX 360 Contrastive Explanations package.  Also, it also provides similar case profiles for a specific test instance.
+
+All of the packages investigated for the purpose of corrective measures and counterfactual explanations use models from Tensorflow, including Contrastive Explanation Method (AIX 360), CounterFactualProto (Alibi package), and Counterfactual Local Explanations viA Regression (CLEAR, University of London).  The latter is particularly unfortunate since CLEAR produces graphs delineating corrective measures.
+
+The Contrastive Explanation (CE) package from the University of Utrecht [@Robeer2018] does work with most ML models, including the EBM.  Interpretability measures considered thus far seek to answer the question "why this output?".  The contrastive approach considers "why this output and not that output?".  So there is a contrast between the actual outcome and the desired outcome.  The system identifies those features that have the greatest impact on this contrast.  In doing so, it specifies the value levels that features need to reach in order to obtain the desired result.  In practice, Contrastive Explanations are unable to distinguish between actual and desired outcomes when there are a large number of features.  
+
+## References

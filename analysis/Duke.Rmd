@@ -1,0 +1,68 @@
+---
+title: "Duke"
+type: inverse
+author: "Jim Coen"
+date: "`r format(Sys.Date(), '%A, %B %d, %Y') `"
+output: workflowr::wflow_html
+bibliography: C:/Users/jimco/Documents/Mendeley-Bib/Financial-Analytics-Thesis.bib
+csl: Harvard.csl
+editor_options:
+  chunk_output_type: console
+---
+
+## Duke University 2 Level GAM model
+
+The Duke team recommend the use of models that are domain-specific.  So they emphasise engaging in knowledge discovery a priori.  After engaging in such a process, it is possible to create a two-level hierarchy that compartmentalizes subsets of features into meaningful groupings known as "subscale features" [@DukeModel].  Figure 1 groups features according to attributes that they have in common.
+
+![](./images/duke-subscales.png)
+**Figure 1:** Grouping of features elicits intent and meaning.
+\newline \footnotesize Source: Chen (2018)
+
+
+#### Global Model {-}
+
+This level of interpretation is of use to all who interact with the model (Developer, Auditor, and Regulator).  Figure \@ref(fig:duke-global) shows how the sub-scales can be considered as a simplified model which, in turn, determines the overall probability of default.  Feature values for specific loan applicants can be entered using the sliders on the left side.
+
+![](./images/duke-global-model.png)
+**Figure 2:**  Global Model gives Probability of Default.
+\newline \footnotesize Source: Chen (2018)
+
+The use of colour is effective with shades from green to red signifying low to high risk.  This global model graph is of interest to all stakeholders.
+
+#### Most Important Contibuting Factors {-}
+
+Similar to the AIX 360, feature values are split into intervals or bins.  In this case, the 23 features are transformed into 182 bin.  In addition, these include indicator variables when an entry is missing, unlike AIX 360.  
+
+The model gives the top four factors that lead to a "Good" or "Bad" prediction.  These factors are expressed as predicates on specific values.  In the case of Demo 1 in the web interface, these are:  
+
+1. MaxDelq2PublicRecLast12M $\le$ 6  
+2. PercentTradesNeverDelq $\le$ 95   
+3. AverageMInFile $\le$ 48   
+4. AverageMInFile $=$ 69  
+
+Such information is of helpful to a service user or customer who was refused a loan.  A regulator can check that loan applicants receive sufficient explanation when they are denied.
+
+However, it would be of greater benefit to know what values these features need to be in order to achieve approval.   There are post-hoc algorithms within the AIX 360 toolkit that can provide such detail.  
+
+#### Consistent Rule-based Explanations {-}
+
+The model considers the current application in relation to all previous applications.  It derives a feature based rule that is consistent over the greatest number of past cases.  For instance, with regards the Demo 1 case, there were 594 applications that satisified the rule:
+$$
+\text{ExternalRiskEstimate} \le 63 \text{ AND AverageMInFile} \le 48
+$$
+and all of them went into default.  These types of explanations give the developer, auditor and regulator insight into how the model operates for groups of customers.  They can help the developer check that a model is operating as expected.  The internal auditor and the regulator can ascertain that types of customers are being treated fairly.    
+
+#### Case-based Explanations {-}
+
+Figure \@ref(fig:duke-case-based) shows a case under consideration (current) alongside previous applications with similar feature values (light blue shading).  Only the first six features are shown.  This figure provides additional information to a financial officer when deciding upon a loan application.  By comparing the prediction with actual outcome, the model assists the officer to use their judgement when arriving at a decision.
+
+![](./images/duke-case-based.png)
+**Figure 3.** Comparison with cases similar to current applicant.
+\newline \footnotesize Source: Chen (2018)
+
+Where the Duke model is lacking in corrective actions to change a "Bad" classification to "Good", the New York University provides a succinct and effective solution.
+
+## References
+<bibliography entry-spacing = "2" >
+
+

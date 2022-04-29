@@ -1,0 +1,28 @@
+---
+title: "exemplars"
+type: inverse
+author: "Jim Coen"
+date: "`r format(Sys.Date(), '%A, %B %d, %Y') `"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Introduction
+
+This section contains interpretable ML models that have recognition within the Financial Services industry as being exemplar.  These are the three winning entries in the FICO Explainability Challenge.  Also included is the Bank of England QII model due to the prominent position of this bank and because of their responsibility for regulation.  The first notebook gives an overview of Logistic Regression and explains the $log(Odds)$, which is used as a metric in the other notebooks.
+
+* [Logistic Regression Overview](Logistic-Regression.html)
+
+## Exemplar Models
+
+* [Bank of England QII](BoE-QII.html)
+* [AIX 360](https://colab.research.google.com/drive/1y_t7kzeBOGKY0snLWF70MBrjqaOcZUiL)
+*[NYU](NYU.html)
+*[Duke GAM](Duke.html)
+
+
+```{r}
+
+```
+
