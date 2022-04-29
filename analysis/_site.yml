@@ -1,7 +1,7 @@
 name: Interpretable-ML-Models
 output_dir: ../docs
 navbar:
-  title: Interpretable ML Models
+#  title: Interpretable ML Models
   type: inverse
   left:
   - text: Home
