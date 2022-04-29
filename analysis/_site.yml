@@ -16,17 +16,8 @@ navbar:
       href: HELOC-data-dictionary.html
     - text: HELOC Data Cleaning
       href: HELOC-data-cleaning.html
-  - text: Models
-    menu:
-    - text: Logistic Regression Overview
-      icon: fa-shield-alt
-      href: Logistic-Regression.html
-    - text: Bank of England QII
-      icon: fa-landmark
-      href: BoE-QII.html
-    - text: AIX 360
-      icon: fa-cogs
-      href: https://colab.research.google.com/drive/1y_t7kzeBOGKY0snLWF70MBrjqaOcZUiL#scrollTo=K8H28LcnJwrh
+  - text: Exemplars
+    href: exemplars.html
   - text: Interpret
     menu:
     - text: Data Scientist Interpretation
