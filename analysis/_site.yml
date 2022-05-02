@@ -23,10 +23,10 @@ navbar:
     menu:
     - text: Data Scientist Interpretation
       icon: fa-area-chart
-      href: https://colab.research.google.com/drive/1g16X5H7MB2SZu9VfsTpZO-Lc0-lo6MhE
+      href: https://colab.research.google.com/drive/1XSyIDIutpRNucOy6t5GeW8XjJeCWx8NW
     - text: Service User Interpretation
       icon: fa-user-check
-      href: https://colab.research.google.com/drive/1i0umyZjMbP5LkRB1svnrOq7eNEpYCsOP#scrollTo=9_rPb0hE5hei
+      href: https://colab.research.google.com/drive/1hNYRWgZN4xjj6H-wG2_Feg4b8iF_OGMc
   right:
   - icon: fab fa-github
     text: Source code
