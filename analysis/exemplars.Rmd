@@ -1,5 +1,5 @@
 ---
-title: "exemplars"
+title: "Models having Industry-level Recognition"
 type: inverse
 author: "Jim Coen"
 date: "`r format(Sys.Date(), '%A, %B %d, %Y') `"
