@@ -9,7 +9,7 @@ navbar:
     href: index.html
   - text: Methodology
     icon: fa-clipboard-list
-    href: Purpose.html
+    href: methodology.html
   - text: Dataset
     menu:
     - text: HELOC Data Dictionary
