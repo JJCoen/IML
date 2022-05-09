@@ -1,0 +1,127 @@
+---
+title: "Methodology"
+type: inverse
+author: "Jim Coen"
+date: "`r format(Sys.Date(), '%A, %B %d, %Y') `"
+geometry: "left=3cm,right=3cm,top=2cm,bottom=2cm"
+output: workflowr::wflow_html
+bibliography: C:/Users/jimco/Documents/Mendeley-Bib/Financial-Analytics-Thesis.bib
+csl: Harvard.csl
+editor_options:
+  chunk_output_type: console
+---
+
+# Research Methodology 
+
+## Research Aims and Objectives
+
+<center>
+![](./images/research-aim.png)
+
+**Figure 1.** Research Methodology.
+</center>
+
+The overall research objective is to improve the acceptance and deployment of ML
+models in Finance. To that end, the following question need to be addressed:
+
+> **Primary Research Question:**\
+> What interpretability methods and applications can improve the utilisation of
+> ML in finance.
+
+> **Research Aim:**\
+> To create a comprehensive framework for interpretability and improved
+> reproducibility of ML models.
+
+> **Research Objectives:**
+
+1.  Assess exemplar interpretable ML models for financial risk in terms of
+    addressing the needs of all stakeholders involved with such models.
+
+2.  Identify the characteristics of interpretability methods and categorise
+    them.
+
+3.  Use the categories above to create and implement a framework for
+    interpretable ML models.
+
+4.  Build a research website, linked to a github repository, that provides
+    access to the notebooks that make up the interpretability framework.
+
+The methodology chosen for this study and presented here is in order to rectify
+the engineering focus in the area of interpretable ML models.
+
+## Rationale for this Study
+
+### Gap in the Literature {.unnumbered}
+<center>
+![](./images/research-gap.png){ width="300" height="200" style="display: block; margin: 50" }
+**Figure 2.** What the current prespective is missing.
+</center>
+
+As alluded to in the introduction, there is a gap between the current focus of
+explainable AI, that meets the needs of engineering, and what is required to
+address interpretability for all stakeholders. This is a conceptual limitation
+whereby ML model creators and data scientists developed interpretability
+functions that met their needs. In addition, lack of a definition of
+interpretability is recognised as a deficiency [@Molnar2020].
+
+Current approaches tend to describe categories of explanations based on
+available interpretable methods and on the capability of an interpreter
+algorithm [@Das2020]. This thesis takes a different approach by assessing
+exemplar IML models and determining those characteristics that lead to improved
+interpretability.
+
+Also, this thesis aims to identify what improvements are needed to provide
+role-specific explanations for all who interact with a ML model. This is the
+specific problem that needs solution. The author is capable of meeting this
+challenge, having taken courses in Machine Learning at DBS and Coursera [@Leek]
+along with courses at Datacamp on modelling credit risk in Python
+[@Crabtree2021] and in R [@Dirick2021]. In addition, he has experience of
+training and continuing education. As such, he has practice in assisting the
+understanding of persons in various employment roles.
+
+The knowledge and experience gained through the work effort of this thesis will
+assist the career aspirations of the author. His objective is to apply data
+analysis skills in the area finance. His primary degree is in Physics and the
+financial sector tends to employ such persons as "quants". The author hopes to
+take advantage of the growing attention being given to interpretable ML.
+
+The outcome of this thesis is a framework for interpretable ML models that
+provides for all persons who interact with an ML model. In addition,
+implementation of this framework is by means of a set of Python notebooks for
+model developer, loan officer and service user.
+
+## Research Approach
+
+This research evaluates ML models for credit risk that are considered exemplar
+in terms of the interpretations that they provide. The research then considers
+the requirements of role-specific contexts. The end result is a framework for
+interpretability.
+
+In effect, there is a set of observations (ML model interpretations) and
+criteria are developed so as to augment the observations. Known premises
+(explanations given by exemplar models) are used to generate untested
+conclusions (framework for interpretable ML models). This framework is then
+implemented by means of a specific interpretable ML software package.
+
+The conceptual flow is from the specific to the general. Data collection in this
+case amounts to the graphs and text explanations obtained from ML model
+operation. This data is used to identify themes and patterns and create a
+conceptual framework.
+
+Consequently, the research approach is through **inductive reasoning**.
+
+## Data Pre-processing
+
+This research uses the same raw data that was employed for the exemplar models.
+The Home Loan Equity (HELOC) data-set is available from FICO. However, this
+study takes a different approach to pre-processing and dealing with missing
+entries. The AIX 360 model treats missing values as Not a Number (NaN). A
+negative value signifies a missing entry. The Duke University model leaves the
+negative values unchanged. Since there is a large number of missing entries,
+this research explores the use of imputation and indicator variables to deal
+uncertainty about such values.
+
+In this case, the starting point are hypotheses on the use of imputation and
+indicators and these are tested against observation in the form of the HELOC raw
+data. As such, this section of the research follows a deductive reasoning
+approach.
