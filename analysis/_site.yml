@@ -26,7 +26,7 @@ navbar:
       href: https://colab.research.google.com/drive/1XSyIDIutpRNucOy6t5GeW8XjJeCWx8NW
     - text: Service User Interpretation
       icon: fa-user-check
-      href: https://colab.research.google.com/drive/1hNYRWgZN4xjj6H-wG2_Feg4b8iF_OGMc
+      href: https://colab.research.google.com/drive/1hNYRWgZN4xjj6H-wG2_Feg4b8iF_OGMc#scrollTo=VAj3G13hGniK
   right:
   - icon: fab fa-github
     text: Source code
