@@ -23,7 +23,7 @@ navbar:
     menu:
     - text: Data Scientist Interpretation
       icon: fa-area-chart
-      href: https://colab.research.google.com/drive/1XSyIDIutpRNucOy6t5GeW8XjJeCWx8NW
+      href: https://colab.research.google.com/drive/1XSyIDIutpRNucOy6t5GeW8XjJeCWx8NW#scrollTo=Ik7flm2tr0F7
     - text: Service User Interpretation
       icon: fa-user-check
       href: https://colab.research.google.com/drive/1hNYRWgZN4xjj6H-wG2_Feg4b8iF_OGMc#scrollTo=VAj3G13hGniK
