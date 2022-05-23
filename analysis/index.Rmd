@@ -49,14 +49,14 @@ While a highly complex, "black-box" model can give high predictive accuracy, it 
 <div class="col-sm-6">
 <div style="text-align: right;"><img src="./images/corporate-finance-inst.png" width="20%"></div>
 
-**Data Science**
+**Directly Interpretable Models**
 
->"Success in a data science project comes, not from access to any one exotic tool, but from having quantifiable goals, good methodology, cross-discipline interactions, and a repeatable workflow"\
->Nina Zumel and John Mount, Practical Data Science with R
+>"Stop explaining the black box."\
+>Cynthia Rudin, Duke University
 
-**Information content of available data**
+**Interpretability**
 
->"The combination of some data and an aching desire for an answer does not ensure that a reasonable answer can be extracted from a given body of data"\
->John W. Tukey
+>"Interpretability is the degree to which a human can understand the cause of a decision"\
+>Tim Miller, University of Melbourne
 
 </div>
