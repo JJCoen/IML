@@ -14,7 +14,7 @@
 
 <title>HELOC Data Cleaning</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
@@ -73,6 +73,7 @@ if (window.hljs) {
 
 
 
+
 <style type="text/css">
 /* for pandoc --citeproc since 2.11 */
 div.csl-bib-body { }
@@ -120,6 +121,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -348,7 +352,7 @@ div.tocify {
 <div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -364,15 +368,27 @@ div.tocify {
     Interpretable ML Models
   </a>
 </li>
-<li>
-  <a href="methodology.html">
-    <span class="fa fa-clipboard-list"></span>
-     
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Methodology
+     
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="methodology.html">
+        <span class="fa fa-clipboard-list"></span>
+         
+        Methodology
+      </a>
+    </li>
+    <li>
+      <a href="Interpretable-ML-Models.html">Presentation</a>
+    </li>
+  </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Dataset
      
     <span class="caret"></span>
@@ -394,7 +410,7 @@ div.tocify {
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Interpret
      
     <span class="caret"></span>
@@ -433,7 +449,7 @@ div.tocify {
 <div id="header">
 
 <div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
 <ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
@@ -444,14 +460,16 @@ div.tocify {
 
 <h1 class="title toc-ignore">HELOC Data Cleaning</h1>
 <h4 class="author">Jim Coen</h4>
-<h4 class="date">Monday, May 23, 2022</h4>
+<h4 class="date">Tuesday, November 15, 2022</h4>
 
 </div>
 
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -460,7 +478,9 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -469,17 +489,27 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-05-23
+<strong>Last updated:</strong> 2022-11-15
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 0
 </p>
 <p>
-<strong>Knit directory:</strong> <code>Interpretable-ML-Models/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+<strong>Knit directory:</strong> <code>Interpretable-ML-Models/</code>
+<span class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
 </p>
 <p>
-This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
-  href="https://github.com/workflowr/workflowr">workflowr</a> (version 1.7.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.0). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
 </p>
 <hr>
 </div>
@@ -488,91 +518,138 @@ This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysi
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguptodate"
+class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
 </p>
 </div>
 <div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20220121code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20220121)</code> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20220121code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20220121)</code> </a>
 </p>
 </div>
-<div id="strongSeedstrongcodesetseed20220121code" class="panel-collapse collapse">
+<div id="strongSeedstrongcodesetseed20220121code"
+class="panel-collapse collapse">
 <div class="panel-body">
-<p>The command <code>set.seed(20220121)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+<p>The command <code>set.seed(20220121)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
 </p>
 </div>
-<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
 </p>
 </div>
 <div id="strongCachestrongnone" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
 </p>
 </div>
 <div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstreebd896bdacf0281594bfc4d0e0500b0e15bb1bb06targetblankbd896bda"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/bd896bdacf0281594bfc4d0e0500b0e15bb1bb06" target="_blank">bd896bd</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree0aeb8e485add5277ef9c6539a3cdb29d915f0684targetblank0aeb8e4a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/0aeb8e485add5277ef9c6539a3cdb29d915f0684" target="_blank">0aeb8e4</a>
+</a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstreebd896bdacf0281594bfc4d0e0500b0e15bb1bb06targetblankbd896bda" class="panel-collapse collapse">
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree0aeb8e485add5277ef9c6539a3cdb29d915f0684targetblank0aeb8e4a"
+class="panel-collapse collapse">
 <div class="panel-body">
 <p>
-Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/bd896bdacf0281594bfc4d0e0500b0e15bb1bb06" target="_blank">bd896bd</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version
+<a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/0aeb8e485add5277ef9c6539a3cdb29d915f0684" target="_blank">0aeb8e4</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
 </p>
 <p>
-Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
 </p>
 <pre><code>
 Ignored files:
@@ -581,20 +658,27 @@ Ignored files:
     Ignored:    analysis/.Rhistory
 
 Untracked files:
-    Untracked:  Pres-Video-Interpretable-ML.mp4
-    Untracked:  Presentation-Interpretable-ML.pptx
+    Untracked:  CA1-Research proposal Outline.docx
+    Untracked:  Research-Proposal.docx
     Untracked:  code/.ipynb_checkpoints/HELOC-Data-Scientist-checkpoint.ipynb
     Untracked:  code/.ipynb_checkpoints/HELOC-Service-User-checkpoint.ipynb
+    Untracked:  marking=rubic.PNG
+    Untracked:  project-ideas.odt
+    Untracked:  timeline-24-Nov.xlsx
 
 Unstaged changes:
+    Modified:   README.md
     Deleted:    analysis/AIX360.Rmd
     Modified:   analysis/_site.yml
     Deleted:    analysis/about.Rmd
     Deleted:    analysis/license.Rmd
+    Modified:   code/HELOC-Data-Scientist.ipynb
 
 </code></pre>
 <p>
-Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
 </p>
 </div>
 </div>
@@ -605,7 +689,12 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/HELOC-data-cleaning.Rmd</code>) and HTML (<code>docs/HELOC-data-cleaning.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/HELOC-data-cleaning.Rmd</code>)
+and HTML (<code>docs/HELOC-data-cleaning.html</code>) files. If you’ve
+configured a remote Git repository (see <code>?wflow_git_remote</code>),
+click on the hyperlinks in the table below to view the files as they
+were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -629,6 +718,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/JJCoen/Interpretable-ML-Models/a152749d6bf19873316ff32b4e0a2adc1eb1b09c/docs/HELOC-data-cleaning.html" target="_blank">a152749</a>
+</td>
+<td>
+JJCoen
+</td>
+<td>
+2022-05-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -932,7 +1038,8 @@ JJCoen
 2022-03-19
 </td>
 <td>
-wflow_publish(c(“analysis/BoE-QII.Rmd”, “analysis/HELOC-data-cleaning.Rmd”))
+wflow_publish(c("analysis/BoE-QII.Rmd",
+"analysis/HELOC-data-cleaning.Rmd"))
 </td>
 </tr>
 <tr>
@@ -1000,7 +1107,7 @@ JJCoen
 2022-03-12
 </td>
 <td>
-wflow_publish(“analysis/HELOC-data-cleaning.Rmd”)
+wflow_publish("analysis/HELOC-data-cleaning.Rmd")
 </td>
 </tr>
 <tr>
@@ -1102,7 +1209,7 @@ JJCoen
 2022-03-02
 </td>
 <td>
-wflow_publish(“analysis/HELOC-data-cleaning.Rmd”)
+wflow_publish("analysis/HELOC-data-cleaning.Rmd")
 </td>
 </tr>
 <tr>
@@ -1153,7 +1260,8 @@ JJCoen
 2022-03-01
 </td>
 <td>
-wflow_publish(files = c(“analysis/index.Rmd”, “analysis/HELOC-data-cleaning.Rmd”,
+wflow_publish(files = c("analysis/index.Rmd",
+"analysis/HELOC-data-cleaning.Rmd",
 </td>
 </tr>
 <tr>
@@ -1201,18 +1309,33 @@ add missForest
 setDT(heloc)</code></pre>
 <div id="missing-values" class="section level1">
 <h1>Missing Values</h1>
-<p>Missing values may be ignored by taking complete cases only or they may be replaced with an fixed value, such as the mean or median. However, this can lead to unstable model operation or biased predictions.</p>
-<p>The main pre-processing action required to prepare the HELOC data-set for further analysis is dealing with missing values. For instance, for one particular feature, over 50% of the entries are missing.</p>
+<p>Missing values may be ignored by taking complete cases only or they
+may be replaced with an fixed value, such as the mean or median.
+However, this can lead to unstable model operation or biased
+predictions.</p>
+<p>The main pre-processing action required to prepare the HELOC data-set
+for further analysis is dealing with missing values. For instance, for
+one particular feature, over 50% of the entries are missing.</p>
 <div style="text-align: right;">
 <img src="./images/imputation-workflow.png" width="100%">
 </div>
-<p>In the HELOC dataset, a negative numeric indicates a missing value. Reasons for this are:</p>
+<p>In the HELOC dataset, a negative numeric indicates a missing value.
+Reasons for this are:</p>
 <ul>
-<li><p>A credit report for an applicant was not found or not investigated. In most of these cases, all features receive a value of -9.</p></li>
-<li><p>Information in the credit report on a particular feature was considered “not usable” and that feature receives a value of -8.</p></li>
-<li><p>In the case where there is “no information of that type”, the feature receives a value of -7. This is due to lack of data on delinquency and occurs in the features <code>MSinceMostRecentDelq</code> and <code>MSinceMostRecentInqexcl7days</code>.</p></li>
+<li><p>A credit report for an applicant was not found or not
+investigated. In most of these cases, all features receive a value of
+-9.</p></li>
+<li><p>Information in the credit report on a particular feature was
+considered “not usable” and that feature receives a value of
+-8.</p></li>
+<li><p>In the case where there is “no information of that type”, the
+feature receives a value of -7. This is due to lack of data on
+delinquency and occurs in the features <code>MSinceMostRecentDelq</code>
+and <code>MSinceMostRecentInqexcl7days</code>.</p></li>
 </ul>
-<p>When there is no credit report for all observations in a loan applications (all the feature variables are -9), they provide no information and need to be removed.</p>
+<p>When there is no credit report for all observations in a loan
+applications (all the feature variables are -9), they provide no
+information and need to be removed.</p>
 <pre class="r"><code>features &lt;- subset (heloc, select = -RiskPerformance)
 # rows containing negative values in each feature
 all_neg &lt;- apply(features, 1, function(row) all(row &lt; 0))
@@ -1247,7 +1370,11 @@ cat(&quot;there are&quot;, num_neg7, &quot;observations that have at least one f
 <pre><code>there are 5687 observations that have at least one feature with an entry of -7.</code></pre>
 <pre class="r"><code># cleanup
 rm(&quot;has.neg9&quot;, &quot;num_neg9&quot;,  &quot;has.neg7&quot;, &quot;has.neg8&quot;, &quot;num_neg7&quot;, &quot;num_neg8&quot;)</code></pre>
-<p>In effect, these entries are missing values and it is better to encode them as “NA”. However, the HELOC dataset does distinguish between different types of missing values, as described above. It is possible to capture these distinctions through the use of indicator variables <span class="citation">(Bücker <em>et al.</em>, 2021)</span>.</p>
+<p>In effect, these entries are missing values and it is better to
+encode them as “NA”. However, the HELOC dataset does distinguish between
+different types of missing values, as described above. It is possible to
+capture these distinctions through the use of indicator variables <span
+class="citation">(Bücker <em>et al.</em>, 2021)</span>.</p>
 <pre class="r"><code># suggestion to improve code:
 # use replace_with_na fn from naniar package
 no_report_rows &lt;- heloc[, which(.SD == -9), .SDcols = feature_cols]
@@ -1355,7 +1482,8 @@ rm(list=(cleanup))
 rm(cleanup)</code></pre>
 <div id="factor-variables" class="section level3">
 <h3>Factor Variables</h3>
-<p>As described in the data dictionary, the two factor variables and their levels are:</p>
+<p>As described in the data dictionary, the two factor variables and
+their levels are:</p>
 <table>
 <thead>
 <tr class="header">
@@ -1402,8 +1530,10 @@ rm(cleanup)</code></pre>
 </tr>
 </tbody>
 </table>
-<p>First, convert <code>MaxDelq2PublicRecLast12M</code> and <code>MaxDelqEver</code> from numeric to factor data type.</p>
-<p>In <code>MaxDelqEver</code>, entries with “No such value” are equivalent to missing values and need to be recorded as such.</p>
+<p>First, convert <code>MaxDelq2PublicRecLast12M</code> and
+<code>MaxDelqEver</code> from numeric to factor data type.</p>
+<p>In <code>MaxDelqEver</code>, entries with “No such value” are
+equivalent to missing values and need to be recorded as such.</p>
 <pre class="r"><code># Categorical features
 change_columns &lt;- c(&quot;MaxDelq2PublicRecLast12M&quot;, &quot;MaxDelqEver&quot;)
 # Change class of certain columns
@@ -1526,39 +1656,85 @@ ExternalRiskEstimate
 <pre class="r"><code># record features with missing values
 miss &lt;- names(missing_counts[missing_counts &gt; 0])
 heloc_miss &lt;- heloc[, ..miss]</code></pre>
-<p>Given the large proportion of missing values, dealing with them appropriately is a critical aspect of the overall analysis of the HELOC dataset.</p>
+<p>Given the large proportion of missing values, dealing with them
+appropriately is a critical aspect of the overall analysis of the HELOC
+dataset.</p>
 <p>The majority of missing values are in the variables<br />
-<code>MSinceMostRecentDelq</code>, <code>MSinceMostRecentInqexcl7days</code>, <code>NetFractionInstallBurden</code>, and <code>NumInstallTradesWBalance</code></p>
+<code>MSinceMostRecentDelq</code>,
+<code>MSinceMostRecentInqexcl7days</code>,
+<code>NetFractionInstallBurden</code>, and
+<code>NumInstallTradesWBalance</code></p>
 </div>
 </div>
 </div>
 <div id="recognizing-missing-data-mechanisms" class="section level1">
 <h1>Recognizing missing data mechanisms</h1>
-<p>In order to formulate a strategy to deal with missing values, it is important to identify the reasons why a variable has a missing entry.</p>
+<p>In order to formulate a strategy to deal with missing values, it is
+important to identify the reasons why a variable has a missing
+entry.</p>
 <ul>
 <li>If the reason for missingness is purely random, it’s MCAR.<br />
-When the probability of a missing entry occurring is not related to either observed or missing data, then it is Missing Completely At Random. This is generally due to poor test design, absence of output from a faulty sensor, or failure to record the value of a feature. Missing values could potentially occur across all instances / rows in a dataset. Removing such missing values will not introduce bias in subsequent analysis. However, other features for a specific observation are likely to contain relevant information.</li>
-<li>If the reason for missingness can be explained by another variable, it’s MAR.<br />
-In this case, the missing values occur conditional upon the observed data but they are independent of unobserved data. They are found within a subset to the observed data. For instance, in a certain location the county council has not registered new builds and so, no address is recorded for them.</li>
-<li>If the reason for missingness depends on the instance (table row) where the missing value occurs, it is Missing Not At Random (MNAR).<br />
-For example, those with high income tend not to record a value for their income. The probability of missing is conditional upon observed data (attributes of high earners) and are also dependent upon unobserved data (whether the high earner chooses to record income). The missing data is simply unknown and cannot be estimated from other observations. Because there are reasons within the data for the occurrence of missing values, removing them would lead to bias. There needs to be a method of estimation that minimises bias.</li>
-<li>The missing value may depend on a predictor that has not been recorded. For instance, people with prior infection are unlikely record if they took an experimental inoculation or not. But the dataset does not record prior infection.</li>
+When the probability of a missing entry occurring is not related to
+either observed or missing data, then it is Missing Completely At
+Random. This is generally due to poor test design, absence of output
+from a faulty sensor, or failure to record the value of a feature.
+Missing values could potentially occur across all instances / rows in a
+dataset. Removing such missing values will not introduce bias in
+subsequent analysis. However, other features for a specific observation
+are likely to contain relevant information.</li>
+<li>If the reason for missingness can be explained by another variable,
+it’s MAR.<br />
+In this case, the missing values occur conditional upon the observed
+data but they are independent of unobserved data. They are found within
+a subset to the observed data. For instance, in a certain location the
+county council has not registered new builds and so, no address is
+recorded for them.</li>
+<li>If the reason for missingness depends on the instance (table row)
+where the missing value occurs, it is Missing Not At Random
+(MNAR).<br />
+For example, those with high income tend not to record a value for their
+income. The probability of missing is conditional upon observed data
+(attributes of high earners) and are also dependent upon unobserved data
+(whether the high earner chooses to record income). The missing data is
+simply unknown and cannot be estimated from other observations. Because
+there are reasons within the data for the occurrence of missing values,
+removing them would lead to bias. There needs to be a method of
+estimation that minimises bias.</li>
+<li>The missing value may depend on a predictor that has not been
+recorded. For instance, people with prior infection are unlikely record
+if they took an experimental inoculation or not. But the dataset does
+not record prior infection.</li>
 </ul>
-<p>To determine whether a variable is MCAR or MAR, it is necessary to check if missing values on one variable are related to missing values on another variable.</p>
+<p>To determine whether a variable is MCAR or MAR, it is necessary to
+check if missing values on one variable are related to missing values on
+another variable.</p>
 <div id="visualizing-missing-values" class="section level2">
 <h2>Visualizing Missing Values</h2>
-<p>An aggregation plot displays features in columns and sections each into missing (red cells) and valid entries (blue cells). Limiting the plot to the top four features with missing values facilitates inspection of relationships.</p>
-<p>Columns in the plot below represent the features <code>MSinceMostRecentDelq</code>, <code>NetFractionInstallBurden</code>, <code>MSinceMostRecentInqexcl7days</code>, and <code>NumInstallTradesWBalance</code> in that order.</p>
+<p>An aggregation plot displays features in columns and sections each
+into missing (red cells) and valid entries (blue cells). Limiting the
+plot to the top four features with missing values facilitates inspection
+of relationships.</p>
+<p>Columns in the plot below represent the features
+<code>MSinceMostRecentDelq</code>,
+<code>NetFractionInstallBurden</code>,
+<code>MSinceMostRecentInqexcl7days</code>, and
+<code>NumInstallTradesWBalance</code> in that order.</p>
 <pre class="r"><code># Draw an aggregation plot of HELOC variables with missing values
 heloc_miss[, c(&quot;MSinceMostRecentDelq&quot;, &quot;NetFractionInstallBurden&quot;, &quot;MSinceMostRecentInqexcl7days&quot;,  &quot;NumInstallTradesWBalance&quot;)] %&gt;% 
     aggr(combined = TRUE, numbers = TRUE,
          cex.axis=.7,cex.numbers=0.7)</code></pre>
 <p><img src="figure/HELOC-data-cleaning.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
 <ul>
-<li>27% of <code>MSinceMostRecentDelq</code> entries are not related to other variables (MCAR).</li>
-<li>10% of <code>NetFractionInstallBurden</code> and 7.7% of <code>MSinceMostRecentInqexcl7days</code> are also MCAR.</li>
-<li>10% of observations have missing entries in both <code>MSinceMostRecentDelq</code> and <code>NetFractionInstallBurden</code> (MNAR).</li>
-<li>7% of observations have missing entries in both <code>MSinceMostRecentDelq</code> and <code>MSinceMostRecentInqexcl7days</code> (MNAR).</li>
+<li>27% of <code>MSinceMostRecentDelq</code> entries are not related to
+other variables (MCAR).</li>
+<li>10% of <code>NetFractionInstallBurden</code> and 7.7% of
+<code>MSinceMostRecentInqexcl7days</code> are also MCAR.</li>
+<li>10% of observations have missing entries in both
+<code>MSinceMostRecentDelq</code> and
+<code>NetFractionInstallBurden</code> (MNAR).</li>
+<li>7% of observations have missing entries in both
+<code>MSinceMostRecentDelq</code> and
+<code>MSinceMostRecentInqexcl7days</code> (MNAR).</li>
 </ul>
 <p>Full aggregation plot</p>
 <pre class="r"><code>res &lt;- summary(aggr(heloc_miss, sortVar = TRUE))$combinations</code></pre>
@@ -1681,8 +1857,11 @@ Percent
 </tr>
 </tbody>
 </table>
-<div id="correlation-between-variables-with-missing-values-ranked-by-r-value." class="section level3">
-<h3>Correlation between variables with missing values, ranked by r value.</h3>
+<div
+id="correlation-between-variables-with-missing-values-ranked-by-r-value."
+class="section level3">
+<h3>Correlation between variables with missing values, ranked by r
+value.</h3>
 <pre class="r"><code># devtools::install_github(&quot;laresbernardo/lares&quot;)
 library(lares)
 
@@ -1699,11 +1878,21 @@ corr_cross(x,  # name of dataset
 <pre><code>Warning in .font_global(font, quiet = FALSE): Font &#39;Arial Narrow&#39; is not
 installed, has other name, or can&#39;t be found</code></pre>
 <p><img src="figure/HELOC-data-cleaning.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p><code>NetFractionRevolvingBurden</code> and <code>NumRevolvingTradesWBalance</code> have highest correlation for missing values. This is most likely due to absence of data on the revolving balance. Missing entries are dependent upon missings in another variable and both are MNAR. However, for these two features, the number of missing values is relatively low (&lt;200). For the remainder of features with missing entries, the correlation between pairs of features is low (&lt;= 0.5). So they could be classified as Missing Completely at Random or Missing At Random.</p>
+<p><code>NetFractionRevolvingBurden</code> and
+<code>NumRevolvingTradesWBalance</code> have highest correlation for
+missing values. This is most likely due to absence of data on the
+revolving balance. Missing entries are dependent upon missings in
+another variable and both are MNAR. However, for these two features, the
+number of missing values is relatively low (&lt;200). For the remainder
+of features with missing entries, the correlation between pairs of
+features is low (&lt;= 0.5). So they could be classified as Missing
+Completely at Random or Missing At Random.</p>
 </div>
 <div id="all-features-with-missing-entries" class="section level3">
 <h3>All Features with Missing Entries</h3>
-<p>In the matrixplot below, missing values have a red colour. Observed values are recorded in a gray scale, with low values having a light grey while higher values are darker.</p>
+<p>In the matrixplot below, missing values have a red colour. Observed
+values are recorded in a gray scale, with low values having a light grey
+while higher values are darker.</p>
 <pre class="r"><code># identify features that have missing values
 miss_cols &lt;- names(missing_counts[missing_counts &gt; 0])
 
@@ -1718,65 +1907,116 @@ cleanup &lt;- ls()
 cleanup &lt;- cleanup[ cleanup %ni% c(&quot;heloc&quot;) ]
 rm(list=(cleanup))
 rm(cleanup)</code></pre>
-<p>This plot indicates that most of the missing entries occur in combination with other features. So they are unlikely to be MCAR.</p>
+<p>This plot indicates that most of the missing entries occur in
+combination with other features. So they are unlikely to be MCAR.</p>
 </div>
 </div>
 </div>
-<div id="strategy-for-dealing-with-missing-values" class="section level1">
+<div id="strategy-for-dealing-with-missing-values"
+class="section level1">
 <h1>Strategy for Dealing with Missing Values</h1>
-<p>Donor-based imputation, such as mean/median substitution or K nearest neighbours, is appropriate when the variable of concern has a normal distribution and missingness is MCAR. However, such methods may introduce bias in the estimates themselves and with subsequent models.</p>
-<p>In the HELOC dataset, there is a high number of missing values (about 50% of observations in the <code>MSinceMostRecentDelq</code> variable). In addition, missing values occur in 12 out of the 23 features. Given the exploratory analysis above, it is not appropriate to assume that any of these are MCAR and donor-based imputation cannot be applied.</p>
-<p>Unfortunately, it is not possible to ascertain whether data is missing at random, missing due to unobserved predictors, or due to the missing value itself <span class="citation">(Gelman and Hill, 2006)</span>. A practical response to this problem is to create a model of the missing data that includes as many predictors as possible .</p>
+<p>Donor-based imputation, such as mean/median substitution or K nearest
+neighbours, is appropriate when the variable of concern has a normal
+distribution and missingness is MCAR. However, such methods may
+introduce bias in the estimates themselves and with subsequent
+models.</p>
+<p>In the HELOC dataset, there is a high number of missing values (about
+50% of observations in the <code>MSinceMostRecentDelq</code> variable).
+In addition, missing values occur in 12 out of the 23 features. Given
+the exploratory analysis above, it is not appropriate to assume that any
+of these are MCAR and donor-based imputation cannot be applied.</p>
+<p>Unfortunately, it is not possible to ascertain whether data is
+missing at random, missing due to unobserved predictors, or due to the
+missing value itself <span class="citation">(Gelman and Hill,
+2006)</span>. A practical response to this problem is to create a model
+of the missing data that includes as many predictors as possible .</p>
 <div id="model-based-imputation" class="section level2">
 <h2>Model-based Imputation</h2>
-<p>Model-based imputation creates a statistical or machine learning model for each variable with missing entries. In effect, these models estimate an imputation value as a function of the values of all the other variables in the dataset. Statistical methods can be used when relationship between variables is known. The Machine Learning (ML) approach makes no assumptions about the underlying relationships. So this approach has particular advantages:</p>
+<p>Model-based imputation creates a statistical or machine learning
+model for each variable with missing entries. In effect, these models
+estimate an imputation value as a function of the values of all the
+other variables in the dataset. Statistical methods can be used when
+relationship between variables is known. The Machine Learning (ML)
+approach makes no assumptions about the underlying relationships. So
+this approach has particular advantages:</p>
 <ul>
-<li>It is not necessary to specify relationships between variables since the ML model can “learn” this from the data itself by means of induction.</li>
-<li>It is capable of capturing complex non-linear patterns in the data.</li>
+<li>It is not necessary to specify relationships between variables since
+the ML model can “learn” this from the data itself by means of
+induction.</li>
+<li>It is capable of capturing complex non-linear patterns in the
+data.</li>
 </ul>
 <div id="imputation-methods" class="section level3">
 <h3>Imputation Methods</h3>
-<p>Researchers at the University of Michigan carried out a comparison of four imputation methods when dealing with missing laboratory data <span class="citation">(Waljee <em>et al.</em>, 2013)</span>. The methods studied were:<br />
+<p>Researchers at the University of Michigan carried out a comparison of
+four imputation methods when dealing with missing laboratory data <span
+class="citation">(Waljee <em>et al.</em>, 2013)</span>. The methods
+studied were:<br />
 missForest;<br />
 mean imputation;<br />
 nearestneighbour imputation;<br />
 and multivariate imputation by chained equations (MICE).</p>
-<p>Two ML models had been fit apriori to the data with no missing values. Evaluation of imputation results occurred following multiple schemes:</p>
+<p>Two ML models had been fit apriori to the data with no missing
+values. Evaluation of imputation results occurred following multiple
+schemes:</p>
 <ol style="list-style-type: decimal">
-<li>A proportion of the test data was randomly assigned as “NA” to simulate data missing completely at random (MCAR). This test data was imputed with the four methods and compared to the valid test data.</li>
-<li>The imputed test data was used to make predictions using the apriori models and compared to predictions made with the valid test data.</li>
-<li>To take account for differences in feature importance, the frequency of missing values across features in the test data was varied. Following this, steps 1 and 2 repeated.</li>
+<li>A proportion of the test data was randomly assigned as “NA” to
+simulate data missing completely at random (MCAR). This test data was
+imputed with the four methods and compared to the valid test data.</li>
+<li>The imputed test data was used to make predictions using the apriori
+models and compared to predictions made with the valid test data.</li>
+<li>To take account for differences in feature importance, the frequency
+of missing values across features in the test data was varied. Following
+this, steps 1 and 2 repeated.</li>
 </ol>
-<p>When dealing with both continuous and categorical data in two separate datasets, the <code>missForest</code>algorithm had the least imputation error. Also, it had the smallest prediction difference when models used imputed and valid (original) values.</p>
+<p>When dealing with both continuous and categorical data in two
+separate datasets, the <code>missForest</code>algorithm had the least
+imputation error. Also, it had the smallest prediction difference when
+models used imputed and valid (original) values.</p>
 </div>
 <div id="missforest-algorithm-for-imputation" class="section level3">
 <h3><code>missForest</code> algorithm for imputation</h3>
-<p>The missForest algorithm creates a Random Forest model to predict missing values for each variable. This is an iterative approach that makes initial estimates of missing values and updates these with a random forest model until reaching convergence:</p>
+<p>The missForest algorithm creates a Random Forest model to predict
+missing values for each variable. This is an iterative approach that
+makes initial estimates of missing values and updates these with a
+random forest model until reaching convergence:</p>
 <blockquote>
 <ol style="list-style-type: decimal">
 <li>For each variable x<br />
-<span class="math inline">\(\quad\)</span> Impute initial value with mean substitution</li>
+<span class="math inline">\(\quad\)</span> Impute initial value with
+mean substitution</li>
 <li>Sort variables by number of missing values, in ascending order</li>
 <li>Repeat until imputed values converge<br />
 <span class="math inline">\(\quad\)</span>For each variable x<br />
-<span class="math inline">\(\quad\)</span> <span class="math inline">\(\quad\)</span>Fit a random forest model to the observed values of x using all other variables as predictors<br />
-<span class="math inline">\(\quad\)</span> <span class="math inline">\(\quad\)</span>Use model to predict missing values of x</li>
+<span class="math inline">\(\quad\)</span> <span
+class="math inline">\(\quad\)</span>Fit a random forest model to the
+observed values of x using all other variables as predictors<br />
+<span class="math inline">\(\quad\)</span> <span
+class="math inline">\(\quad\)</span>Use model to predict missing values
+of x</li>
 </ol>
 </blockquote>
-<p>Finally, it is possible to extract the “filled-in” values and estimate imputation error.</p>
+<p>Finally, it is possible to extract the “filled-in” values and
+estimate imputation error.</p>
 </div>
 </div>
-<div id="consolidation-of-imputation-between-training-and-testing-sets" class="section level2">
+<div id="consolidation-of-imputation-between-training-and-testing-sets"
+class="section level2">
 <h2>Consolidation of Imputation between Training and Testing Sets</h2>
-<p>The overall strategy to handle missing entries that occur in training and testing sets <span class="citation">(Morgan, 2020)</span>:</p>
+<p>The overall strategy to handle missing entries that occur in training
+and testing sets <span class="citation">(Morgan, 2020)</span>:</p>
 <ol style="list-style-type: decimal">
-<li>Impute the training set using <code>missForest</code> and store in <code>train_imp</code></li>
-<li>Combine imputed training set with the test set and store in <code>train_test</code></li>
-<li>Impute missing entries in the combined <code>train_test</code> set and extract test data (<code>test_imp</code>)</li>
+<li>Impute the training set using <code>missForest</code> and store in
+<code>train_imp</code></li>
+<li>Combine imputed training set with the test set and store in
+<code>train_test</code></li>
+<li>Impute missing entries in the combined <code>train_test</code> set
+and extract test data (<code>test_imp</code>)</li>
 </ol>
 <div id="partition" class="section level3">
 <h3>Partition</h3>
-<p>Convert <code>RiskPerformance</code> to a categorical (factor) variable.</p>
+<p>Convert <code>RiskPerformance</code> to a categorical (factor)
+variable.</p>
 <pre class="r"><code>heloc[, RiskPerformance := as.factor(RiskPerformance)]
 levels(heloc$RiskPerformance)</code></pre>
 <pre><code>[1] &quot;Bad&quot;  &quot;Good&quot;</code></pre>
@@ -1785,7 +2025,9 @@ levels(heloc$RiskPerformance)</code></pre>
 <pre><code>
  Bad Good 
 5136 4735 </code></pre>
-<p><span class="math inline">\(\rightarrow\)</span> The response variable is balanced between “Bad” and “Good” classes, so stratified sampling is not necessary.</p>
+<p><span class="math inline">\(\rightarrow\)</span> The response
+variable is balanced between “Bad” and “Good” classes, so stratified
+sampling is not necessary.</p>
 <pre class="r"><code>library(tidymodels) 
 library(visdat)   # visualise missing data
 library(missForest)
@@ -1818,20 +2060,22 @@ cat(&quot;train: \n&quot;)</code></pre>
 </div>
 <div id="occurrence-of-missing-entries" class="section level3">
 <h3>Occurrence of Missing Entries</h3>
-<p>There is no need to consider the indicator variables since they contain no missing entries.</p>
+<p>There is no need to consider the indicator variables since they
+contain no missing entries.</p>
 <pre class="r"><code>vis_miss(rbind(train[, 2:24], test[, 2:24]), show_perc = FALSE) + 
   coord_flip()</code></pre>
 <pre><code>Warning: `gather_()` was deprecated in tidyr 1.2.0.
-Please use `gather()` instead.
-This warning is displayed once every 8 hours.
-Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
+ℹ Please use `gather()` instead.
+ℹ The deprecated feature was likely used in the visdat package.
+  Please report the issue at &lt;https://github.com/ropensci/visdat/issues&gt;.</code></pre>
 <div class="figure" style="text-align: center">
 <img src="figure/HELOC-data-cleaning.Rmd/unnamed-chunk-13-1.png" alt="Distribution of Missing Entries" width="672" />
 <p class="caption">
 Distribution of Missing Entries
 </p>
 </div>
-<p>Figure shows that most features have no missing entries. This suggests that model-based imputation would be appropriate.</p>
+<p>Figure shows that most features have no missing entries. This
+suggests that model-based imputation would be appropriate.</p>
 <p><strong>Step 1</strong> Impute trainS</p>
 <p>Enabling parallel processing was recommended by Morgan (2020).</p>
 <pre class="r"><code># parallelize = &#39;variables&#39;
@@ -1841,20 +2085,29 @@ Distribution of Missing Entries
 # doRNG::registerDoRNG(seed = 123)
 # train_imp &lt;- missForest(train, verbose = TRUE,
 #                         parallelize = &#39;variables&#39;)$ximp</code></pre>
-<p>The ‘difference’ given with each iteration is between the new and previously imputed values. As given above, the difference comes down and then increases on the third iteration, so the algorithm stops.</p>
+<p>The ‘difference’ given with each iteration is between the new and
+previously imputed values. As given above, the difference comes down and
+then increases on the third iteration, so the algorithm stops.</p>
 <p><strong>Step 2</strong> Combine train_imp and test</p>
 <pre class="r"><code>#train_test &lt;- rbind(test, train_imp)</code></pre>
-<p><strong>Step 3</strong> Impute with combined train and test. Then extract imputed test.</p>
+<p><strong>Step 3</strong> Impute with combined train and test. Then
+extract imputed test.</p>
 <pre class="r"><code># doParallel::registerDoParallel(cores = 4) 
 # doRNG::registerDoRNG(seed = 123)
 # test_imp &lt;- missForest(train_test, 
 #                        verbose = TRUE,
 #                        parallelize = &#39;variables&#39;)$ximp[1:nrow(test), ]</code></pre>
-<p>parallelizing over the variables of the input data matrix ‘xmis’ missForest iteration 1 in progress…done! estimated error(s): 0.2984354 0 difference(s): 0.0003728205 0 time: 349.13 seconds</p>
-<p>missForest iteration 2 in progress…done! estimated error(s): 0.2985256 0 difference(s): 1.93276e-05 0 time: 328 seconds</p>
-<p>missForest iteration 3 in progress…done! estimated error(s): 0.2954846 0 difference(s): 1.645632e-05 0 time: 378.67 seconds</p>
-<p>missForest iteration 4 in progress…done! estimated error(s): 0.2953382 0 difference(s): 1.396596e-05 0 time: 323.06 seconds</p>
-<p>missForest iteration 5 in progress…done! estimated error(s): 0.2978618 0 difference(s): 1.491222e-05 0 time: 320.72 seconds</p>
+<p>parallelizing over the variables of the input data matrix ‘xmis’
+missForest iteration 1 in progress…done! estimated error(s): 0.2984354 0
+difference(s): 0.0003728205 0 time: 349.13 seconds</p>
+<p>missForest iteration 2 in progress…done! estimated error(s):
+0.2985256 0 difference(s): 1.93276e-05 0 time: 328 seconds</p>
+<p>missForest iteration 3 in progress…done! estimated error(s):
+0.2954846 0 difference(s): 1.645632e-05 0 time: 378.67 seconds</p>
+<p>missForest iteration 4 in progress…done! estimated error(s):
+0.2953382 0 difference(s): 1.396596e-05 0 time: 323.06 seconds</p>
+<p>missForest iteration 5 in progress…done! estimated error(s):
+0.2978618 0 difference(s): 1.491222e-05 0 time: 320.72 seconds</p>
 <pre class="r"><code>#save( train_imp, test_imp, file = &quot;data/train_test_imp&quot;)</code></pre>
 </div>
 </div>
@@ -1862,90 +2115,105 @@ Distribution of Missing Entries
 <h2>References</h2>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-Bucker" class="csl-entry">
-Bücker, M. <em>et al.</em> (2021) <span>‘<span class="nocase">Transparency, auditability, and explainability of machine learning models in credit scoring</span>’</span>, <em>Journal of the Operational Research Society</em>. doi: <a href="https://doi.org/10.1080/01605682.2021.1922098">10.1080/01605682.2021.1922098</a>.
+Bücker, M. <em>et al.</em> (2021) <span>‘<span
+class="nocase">Transparency, auditability, and explainability of machine
+learning models in credit scoring</span>’</span>, <em>Journal of the
+Operational Research Society</em>. doi: <a
+href="https://doi.org/10.1080/01605682.2021.1922098">10.1080/01605682.2021.1922098</a>.
 </div>
 <div id="ref-Gelman-Missing" class="csl-entry">
-Gelman, A. and Hill, J. (2006) <span>‘<span>Chapter 25. Missing Data Imputation</span>’</span>, in <em>Data analysis using regression and multilevel/hierarchical models</em>. Cambridge University Press, pp. 529–544. doi: <a href="https://doi.org/10.1017/CBO9780511790942">10.1017/CBO9780511790942</a>.
+Gelman, A. and Hill, J. (2006) <span>‘<span>Chapter 25. Missing Data
+Imputation</span>’</span>, in <em>Data analysis using regression and
+multilevel/hierarchical models</em>. Cambridge University Press, pp.
+529–544. doi: <a
+href="https://doi.org/10.1017/CBO9780511790942">10.1017/CBO9780511790942</a>.
 </div>
 <div id="ref-Morgan2020" class="csl-entry">
-Morgan, L. (2020) <em><span class="nocase">MissForest - The best imputation algorithm</span></em>. Kaggle. Available at: <a href="https://www.kaggle.com/lmorgan95/missforest-the-best-imputation-algorithm">https://www.kaggle.com/lmorgan95/missforest-the-best-imputation-algorithm</a>.
+Morgan, L. (2020) <em><span class="nocase">MissForest - The best
+imputation algorithm</span></em>. Kaggle. Available at: <a
+href="https://www.kaggle.com/lmorgan95/missforest-the-best-imputation-algorithm">https://www.kaggle.com/lmorgan95/missforest-the-best-imputation-algorithm</a>.
 </div>
 <div id="ref-Waljee" class="csl-entry">
-Waljee, A. K. <em>et al.</em> (2013) <span>‘<span class="nocase">Comparison of imputation methods for missing laboratory data in medicine</span>’</span>, <em>BMJ Open</em>, 3(8). doi: <a href="https://doi.org/10.1136/BMJOPEN-2013-002847">10.1136/BMJOPEN-2013-002847</a>.
+Waljee, A. K. <em>et al.</em> (2013) <span>‘<span
+class="nocase">Comparison of imputation methods for missing laboratory
+data in medicine</span>’</span>, <em>BMJ Open</em>, 3(8). doi: <a
+href="https://doi.org/10.1136/BMJOPEN-2013-002847">10.1136/BMJOPEN-2013-002847</a>.
 </div>
 </div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
-<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
 </button>
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.1.2 (2021-11-01)
+<pre><code>R version 4.2.1 (2022-06-23 ucrt)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 Running under: Windows 10 x64 (build 22000)
 
 Matrix products: default
 
 locale:
-[1] LC_COLLATE=English_United States.1252 
-[2] LC_CTYPE=English_United States.1252   
-[3] LC_MONETARY=English_United States.1252
+[1] LC_COLLATE=English_United States.utf8 
+[2] LC_CTYPE=English_United States.utf8   
+[3] LC_MONETARY=English_United States.utf8
 [4] LC_NUMERIC=C                          
-[5] LC_TIME=English_United States.1252    
+[5] LC_TIME=English_United States.utf8    
 
 attached base packages:
 [1] grid      stats     graphics  grDevices utils     datasets  methods  
 [8] base     
 
 other attached packages:
- [1] missForest_1.4     itertools_0.1-3    iterators_1.0.14   foreach_1.5.2     
- [5] randomForest_4.7-1 visdat_0.5.3       yardstick_0.0.9    workflowsets_0.1.0
- [9] workflows_0.2.4    tune_0.1.6         tidyr_1.2.0        tibble_3.1.6      
-[13] rsample_0.1.1      recipes_0.2.0      parsnip_0.1.7      modeldata_0.1.1   
-[17] infer_1.0.0        dials_0.1.0        scales_1.1.1       broom_0.7.12      
-[21] tidymodels_0.1.4   lares_5.0.6        VIM_6.1.1          colorspace_2.0-3  
-[25] kableExtra_1.3.4   data.table_1.14.2  purrr_0.3.4        dplyr_1.0.8       
-[29] ggplot2_3.3.5      knitr_1.37         workflowr_1.7.0   
+ [1] missForest_1.5     visdat_0.5.3       yardstick_1.0.0    workflowsets_0.2.1
+ [5] workflows_0.2.6    tune_0.2.0         tidyr_1.2.1        tibble_3.1.8      
+ [9] rsample_1.0.0      recipes_0.2.0      parsnip_1.0.0      modeldata_0.1.1   
+[13] infer_1.0.2        dials_1.0.0        scales_1.2.1       broom_1.0.0       
+[17] tidymodels_0.2.0   lares_5.1.2        VIM_6.1.1          colorspace_2.0-3  
+[21] kableExtra_1.3.4   data.table_1.14.2  purrr_0.3.5        dplyr_1.0.10      
+[25] ggplot2_3.3.6      knitr_1.39         workflowr_1.7.0   
 
 loaded via a namespace (and not attached):
-  [1] backports_1.4.1    systemfonts_1.0.4  plyr_1.8.6        
-  [4] sp_1.4-6           splines_4.1.2      listenv_0.8.0     
-  [7] digest_0.6.29      h2o_3.36.0.3       htmltools_0.5.2   
- [10] fansi_1.0.2        magrittr_2.0.2     openxlsx_4.2.5    
- [13] globals_0.14.0     gower_1.0.0        svglite_2.1.0     
- [16] hardhat_0.2.0      rvest_1.0.2        xfun_0.29         
- [19] callr_3.7.0        crayon_1.5.0       RCurl_1.98-1.6    
- [22] jsonlite_1.7.3     survival_3.2-13    zoo_1.8-9         
- [25] glue_1.6.1         gtable_0.3.0       ipred_0.9-12      
- [28] webshot_0.5.2      car_3.0-12         future.apply_1.8.1
- [31] DEoptimR_1.0-10    abind_1.4-5        DBI_1.1.2         
- [34] Rcpp_1.0.8         viridisLite_0.4.0  laeken_0.5.2      
- [37] GPfit_1.0-8        proxy_0.4-26       lava_1.6.10       
- [40] prodlim_2019.11.13 vcd_1.4-9          httr_1.4.2        
- [43] ellipsis_0.3.2     pkgconfig_2.0.3    farver_2.1.0      
- [46] nnet_7.3-17        sass_0.4.0         utf8_1.2.2        
- [49] tidyselect_1.1.2   labeling_0.4.2     rlang_1.0.1       
- [52] DiceDesign_1.9     later_1.3.0        munsell_0.5.0     
- [55] tools_4.1.2        cli_3.2.0          generics_0.1.2    
- [58] ranger_0.13.1      evaluate_0.15      stringr_1.4.0     
- [61] fastmap_1.1.0      yaml_2.3.5         processx_3.5.2    
- [64] fs_1.5.2           zip_2.2.0          robustbase_0.93-9 
- [67] future_1.23.0      whisker_0.4        xml2_1.3.3        
- [70] compiler_4.1.2     rstudioapi_0.13    e1071_1.7-9       
- [73] lhs_1.1.3          bslib_0.3.1        stringi_1.7.6     
- [76] highr_0.9          ps_1.6.0           lattice_0.20-45   
- [79] Matrix_1.4-0       vctrs_0.3.8        pillar_1.7.0      
- [82] lifecycle_1.0.1    furrr_0.2.3        lmtest_0.9-39     
- [85] jquerylib_0.1.4    bitops_1.0-7       httpuv_1.6.5      
- [88] patchwork_1.1.1    R6_2.5.1           promises_1.2.0.1  
- [91] rpart.plot_3.1.0   parallelly_1.30.0  codetools_0.2-18  
- [94] boot_1.3-28        MASS_7.3-55        assertthat_0.2.1  
- [97] rprojroot_2.0.2    withr_2.4.3        parallel_4.1.2    
-[100] rpart_4.1-15       timeDate_3043.102  class_7.3-20      
-[103] rmarkdown_2.11     carData_3.0-5      git2r_0.29.0      
-[106] getPass_0.2-2      pROC_1.18.0        lubridate_1.8.0   </code></pre>
+  [1] backports_1.4.1      systemfonts_1.0.4    plyr_1.8.7          
+  [4] sp_1.5-0             splines_4.2.1        listenv_0.8.0       
+  [7] digest_0.6.29        foreach_1.5.2        h2o_3.36.1.2        
+ [10] htmltools_0.5.2      fansi_1.0.3          magrittr_2.0.3      
+ [13] openxlsx_4.2.5       globals_0.15.1       gower_1.0.0         
+ [16] svglite_2.1.0        hardhat_1.2.0        rvest_1.0.2         
+ [19] xfun_0.31            callr_3.7.2          RCurl_1.98-1.7      
+ [22] jsonlite_1.8.2       survival_3.3-1       zoo_1.8-11          
+ [25] iterators_1.0.14     glue_1.6.2           gtable_0.3.1        
+ [28] ipred_0.9-13         webshot_0.5.3        car_3.1-0           
+ [31] future.apply_1.9.0   DEoptimR_1.0-11      abind_1.4-5         
+ [34] rngtools_1.5.2       DBI_1.1.3            Rcpp_1.0.9          
+ [37] viridisLite_0.4.1    laeken_0.5.2         GPfit_1.0-8         
+ [40] proxy_0.4-27         lava_1.6.10          prodlim_2019.11.13  
+ [43] vcd_1.4-10           httr_1.4.3           ellipsis_0.3.2      
+ [46] pkgconfig_2.0.3      farver_2.1.1         nnet_7.3-17         
+ [49] sass_0.4.1           utf8_1.2.2           tidyselect_1.2.0    
+ [52] labeling_0.4.2       rlang_1.0.6          DiceDesign_1.9      
+ [55] later_1.3.0          munsell_0.5.0        tools_4.2.1         
+ [58] cli_3.3.0            generics_0.1.3       ranger_0.14.1       
+ [61] evaluate_0.17        stringr_1.4.1        fastmap_1.1.0       
+ [64] yaml_2.3.5           processx_3.7.0       fs_1.5.2            
+ [67] zip_2.2.0            robustbase_0.95-0    randomForest_4.7-1.1
+ [70] doRNG_1.8.2          future_1.26.1        whisker_0.4         
+ [73] xml2_1.3.3           compiler_4.2.1       rstudioapi_0.13     
+ [76] e1071_1.7-11         lhs_1.1.5            bslib_0.3.1         
+ [79] stringi_1.7.8        highr_0.9            ps_1.7.1            
+ [82] lattice_0.20-45      Matrix_1.4-1         vctrs_0.4.1         
+ [85] pillar_1.8.1         lifecycle_1.0.3      furrr_0.3.0         
+ [88] lmtest_0.9-40        jquerylib_0.1.4      bitops_1.0-7        
+ [91] httpuv_1.6.5         patchwork_1.1.1      R6_2.5.1            
+ [94] promises_1.2.0.1     rpart.plot_3.1.1     parallelly_1.32.0   
+ [97] codetools_0.2-18     boot_1.3-28          MASS_7.3-57         
+[100] assertthat_0.2.1     rprojroot_2.0.3      withr_2.5.0         
+[103] parallel_4.2.1       rpart_4.1.16         timeDate_3043.102   
+[106] class_7.3-20         rmarkdown_2.14       carData_3.0-5       
+[109] git2r_0.30.1         getPass_0.2-2        pROC_1.18.0         
+[112] itertools_0.1-3      lubridate_1.8.0     </code></pre>
 </div>
 </div>
 </div>

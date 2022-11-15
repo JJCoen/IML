@@ -14,7 +14,7 @@
 
 <title>Logistic-Regression</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
@@ -73,6 +73,7 @@ if (window.hljs) {
 
 
 
+
 <style type="text/css">
 /* for pandoc --citeproc since 2.11 */
 div.csl-bib-body { }
@@ -120,6 +121,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -348,7 +352,7 @@ div.tocify {
 <div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -364,15 +368,27 @@ div.tocify {
     Interpretable ML Models
   </a>
 </li>
-<li>
-  <a href="methodology.html">
-    <span class="fa fa-clipboard-list"></span>
-     
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Methodology
+     
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="methodology.html">
+        <span class="fa fa-clipboard-list"></span>
+         
+        Methodology
+      </a>
+    </li>
+    <li>
+      <a href="Interpretable-ML-Models.html">Presentation</a>
+    </li>
+  </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Dataset
      
     <span class="caret"></span>
@@ -394,7 +410,7 @@ div.tocify {
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Interpret
      
     <span class="caret"></span>
@@ -433,7 +449,7 @@ div.tocify {
 <div id="header">
 
 <div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
 <ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
@@ -444,14 +460,16 @@ div.tocify {
 
 <h1 class="title toc-ignore">Logistic-Regression</h1>
 <h4 class="author">Jim Coen</h4>
-<h4 class="date">Monday, May 23, 2022</h4>
+<h4 class="date">Tuesday, November 15, 2022</h4>
 
 </div>
 
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -460,7 +478,9 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -469,17 +489,27 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-05-23
+<strong>Last updated:</strong> 2022-11-15
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 0
 </p>
 <p>
-<strong>Knit directory:</strong> <code>Interpretable-ML-Models/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+<strong>Knit directory:</strong> <code>Interpretable-ML-Models/</code>
+<span class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
 </p>
 <p>
-This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
-  href="https://github.com/workflowr/workflowr">workflowr</a> (version 1.7.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.0). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
 </p>
 <hr>
 </div>
@@ -488,91 +518,138 @@ This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysi
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguptodate"
+class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
 </p>
 </div>
 <div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20220121code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20220121)</code> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20220121code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20220121)</code> </a>
 </p>
 </div>
-<div id="strongSeedstrongcodesetseed20220121code" class="panel-collapse collapse">
+<div id="strongSeedstrongcodesetseed20220121code"
+class="panel-collapse collapse">
 <div class="panel-body">
-<p>The command <code>set.seed(20220121)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+<p>The command <code>set.seed(20220121)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
 </p>
 </div>
-<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
 </p>
 </div>
 <div id="strongCachestrongnone" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
 </p>
 </div>
 <div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstreebd896bdacf0281594bfc4d0e0500b0e15bb1bb06targetblankbd896bda"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/bd896bdacf0281594bfc4d0e0500b0e15bb1bb06" target="_blank">bd896bd</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree0aeb8e485add5277ef9c6539a3cdb29d915f0684targetblank0aeb8e4a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/0aeb8e485add5277ef9c6539a3cdb29d915f0684" target="_blank">0aeb8e4</a>
+</a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstreebd896bdacf0281594bfc4d0e0500b0e15bb1bb06targetblankbd896bda" class="panel-collapse collapse">
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree0aeb8e485add5277ef9c6539a3cdb29d915f0684targetblank0aeb8e4a"
+class="panel-collapse collapse">
 <div class="panel-body">
 <p>
-Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/bd896bdacf0281594bfc4d0e0500b0e15bb1bb06" target="_blank">bd896bd</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version
+<a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/0aeb8e485add5277ef9c6539a3cdb29d915f0684" target="_blank">0aeb8e4</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
 </p>
 <p>
-Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
 </p>
 <pre><code>
 Ignored files:
@@ -581,20 +658,27 @@ Ignored files:
     Ignored:    analysis/.Rhistory
 
 Untracked files:
-    Untracked:  Pres-Video-Interpretable-ML.mp4
-    Untracked:  Presentation-Interpretable-ML.pptx
+    Untracked:  CA1-Research proposal Outline.docx
+    Untracked:  Research-Proposal.docx
     Untracked:  code/.ipynb_checkpoints/HELOC-Data-Scientist-checkpoint.ipynb
     Untracked:  code/.ipynb_checkpoints/HELOC-Service-User-checkpoint.ipynb
+    Untracked:  marking=rubic.PNG
+    Untracked:  project-ideas.odt
+    Untracked:  timeline-24-Nov.xlsx
 
 Unstaged changes:
+    Modified:   README.md
     Deleted:    analysis/AIX360.Rmd
     Modified:   analysis/_site.yml
     Deleted:    analysis/about.Rmd
     Deleted:    analysis/license.Rmd
+    Modified:   code/HELOC-Data-Scientist.ipynb
 
 </code></pre>
 <p>
-Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
 </p>
 </div>
 </div>
@@ -605,7 +689,12 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/Logistic-Regression.Rmd</code>) and HTML (<code>docs/Logistic-Regression.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/Logistic-Regression.Rmd</code>)
+and HTML (<code>docs/Logistic-Regression.html</code>) files. If you’ve
+configured a remote Git repository (see <code>?wflow_git_remote</code>),
+click on the hyperlinks in the table below to view the files as they
+were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -629,6 +718,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/JJCoen/Interpretable-ML-Models/a152749d6bf19873316ff32b4e0a2adc1eb1b09c/docs/Logistic-Regression.html" target="_blank">a152749</a>
+</td>
+<td>
+JJCoen
+</td>
+<td>
+2022-05-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -932,7 +1038,7 @@ JJCoen
 2022-04-23
 </td>
 <td>
-wflow_publish(“analysis/Logistic-Regression.Rmd”)
+wflow_publish("analysis/Logistic-Regression.Rmd")
 </td>
 </tr>
 <tr>
@@ -983,7 +1089,7 @@ JJCoen
 2022-03-18
 </td>
 <td>
-wflow_publish(files = c(“analysis/Logistic-Regression.Rmd”))
+wflow_publish(files = c("analysis/Logistic-Regression.Rmd"))
 </td>
 </tr>
 <tr>
@@ -1025,45 +1131,69 @@ knit_hooks$set(inline = function(x) {
   }
 })
 knit_hooks$set(plot = knitr:::hook_plot_html)</code></pre>
-<p>Pre-processing has already been performed in <em>HELOC-data-cleaning.Rmd</em></p>
+<p>Pre-processing has already been performed in
+<em>HELOC-data-cleaning.Rmd</em></p>
 <pre class="r"><code>load(&quot;data/train_test_imp&quot;)
 # Set the reference level
 train_imp[, RiskPerformance := relevel(RiskPerformance, ref = &quot;Good&quot;)]
 test_imp[, RiskPerformance := relevel(RiskPerformance, ref = &quot;Good&quot;)]</code></pre>
 <div id="logistic-regression" class="section level2">
 <h2>Logistic Regression</h2>
-<p>The BoE QII model uses log(odds) and probability of default as metrics in graphs that enable interpretation <span class="citation">(Bracke <em>et al.</em>, 2019)</span>. Therefore, it is informative to review these concepts.</p>
-<p>All these models are binary classifiers where the outcome is in one of two classes and can be represented by a binomial function with probability of success <span class="math inline">\(p_i\)</span>.</p>
-<p><span class="math display">\[ y_i = \mathbf{Binom}(p_i)\]</span> <span class="math inline">\(y_i\)</span> is the <strong>Risk</strong> variable and it takes the values 0 or 1. Generally in credit management, <strong>Risk</strong> = 1 signifies default on a loan, while <strong>Risk</strong> = 0 is non-default.</p>
-<p>In order to model the function <span class="math inline">\(y\)</span>, linear logistic regression uses a linear combination of the features:</p>
+<p>The BoE QII model uses log(odds) and probability of default as
+metrics in graphs that enable interpretation <span
+class="citation">(Bracke <em>et al.</em>, 2019)</span>. Therefore, it is
+informative to review these concepts.</p>
+<p>All these models are binary classifiers where the outcome is in one
+of two classes and can be represented by a binomial function with
+probability of success <span class="math inline">\(p_i\)</span>.</p>
+<p><span class="math display">\[ y_i = \mathbf{Binom}(p_i)\]</span>
+<span class="math inline">\(y_i\)</span> is the <strong>Risk</strong>
+variable and it takes the values 0 or 1. Generally in credit management,
+<strong>Risk</strong> = 1 signifies default on a loan, while
+<strong>Risk</strong> = 0 is non-default.</p>
+<p>In order to model the function <span
+class="math inline">\(y\)</span>, linear logistic regression uses a
+linear combination of the features:</p>
 <p><span class="math display">\[
-\eta = \beta_0 + \beta_1 x_1 + \beta_2 x_2 \quad . . . 
+\eta = \beta_0 + \beta_1 x_1 + \beta_2 x_2 \quad . . .
 \]</span></p>
-<p><span class="math inline">\(\eta\)</span> has values <span class="math inline">\((-\infty,\infty)\)</span>.</p>
-<p>Consider the Odds, which is the probability of default divided by the probability of non-default.</p>
+<p><span class="math inline">\(\eta\)</span> has values <span
+class="math inline">\((-\infty,\infty)\)</span>.</p>
+<p>Consider the Odds, which is the probability of default divided by the
+probability of non-default.</p>
 <p><span class="math display">\[
-\frac{\rm{Pr}(\mathbf{Risk} = 1 | x_1, x_2, \beta_0, \beta_1, \beta_2 )}{1-\rm{Pr}(\mathbf{Risk} = 1 | x_1, x_2, \beta_0, \beta_1, \beta_2 )}
+\frac{\rm{Pr}(\mathbf{Risk} = 1 | x_1, x_2, \beta_0, \beta_1, \beta_2
+)}{1-\rm{Pr}(\mathbf{Risk} = 1 | x_1, x_2, \beta_0, \beta_1, \beta_2 )}
 \]</span></p>
-<p>This has values in the range <span class="math inline">\((0,\infty)\)</span></p>
-<p>The logit function, which is the log (Odds), has values <span class="math inline">\((-\infty,\infty)\)</span>. Now it is possible to relate the logit function (log odds of success) to the linear combination of the predictors.</p>
+<p>This has values in the range <span
+class="math inline">\((0,\infty)\)</span></p>
+<p>The logit function, which is the log (Odds), has values <span
+class="math inline">\((-\infty,\infty)\)</span>. Now it is possible to
+relate the logit function (log odds of success) to the linear
+combination of the predictors.</p>
 <p><span class="math display">\[
-log(\frac{p}{1-p}) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 \quad . . . 
+log(\frac{p}{1-p}) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 \quad . . .
 \]</span></p>
 <p>So the Odds in favor of default are:</p>
 <p><span class="math display">\[
 \frac{p}{1-p} = e^{\beta_0 + \beta_1 x_1 + \beta_2 x_2}  
 \]</span></p>
-<p>The inverse logit express the probability <span class="math inline">\(p\)</span> in terms of the sigmoid (logistic) function:</p>
+<p>The inverse logit express the probability <span
+class="math inline">\(p\)</span> in terms of the sigmoid (logistic)
+function:</p>
 <p><span class="math display">\[
-p = \frac{\exp(\eta)}{1 + \exp(\eta)} \text{  where  } \eta = \beta_0 + \beta_1 x_1 + \beta_2 x_2 \quad . . . 
+p = \frac{\exp(\eta)}{1 + \exp(\eta)} \text{  where  } \eta = \beta_0 +
+\beta_1 x_1 + \beta_2 x_2 \quad . . .
 \]</span></p>
-<p>In the Bracke (2019) study, the baseline model is Logistic Regression. For simplicity, consider a logistic regression model based on the first two features in the HELOC data-set.</p>
+<p>In the Bracke (2019) study, the baseline model is Logistic
+Regression. For simplicity, consider a logistic regression model based
+on the first two features in the HELOC data-set.</p>
 <pre class="r"><code>set.seed(17032022)
 LR_two &lt;- glm(RiskPerformance ~ ExternalRiskEstimate +  MSinceOldestTradeOpen,
               family = &quot;binomial&quot;, 
               data = train_imp)
 tidy(LR_two)</code></pre>
-<pre><code># A tibble: 3 x 5
+<pre><code># A tibble: 3 × 5
   term                  estimate std.error statistic   p.value
   &lt;chr&gt;                    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
 1 (Intercept)            8.23     0.225         36.5 5.99e-292
@@ -1072,19 +1202,36 @@ tidy(LR_two)</code></pre>
 <p>The coefficient estimates given by the model leads to</p>
 <p><span class="math display">\[
 \begin{align*}
-log(\frac{p}{1-p}) &amp;= 8.23 - 0.105 x_1 -0.003 x_2 \quad \text{and} \\
+log(\frac{p}{1-p}) &amp;= 8.23 - 0.105 x_1 -0.003 x_2 \quad \text{and}
+\\
 \frac{p}{1-p} &amp;= e^{8.23 - 0.105 x_1 -0.003 x_2}
 \end{align*}
 \]</span></p>
 <div id="interpretation-of-coefficient" class="section level3">
 <h3><strong>Interpretation of coefficient</strong></h3>
-<p>Let’s assume that the value for variable <span class="math inline">\(x_j\)</span> goes up by one, while all other variables remain equal. If this happens, the odds for default will be multiplied by the exponential of <span class="math inline">\(beta_j\)</span>.</p>
-<p>Note that odds will DECREASE for increasing <span class="math inline">\(x_j\)</span> when <span class="math inline">\(\beta_j\)</span> is negative, and odds will INCREASE for increasing <span class="math inline">\(x_j\)</span> when $_j$ is positive.</p>
+<p>Let’s assume that the value for variable <span
+class="math inline">\(x_j\)</span> goes up by one, while all other
+variables remain equal. If this happens, the odds for default will be
+multiplied by the exponential of <span
+class="math inline">\(beta_j\)</span>.</p>
+<p>Note that odds will DECREASE for increasing <span
+class="math inline">\(x_j\)</span> when <span
+class="math inline">\(\beta_j\)</span> is negative, and odds will
+INCREASE for increasing <span class="math inline">\(x_j\)</span> when
+$_j$ is positive.</p>
 <ul>
-<li><p><span class="math inline">\(\beta_j &lt; 0 \Rightarrow \exp^{\beta_j} &lt; 1\)</span></p></li>
-<li><p><span class="math inline">\(\beta_j &gt; 0 \Rightarrow \exp^{\beta_j} &gt; 1\)</span></p></li>
+<li><p><span class="math inline">\(\beta_j &lt; 0 \Rightarrow
+\exp^{\beta_j} &lt; 1\)</span></p></li>
+<li><p><span class="math inline">\(\beta_j &gt; 0 \Rightarrow
+\exp^{\beta_j} &gt; 1\)</span></p></li>
 </ul>
-<p>In the logistic regression model above, the coefficient for <code>ExternalRiskEstimate</code> is -0.105. If the <code>ExternalRiskEstimate</code> increases by one unit, then the Odds for default is multiplied by 0.9 (<span class="math inline">\(e^{-0.105}\)</span>). This means that, for each unit increase in <code>ExternalRiskEstimate</code>, then the Odds for default lowers by 10%.</p>
+<p>In the logistic regression model above, the coefficient for
+<code>ExternalRiskEstimate</code> is -0.105. If the
+<code>ExternalRiskEstimate</code> increases by one unit, then the Odds
+for default is multiplied by 0.9 (<span
+class="math inline">\(e^{-0.105}\)</span>). This means that, for each
+unit increase in <code>ExternalRiskEstimate</code>, then the Odds for
+default lowers by 10%.</p>
 <pre class="r"><code>options(digits = 3)
 exp(LR_two$coeff)</code></pre>
 <pre><code>          (Intercept)  ExternalRiskEstimate MSinceOldestTradeOpen 
@@ -1109,60 +1256,65 @@ ggplot(data= train_sub, mapping = aes(x=ExternalRiskEstimate, y=RiskBin)) + geom
 <h2>References</h2>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-Bracke2019" class="csl-entry">
-Bracke, P. <em>et al.</em> (2019) <em><span class="nocase">Staff Working Paper No. 816 Machine learning explainability in finance: an application to default risk analysis</span></em>. Bank of England. Available at: <a href="https://www.bankofengland.co.uk/working-paper/staff-working-papers">www.bankofengland.co.uk/working-paper/staff-working-papers</a>.
+Bracke, P. <em>et al.</em> (2019) <span>‘<span class="nocase">Staff
+Working Paper No. 816 Machine learning explainability in finance: an
+application to default risk analysis</span>’</span>, <em>Bank of
+England</em>. Available at: <a
+href="https://www.bankofengland.co.uk/working-paper/2019/machine-learning-explainability-in-finance-an-application-to-default-risk-analysis">https://www.bankofengland.co.uk/working-paper/2019/machine-learning-explainability-in-finance-an-application-to-default-risk-analysis</a>.
 </div>
 </div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
-<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
 </button>
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.1.2 (2021-11-01)
+<pre><code>R version 4.2.1 (2022-06-23 ucrt)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 Running under: Windows 10 x64 (build 22000)
 
 Matrix products: default
 
 locale:
-[1] LC_COLLATE=English_United States.1252  LC_CTYPE=English_United States.1252   
-[3] LC_MONETARY=English_United States.1252 LC_NUMERIC=C                          
-[5] LC_TIME=English_United States.1252    
+[1] LC_COLLATE=English_United States.utf8  LC_CTYPE=English_United States.utf8   
+[3] LC_MONETARY=English_United States.utf8 LC_NUMERIC=C                          
+[5] LC_TIME=English_United States.utf8    
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] kableExtra_1.3.4   data.table_1.14.2  modelr_0.1.8       yardstick_0.0.9    workflowsets_0.1.0
- [6] workflows_0.2.4    tune_0.1.6         rsample_0.1.1      recipes_0.2.0      parsnip_0.1.7     
-[11] modeldata_0.1.1    infer_1.0.0        dials_0.1.0        scales_1.1.1       broom_0.7.12      
-[16] tidymodels_0.1.4   forcats_0.5.1      stringr_1.4.0      dplyr_1.0.8        purrr_0.3.4       
-[21] readr_2.1.2        tidyr_1.2.0        tibble_3.1.6       ggplot2_3.3.5      tidyverse_1.3.1   
-[26] knitr_1.37         workflowr_1.7.0   
+ [1] kableExtra_1.3.4   data.table_1.14.2  modelr_0.1.8       yardstick_1.0.0    workflowsets_0.2.1
+ [6] workflows_0.2.6    tune_0.2.0         rsample_1.0.0      recipes_0.2.0      parsnip_1.0.0     
+[11] modeldata_0.1.1    infer_1.0.2        dials_1.0.0        scales_1.2.1       broom_1.0.0       
+[16] tidymodels_0.2.0   forcats_0.5.1      stringr_1.4.1      dplyr_1.0.10       purrr_0.3.5       
+[21] readr_2.1.3        tidyr_1.2.1        tibble_3.1.8       ggplot2_3.3.6      tidyverse_1.3.1   
+[26] knitr_1.39         workflowr_1.7.0   
 
 loaded via a namespace (and not attached):
- [1] colorspace_2.0-3   ellipsis_0.3.2     class_7.3-20       rprojroot_2.0.2    fs_1.5.2          
- [6] rstudioapi_0.13    farver_2.1.0       listenv_0.8.0      furrr_0.2.3        prodlim_2019.11.13
-[11] fansi_1.0.2        lubridate_1.8.0    xml2_1.3.3         codetools_0.2-18   splines_4.1.2     
-[16] jsonlite_1.7.3     pROC_1.18.0        dbplyr_2.1.1       compiler_4.1.2     httr_1.4.2        
-[21] backports_1.4.1    assertthat_0.2.1   Matrix_1.4-0       fastmap_1.1.0      cli_3.2.0         
-[26] later_1.3.0        htmltools_0.5.2    tools_4.1.2        gtable_0.3.0       glue_1.6.1        
-[31] Rcpp_1.0.8         cellranger_1.1.0   jquerylib_0.1.4    DiceDesign_1.9     vctrs_0.3.8       
-[36] nlme_3.1-155       svglite_2.1.0      iterators_1.0.14   timeDate_3043.102  gower_1.0.0       
-[41] xfun_0.29          globals_0.14.0     ps_1.6.0           rvest_1.0.2        lifecycle_1.0.1   
-[46] future_1.23.0      getPass_0.2-2      MASS_7.3-55        ipred_0.9-12       hms_1.1.1         
-[51] promises_1.2.0.1   parallel_4.1.2     yaml_2.3.5         sass_0.4.0         rpart_4.1-15      
-[56] stringi_1.7.6      foreach_1.5.2      lhs_1.1.3          hardhat_0.2.0      lava_1.6.10       
-[61] systemfonts_1.0.4  rlang_1.0.1        pkgconfig_2.0.3    evaluate_0.15      lattice_0.20-45   
-[66] labeling_0.4.2     processx_3.5.2     tidyselect_1.1.2   parallelly_1.30.0  plyr_1.8.6        
-[71] magrittr_2.0.2     R6_2.5.1           generics_0.1.2     DBI_1.1.2          mgcv_1.8-38       
-[76] pillar_1.7.0       haven_2.4.3        whisker_0.4        withr_2.4.3        survival_3.2-13   
-[81] nnet_7.3-17        future.apply_1.8.1 crayon_1.5.0       utf8_1.2.2         tzdb_0.2.0        
-[86] rmarkdown_2.11     grid_4.1.2         readxl_1.3.1       callr_3.7.0        git2r_0.29.0      
-[91] webshot_0.5.2      reprex_2.0.1       digest_0.6.29      httpuv_1.6.5       munsell_0.5.0     
-[96] GPfit_1.0-8        viridisLite_0.4.0  bslib_0.3.1       </code></pre>
+ [1] colorspace_2.0-3   ellipsis_0.3.2     class_7.3-20       rprojroot_2.0.3    fs_1.5.2          
+ [6] rstudioapi_0.13    farver_2.1.1       listenv_0.8.0      furrr_0.3.0        prodlim_2019.11.13
+[11] fansi_1.0.3        lubridate_1.8.0    xml2_1.3.3         codetools_0.2-18   splines_4.2.1     
+[16] jsonlite_1.8.2     dbplyr_2.2.1       compiler_4.2.1     httr_1.4.3         backports_1.4.1   
+[21] assertthat_0.2.1   Matrix_1.4-1       fastmap_1.1.0      cli_3.3.0          later_1.3.0       
+[26] htmltools_0.5.2    tools_4.2.1        gtable_0.3.1       glue_1.6.2         Rcpp_1.0.9        
+[31] cellranger_1.1.0   jquerylib_0.1.4    DiceDesign_1.9     vctrs_0.4.1        nlme_3.1-157      
+[36] svglite_2.1.0      iterators_1.0.14   timeDate_3043.102  gower_1.0.0        xfun_0.31         
+[41] globals_0.15.1     ps_1.7.1           rvest_1.0.2        lifecycle_1.0.3    future_1.26.1     
+[46] getPass_0.2-2      MASS_7.3-57        ipred_0.9-13       hms_1.1.2          promises_1.2.0.1  
+[51] parallel_4.2.1     yaml_2.3.5         sass_0.4.1         rpart_4.1.16       stringi_1.7.8     
+[56] foreach_1.5.2      lhs_1.1.5          hardhat_1.2.0      lava_1.6.10        systemfonts_1.0.4 
+[61] rlang_1.0.6        pkgconfig_2.0.3    evaluate_0.17      lattice_0.20-45    labeling_0.4.2    
+[66] processx_3.7.0     tidyselect_1.2.0   parallelly_1.32.0  magrittr_2.0.3     R6_2.5.1          
+[71] generics_0.1.3     DBI_1.1.3          mgcv_1.8-40        pillar_1.8.1       haven_2.5.0       
+[76] whisker_0.4        withr_2.5.0        survival_3.3-1     nnet_7.3-17        future.apply_1.9.0
+[81] crayon_1.5.2       utf8_1.2.2         tzdb_0.3.0         rmarkdown_2.14     grid_4.2.1        
+[86] readxl_1.4.0       callr_3.7.2        git2r_0.30.1       webshot_0.5.3      reprex_2.0.1      
+[91] digest_0.6.29      httpuv_1.6.5       munsell_0.5.0      GPfit_1.0-8        viridisLite_0.4.1 
+[96] bslib_0.3.1       </code></pre>
 </div>
 </div>
 

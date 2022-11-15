@@ -14,7 +14,7 @@
 
 <title>Duke University 2 Level GAM</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
@@ -73,6 +73,7 @@ if (window.hljs) {
 
 
 
+
 <style type="text/css">
 /* for pandoc --citeproc since 2.11 */
 div.csl-bib-body { }
@@ -120,6 +121,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -348,7 +352,7 @@ div.tocify {
 <div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -364,15 +368,27 @@ div.tocify {
     Interpretable ML Models
   </a>
 </li>
-<li>
-  <a href="methodology.html">
-    <span class="fa fa-clipboard-list"></span>
-     
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Methodology
+     
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="methodology.html">
+        <span class="fa fa-clipboard-list"></span>
+         
+        Methodology
+      </a>
+    </li>
+    <li>
+      <a href="Interpretable-ML-Models.html">Presentation</a>
+    </li>
+  </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Dataset
      
     <span class="caret"></span>
@@ -394,7 +410,7 @@ div.tocify {
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Interpret
      
     <span class="caret"></span>
@@ -433,7 +449,7 @@ div.tocify {
 <div id="header">
 
 <div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
 <ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
@@ -444,14 +460,16 @@ div.tocify {
 
 <h1 class="title toc-ignore">Duke University 2 Level GAM</h1>
 <h4 class="author">Jim Coen</h4>
-<h4 class="date">Monday, May 23, 2022</h4>
+<h4 class="date">Tuesday, November 15, 2022</h4>
 
 </div>
 
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -460,7 +478,9 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -469,17 +489,27 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-05-23
+<strong>Last updated:</strong> 2022-11-15
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 0
 </p>
 <p>
-<strong>Knit directory:</strong> <code>Interpretable-ML-Models/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+<strong>Knit directory:</strong> <code>Interpretable-ML-Models/</code>
+<span class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
 </p>
 <p>
-This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
-  href="https://github.com/workflowr/workflowr">workflowr</a> (version 1.7.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.0). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
 </p>
 <hr>
 </div>
@@ -488,91 +518,138 @@ This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysi
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguptodate"
+class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
 </p>
 </div>
 <div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20220121code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20220121)</code> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20220121code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20220121)</code> </a>
 </p>
 </div>
-<div id="strongSeedstrongcodesetseed20220121code" class="panel-collapse collapse">
+<div id="strongSeedstrongcodesetseed20220121code"
+class="panel-collapse collapse">
 <div class="panel-body">
-<p>The command <code>set.seed(20220121)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+<p>The command <code>set.seed(20220121)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
 </p>
 </div>
-<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
 </p>
 </div>
 <div id="strongCachestrongnone" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
 </p>
 </div>
 <div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstreebd896bdacf0281594bfc4d0e0500b0e15bb1bb06targetblankbd896bda"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/bd896bdacf0281594bfc4d0e0500b0e15bb1bb06" target="_blank">bd896bd</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree0aeb8e485add5277ef9c6539a3cdb29d915f0684targetblank0aeb8e4a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/0aeb8e485add5277ef9c6539a3cdb29d915f0684" target="_blank">0aeb8e4</a>
+</a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstreebd896bdacf0281594bfc4d0e0500b0e15bb1bb06targetblankbd896bda" class="panel-collapse collapse">
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree0aeb8e485add5277ef9c6539a3cdb29d915f0684targetblank0aeb8e4a"
+class="panel-collapse collapse">
 <div class="panel-body">
 <p>
-Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/bd896bdacf0281594bfc4d0e0500b0e15bb1bb06" target="_blank">bd896bd</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version
+<a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/0aeb8e485add5277ef9c6539a3cdb29d915f0684" target="_blank">0aeb8e4</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
 </p>
 <p>
-Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
 </p>
 <pre><code>
 Ignored files:
@@ -581,20 +658,27 @@ Ignored files:
     Ignored:    analysis/.Rhistory
 
 Untracked files:
-    Untracked:  Pres-Video-Interpretable-ML.mp4
-    Untracked:  Presentation-Interpretable-ML.pptx
+    Untracked:  CA1-Research proposal Outline.docx
+    Untracked:  Research-Proposal.docx
     Untracked:  code/.ipynb_checkpoints/HELOC-Data-Scientist-checkpoint.ipynb
     Untracked:  code/.ipynb_checkpoints/HELOC-Service-User-checkpoint.ipynb
+    Untracked:  marking=rubic.PNG
+    Untracked:  project-ideas.odt
+    Untracked:  timeline-24-Nov.xlsx
 
 Unstaged changes:
+    Modified:   README.md
     Deleted:    analysis/AIX360.Rmd
     Modified:   analysis/_site.yml
     Deleted:    analysis/about.Rmd
     Deleted:    analysis/license.Rmd
+    Modified:   code/HELOC-Data-Scientist.ipynb
 
 </code></pre>
 <p>
-Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
 </p>
 </div>
 </div>
@@ -605,7 +689,11 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/Duke.Rmd</code>) and HTML (<code>docs/Duke.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/Duke.Rmd</code>) and HTML
+(<code>docs/Duke.html</code>) files. If you’ve configured a remote Git
+repository (see <code>?wflow_git_remote</code>), click on the hyperlinks
+in the table below to view the files as they were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -629,6 +717,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/JJCoen/Interpretable-ML-Models/a152749d6bf19873316ff32b4e0a2adc1eb1b09c/docs/Duke.html" target="_blank">a152749</a>
+</td>
+<td>
+JJCoen
+</td>
+<td>
+2022-05-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -791,41 +896,88 @@ Add Duke and NYU
 </div>
 <div id="duke-university-2-level-gam-model" class="section level2">
 <h2>Duke University 2 Level GAM model</h2>
-<p>The Duke team recommend the use of models that are domain-specific. So they emphasise engaging in knowledge discovery a priori. After engaging in such a process, it is possible to create a two-level hierarchy that compartmentalizes subsets of features into meaningful groupings known as “subscale features” <span class="citation">(Chen <em>et al.</em>, 2018)</span>. Figure 1 groups features according to attributes that they have in common.</p>
-<p><img src="./images/duke-subscales.png" /> <strong>Figure 1:</strong> Grouping of features elicits intent and meaning. Source: Chen (2018)</p>
+<p>The Duke team recommend the use of models that are domain-specific.
+So they emphasise engaging in knowledge discovery a priori. After
+engaging in such a process, it is possible to create a two-level
+hierarchy that compartmentalizes subsets of features into meaningful
+groupings known as “subscale features” <span class="citation">(Chen
+<em>et al.</em>, 2018)</span>. Figure 1 groups features according to
+attributes that they have in common.</p>
+<p><img src="./images/duke-subscales.png" /> <strong>Figure 1:</strong>
+Grouping of features elicits intent and meaning. Source: Chen (2018)</p>
 <div id="global-model" class="section level4 unnumbered">
 <h4 class="unnumbered">Global Model</h4>
-<p>This level of interpretation is of use to all who interact with the model (Developer, Auditor, and Regulator). Figure @ref(fig:duke-global) shows how the sub-scales can be considered as a simplified model which, in turn, determines the overall probability of default. Feature values for specific loan applicants can be entered using the sliders on the left side.</p>
-<p><img src="./images/duke-global-model.png" /> <strong>Figure 2:</strong> Global Model gives Probability of Default. Source: Chen (2018)</p>
-<p>The use of colour is effective with shades from green to red signifying low to high risk. This global model graph is of interest to all stakeholders.</p>
+<p>This level of interpretation is of use to all who interact with the
+model (Developer, Auditor, and Regulator). Figure @ref(fig:duke-global)
+shows how the sub-scales can be considered as a simplified model which,
+in turn, determines the overall probability of default. Feature values
+for specific loan applicants can be entered using the sliders on the
+left side.</p>
+<p><img src="./images/duke-global-model.png" /> <strong>Figure
+2:</strong> Global Model gives Probability of Default. Source: Chen
+(2018)</p>
+<p>The use of colour is effective with shades from green to red
+signifying low to high risk. This global model graph is of interest to
+all stakeholders.</p>
 </div>
-<div id="most-important-contibuting-factors" class="section level4 unnumbered">
+<div id="most-important-contibuting-factors"
+class="section level4 unnumbered">
 <h4 class="unnumbered">Most Important Contibuting Factors</h4>
-<p>Similar to the AIX 360, feature values are split into intervals or bins. In this case, the 23 features are transformed into 182 bin. In addition, these include indicator variables when an entry is missing, unlike AIX 360.</p>
-<p>The model gives the top four factors that lead to a “Good” or “Bad” prediction. These factors are expressed as predicates on specific values. In the case of Demo 1 in the web interface, these are:</p>
+<p>Similar to the AIX 360, feature values are split into intervals or
+bins. In this case, the 23 features are transformed into 182 bin. In
+addition, these include indicator variables when an entry is missing,
+unlike AIX 360.</p>
+<p>The model gives the top four factors that lead to a “Good” or “Bad”
+prediction. These factors are expressed as predicates on specific
+values. In the case of Demo 1 in the web interface, these are:</p>
 <ol style="list-style-type: decimal">
-<li>MaxDelq2PublicRecLast12M <span class="math inline">\(\le\)</span> 6<br />
+<li>MaxDelq2PublicRecLast12M <span class="math inline">\(\le\)</span>
+6<br />
 </li>
-<li>PercentTradesNeverDelq <span class="math inline">\(\le\)</span> 95<br />
+<li>PercentTradesNeverDelq <span class="math inline">\(\le\)</span>
+95<br />
 </li>
 <li>AverageMInFile <span class="math inline">\(\le\)</span> 48<br />
 </li>
 <li>AverageMInFile <span class="math inline">\(=\)</span> 69</li>
 </ol>
-<p>Such information is of helpful to a service user or customer who was refused a loan. A regulator can check that loan applicants receive sufficient explanation when they are denied.</p>
-<p>However, it would be of greater benefit to know what values these features need to be in order to achieve approval. There are post-hoc algorithms within the AIX 360 toolkit that can provide such detail.</p>
+<p>Such information is of helpful to a service user or customer who was
+refused a loan. A regulator can check that loan applicants receive
+sufficient explanation when they are denied.</p>
+<p>However, it would be of greater benefit to know what values these
+features need to be in order to achieve approval. There are post-hoc
+algorithms within the AIX 360 toolkit that can provide such detail.</p>
 </div>
-<div id="consistent-rule-based-explanations" class="section level4 unnumbered">
+<div id="consistent-rule-based-explanations"
+class="section level4 unnumbered">
 <h4 class="unnumbered">Consistent Rule-based Explanations</h4>
-<p>The model considers the current application in relation to all previous applications. It derives a feature based rule that is consistent over the greatest number of past cases. For instance, with regards the Demo 1 case, there were 594 applications that satisified the rule: <span class="math display">\[
+<p>The model considers the current application in relation to all
+previous applications. It derives a feature based rule that is
+consistent over the greatest number of past cases. For instance, with
+regards the Demo 1 case, there were 594 applications that satisified the
+rule: <span class="math display">\[
 \text{ExternalRiskEstimate} \le 63 \text{ AND AverageMInFile} \le 48
-\]</span> and all of them went into default. These types of explanations give the developer, auditor and regulator insight into how the model operates for groups of customers. They can help the developer check that a model is operating as expected. The internal auditor and the regulator can ascertain that types of customers are being treated fairly.</p>
+\]</span> and all of them went into default. These types of explanations
+give the developer, auditor and regulator insight into how the model
+operates for groups of customers. They can help the developer check that
+a model is operating as expected. The internal auditor and the regulator
+can ascertain that types of customers are being treated fairly.</p>
 </div>
 <div id="case-based-explanations" class="section level4 unnumbered">
 <h4 class="unnumbered">Case-based Explanations</h4>
-<p>Figure @ref(fig:duke-case-based) shows a case under consideration (current) alongside previous applications with similar feature values (light blue shading). Only the first six features are shown. This figure provides additional information to a financial officer when deciding upon a loan application. By comparing the prediction with actual outcome, the model assists the officer to use their judgement when arriving at a decision.</p>
-<p><img src="./images/duke-case-based.png" /> <strong>Figure 3.</strong> Comparison with cases similar to current applicant. Source: Chen (2018)</p>
-<p>Where the Duke model is lacking in corrective actions to change a “Bad” classification to “Good”, the New York University provides a succinct and effective solution.</p>
+<p>Figure @ref(fig:duke-case-based) shows a case under consideration
+(current) alongside previous applications with similar feature values
+(light blue shading). Only the first six features are shown. This figure
+provides additional information to a financial officer when deciding
+upon a loan application. By comparing the prediction with actual
+outcome, the model assists the officer to use their judgement when
+arriving at a decision.</p>
+<p><img src="./images/duke-case-based.png" /> <strong>Figure 3.</strong>
+Comparison with cases similar to current applicant. Source: Chen
+(2018)</p>
+<p>Where the Duke model is lacking in corrective actions to change a
+“Bad” classification to “Good”, the New York University provides a
+succinct and effective solution.</p>
 </div>
 </div>
 <div id="references" class="section level2">
@@ -833,29 +985,33 @@ Add Duke and NYU
 <p><bibliography entry-spacing = "2" ></p>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-DukeModel" class="csl-entry">
-Chen, C. <em>et al.</em> (2018) <em><span class="nocase">An Explainable Model for Credit Risk Performance</span></em>. Duke University. Available at: <a href="http://dukedatasciencefico.cs.duke.edu">http://dukedatasciencefico.cs.duke.edu</a>.
+Chen, C. <em>et al.</em> (2018) <em><span class="nocase">An Explainable
+Model for Credit Risk Performance</span></em>. Duke University.
+Available at: <a
+href="http://dukedatasciencefico.cs.duke.edu">http://dukedatasciencefico.cs.duke.edu</a>.
 </div>
 </div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
-<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
 </button>
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.1.2 (2021-11-01)
+<pre><code>R version 4.2.1 (2022-06-23 ucrt)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 Running under: Windows 10 x64 (build 22000)
 
 Matrix products: default
 
 locale:
-[1] LC_COLLATE=English_United States.1252 
-[2] LC_CTYPE=English_United States.1252   
-[3] LC_MONETARY=English_United States.1252
+[1] LC_COLLATE=English_United States.utf8 
+[2] LC_CTYPE=English_United States.utf8   
+[3] LC_MONETARY=English_United States.utf8
 [4] LC_NUMERIC=C                          
-[5] LC_TIME=English_United States.1252    
+[5] LC_TIME=English_United States.utf8    
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
@@ -864,17 +1020,17 @@ other attached packages:
 [1] workflowr_1.7.0
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.8       bslib_0.3.1      compiler_4.1.2   pillar_1.7.0    
- [5] later_1.3.0      git2r_0.29.0     jquerylib_0.1.4  tools_4.1.2     
- [9] getPass_0.2-2    digest_0.6.29    jsonlite_1.7.3   evaluate_0.15   
-[13] tibble_3.1.6     lifecycle_1.0.1  pkgconfig_2.0.3  rlang_1.0.1     
-[17] cli_3.2.0        rstudioapi_0.13  yaml_2.3.5       xfun_0.29       
-[21] fastmap_1.1.0    httr_1.4.2       stringr_1.4.0    knitr_1.37      
-[25] sass_0.4.0       fs_1.5.2         vctrs_0.3.8      rprojroot_2.0.2 
-[29] glue_1.6.1       R6_2.5.1         processx_3.5.2   fansi_1.0.2     
-[33] rmarkdown_2.11   callr_3.7.0      magrittr_2.0.2   whisker_0.4     
-[37] ps_1.6.0         promises_1.2.0.1 htmltools_0.5.2  ellipsis_0.3.2  
-[41] httpuv_1.6.5     utf8_1.2.2       stringi_1.7.6    crayon_1.5.0    </code></pre>
+ [1] Rcpp_1.0.9       compiler_4.2.1   pillar_1.8.1     bslib_0.3.1     
+ [5] later_1.3.0      git2r_0.30.1     jquerylib_0.1.4  tools_4.2.1     
+ [9] getPass_0.2-2    digest_0.6.29    jsonlite_1.8.2   evaluate_0.17   
+[13] tibble_3.1.8     lifecycle_1.0.3  pkgconfig_2.0.3  rlang_1.0.6     
+[17] cli_3.3.0        rstudioapi_0.13  yaml_2.3.5       xfun_0.31       
+[21] fastmap_1.1.0    httr_1.4.3       stringr_1.4.1    knitr_1.39      
+[25] fs_1.5.2         vctrs_0.4.1      sass_0.4.1       rprojroot_2.0.3 
+[29] glue_1.6.2       R6_2.5.1         processx_3.7.0   fansi_1.0.3     
+[33] rmarkdown_2.14   callr_3.7.2      magrittr_2.0.3   whisker_0.4     
+[37] ps_1.7.1         promises_1.2.0.1 htmltools_0.5.2  httpuv_1.6.5    
+[41] utf8_1.2.2       stringi_1.7.8   </code></pre>
 </div>
 </div>
 

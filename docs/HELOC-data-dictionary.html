@@ -14,7 +14,7 @@
 
 <title>HELOC Data Dictionary</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
@@ -73,6 +73,7 @@ if (window.hljs) {
 
 
 
+
 <style type="text/css">
 /* for pandoc --citeproc since 2.11 */
 div.csl-bib-body { }
@@ -120,6 +121,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -348,7 +352,7 @@ div.tocify {
 <div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -364,15 +368,27 @@ div.tocify {
     Interpretable ML Models
   </a>
 </li>
-<li>
-  <a href="methodology.html">
-    <span class="fa fa-clipboard-list"></span>
-     
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Methodology
+     
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="methodology.html">
+        <span class="fa fa-clipboard-list"></span>
+         
+        Methodology
+      </a>
+    </li>
+    <li>
+      <a href="Interpretable-ML-Models.html">Presentation</a>
+    </li>
+  </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Dataset
      
     <span class="caret"></span>
@@ -394,7 +410,7 @@ div.tocify {
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Interpret
      
     <span class="caret"></span>
@@ -433,7 +449,7 @@ div.tocify {
 <div id="header">
 
 <div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
 <ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
@@ -444,14 +460,16 @@ div.tocify {
 
 <h1 class="title toc-ignore">HELOC Data Dictionary</h1>
 <h4 class="author">Jim Coen</h4>
-<h4 class="date">Monday, May 23, 2022</h4>
+<h4 class="date">Tuesday, November 15, 2022</h4>
 
 </div>
 
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -460,7 +478,9 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -469,17 +489,27 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-05-23
+<strong>Last updated:</strong> 2022-11-15
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 0
 </p>
 <p>
-<strong>Knit directory:</strong> <code>Interpretable-ML-Models/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+<strong>Knit directory:</strong> <code>Interpretable-ML-Models/</code>
+<span class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
 </p>
 <p>
-This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
-  href="https://github.com/workflowr/workflowr">workflowr</a> (version 1.7.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.0). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
 </p>
 <hr>
 </div>
@@ -488,91 +518,138 @@ This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysi
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguptodate"
+class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
 </p>
 </div>
 <div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20220121code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20220121)</code> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20220121code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20220121)</code> </a>
 </p>
 </div>
-<div id="strongSeedstrongcodesetseed20220121code" class="panel-collapse collapse">
+<div id="strongSeedstrongcodesetseed20220121code"
+class="panel-collapse collapse">
 <div class="panel-body">
-<p>The command <code>set.seed(20220121)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+<p>The command <code>set.seed(20220121)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
 </p>
 </div>
-<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
 </p>
 </div>
 <div id="strongCachestrongnone" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
 </p>
 </div>
 <div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstreebd896bdacf0281594bfc4d0e0500b0e15bb1bb06targetblankbd896bda"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/bd896bdacf0281594bfc4d0e0500b0e15bb1bb06" target="_blank">bd896bd</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree0aeb8e485add5277ef9c6539a3cdb29d915f0684targetblank0aeb8e4a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/0aeb8e485add5277ef9c6539a3cdb29d915f0684" target="_blank">0aeb8e4</a>
+</a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstreebd896bdacf0281594bfc4d0e0500b0e15bb1bb06targetblankbd896bda" class="panel-collapse collapse">
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomJJCoenInterpretableMLModelstree0aeb8e485add5277ef9c6539a3cdb29d915f0684targetblank0aeb8e4a"
+class="panel-collapse collapse">
 <div class="panel-body">
 <p>
-Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/bd896bdacf0281594bfc4d0e0500b0e15bb1bb06" target="_blank">bd896bd</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version
+<a href="https://github.com/JJCoen/Interpretable-ML-Models/tree/0aeb8e485add5277ef9c6539a3cdb29d915f0684" target="_blank">0aeb8e4</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
 </p>
 <p>
-Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
 </p>
 <pre><code>
 Ignored files:
@@ -581,20 +658,27 @@ Ignored files:
     Ignored:    analysis/.Rhistory
 
 Untracked files:
-    Untracked:  Pres-Video-Interpretable-ML.mp4
-    Untracked:  Presentation-Interpretable-ML.pptx
+    Untracked:  CA1-Research proposal Outline.docx
+    Untracked:  Research-Proposal.docx
     Untracked:  code/.ipynb_checkpoints/HELOC-Data-Scientist-checkpoint.ipynb
     Untracked:  code/.ipynb_checkpoints/HELOC-Service-User-checkpoint.ipynb
+    Untracked:  marking=rubic.PNG
+    Untracked:  project-ideas.odt
+    Untracked:  timeline-24-Nov.xlsx
 
 Unstaged changes:
+    Modified:   README.md
     Deleted:    analysis/AIX360.Rmd
     Modified:   analysis/_site.yml
     Deleted:    analysis/about.Rmd
     Deleted:    analysis/license.Rmd
+    Modified:   code/HELOC-Data-Scientist.ipynb
 
 </code></pre>
 <p>
-Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
 </p>
 </div>
 </div>
@@ -605,7 +689,12 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/HELOC-data-dictionary.Rmd</code>) and HTML (<code>docs/HELOC-data-dictionary.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/HELOC-data-dictionary.Rmd</code>)
+and HTML (<code>docs/HELOC-data-dictionary.html</code>) files. If you’ve
+configured a remote Git repository (see <code>?wflow_git_remote</code>),
+click on the hyperlinks in the table below to view the files as they
+were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -629,6 +718,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/JJCoen/Interpretable-ML-Models/a152749d6bf19873316ff32b4e0a2adc1eb1b09c/docs/HELOC-data-dictionary.html" target="_blank">a152749</a>
+</td>
+<td>
+JJCoen
+</td>
+<td>
+2022-05-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1010,74 +1116,127 @@ add missForest
 </div>
 </div>
 </div>
-<div id="home-equity-line-of-credit-heloc-dataset" class="section level1">
+<div id="home-equity-line-of-credit-heloc-dataset"
+class="section level1">
 <h1>Home Equity Line of Credit (HELOC) Dataset</h1>
-<p>The dataset contains annonyised attributes of actual loan applications to banks by homeowners. Credit is extended to an borrower based upon the equity in their home, that is, the difference between the current market value and the purchase price of the home. Borrowers request loans in the range of \$5,000 to \$150,000.</p>
-<p>It is standard practice in Credit Risk Modelling to record two types of features. Application data consists of details about a loan application itself. And behavioural information contains data related to the financial circumstances of a loan applicant.</p>
-<p>The HELOC data-set only has application data. Features are transaction-related (such as credit exposure) or account-related (days past due, account tenure, delinquincy).</p>
+<p>The dataset contains annonyised attributes of actual loan
+applications to banks by homeowners. Credit is extended to an borrower
+based upon the equity in their home, that is, the difference between the
+current market value and the purchase price of the home. Borrowers
+request loans in the range of \$5,000 to \$150,000.</p>
+<p>It is standard practice in Credit Risk Modelling to record two types
+of features. Application data consists of details about a loan
+application itself. And behavioural information contains data related to
+the financial circumstances of a loan applicant.</p>
+<p>The HELOC data-set only has application data. Features are
+transaction-related (such as credit exposure) or account-related (days
+past due, account tenure, delinquincy).</p>
 <div id="description-of-the-study" class="section level2">
 <h2>Description of the study:</h2>
-<p>In 2018, Fair Isaac Corporation (FICO) created the HELOC dataset from real-world home equity loan applications. It is the source data for the FICO Explainable Machine Learning Challenge. This challenge is sponsored by FICO, Google, Imperial College London, MIT, University of Oxford, UC Irvine and UC Berkeley.</p>
+<p>In 2018, Fair Isaac Corporation (FICO) created the HELOC dataset from
+real-world home equity loan applications. It is the source data for the
+FICO Explainable Machine Learning Challenge. This challenge is sponsored
+by FICO, Google, Imperial College London, MIT, University of Oxford, UC
+Irvine and UC Berkeley.</p>
 </div>
 <div id="sampling-information" class="section level2">
 <h2>Sampling information:</h2>
 <p>There are problems with missing values.</p>
 <p>- It negatively impacts machine learning accuracy.</p>
-<p>- A model may interpret NA values as defaults which can lead to bias. Such a model could become unstable.</p>
-<p>- For some ML models, a NA value for a numeric or character variable raises an error.</p>
-<p>Features containing data about delinquency are coded to numeric scale and missing values are labeled with negative integer number.</p>
+<p>- A model may interpret NA values as defaults which can lead to bias.
+Such a model could become unstable.</p>
+<p>- For some ML models, a NA value for a numeric or character variable
+raises an error.</p>
+<p>Features containing data about delinquency are coded to numeric scale
+and missing values are labeled with negative integer number.</p>
 </div>
 <div id="structure-of-the-data-within-the-file" class="section level2">
 <h2>Structure of the data within the file:</h2>
-<p>Data is organised as a csv file containing 24 columns and 10,459 rows for each loan application. Apart from the target variable, <code>RiskPerformance,</code> all 23 feature variables are numeric. Of the 10,459 observations, 5,000 had a <code>RiskPerformance</code> of “Good” which means they had paid back loans within 2 years. The remaining 5,459 are classified as “Bad”.</p>
+<p>Data is organised as a csv file containing 24 columns and 10,459 rows
+for each loan application. Apart from the target variable,
+<code>RiskPerformance,</code> all 23 feature variables are numeric. Of
+the 10,459 observations, 5,000 had a <code>RiskPerformance</code> of
+“Good” which means they had paid back loans within 2 years. The
+remaining 5,459 are classified as “Bad”.</p>
 </div>
 <div id="details-about-the-data" class="section level2">
 <h2>Details about the data:</h2>
-<p>Descriptions for column headers comes from work carried out by the University of Warsaw and the Warsaw University of Technology <span class="citation">(Kurzelewski and Radzikowski, 2020)</span>.</p>
+<p>Descriptions for column headers comes from work carried out by the
+University of Warsaw and the Warsaw University of Technology <span
+class="citation">(Kurzelewski and Radzikowski, 2020)</span>.</p>
 <div id="variable-id-and-label" class="section level3">
 <h3>Variable ID and label</h3>
 <div id="target-variable" class="section level4">
 <h4>Target Variable</h4>
-<p><code>RiskPerformance</code> = “Good”: These are customers that are unlikely to default on loan payments. Not approving a loan, due to miss-classification, results in lost business to the bank.</p>
-<p><code>RiskPerformance</code> = “Bad”: These are customers that were 90 days past due or worse at least once over a period of 24 months from when the credit account was opened.. Approving a loan, due to miss-classification, results in loss of capital to the bank.</p>
+<p><code>RiskPerformance</code> = “Good”: These are customers that are
+unlikely to default on loan payments. Not approving a loan, due to
+miss-classification, results in lost business to the bank.</p>
+<p><code>RiskPerformance</code> = “Bad”: These are customers that were
+90 days past due or worse at least once over a period of 24 months from
+when the credit account was opened.. Approving a loan, due to
+miss-classification, results in loss of capital to the bank.</p>
 <pre><code>
  Bad Good 
 5459 5000 </code></pre>
-<p>This is a balanced dataset with about the same number of observations in each target class.</p>
+<p>This is a balanced dataset with about the same number of observations
+in each target class.</p>
 </div>
 <div id="feature-variables" class="section level4">
 <h4>Feature Variables</h4>
 <ul>
-<li><p><code>ExternalRiskEstimate</code> - consolidated indicator of risk markers (equivalent of polish BIK’s rate)</p></li>
-<li><p><code>MSinceOldestTradeOpen</code> - number of months that have elapsed since first trade</p></li>
-<li><p><code>MSinceMostRecentTradeOpen</code> - number of months that have elapsed since last opened trade</p></li>
+<li><p><code>ExternalRiskEstimate</code> - consolidated indicator of
+risk markers (equivalent of polish BIK’s rate)</p></li>
+<li><p><code>MSinceOldestTradeOpen</code> - number of months that have
+elapsed since first trade</p></li>
+<li><p><code>MSinceMostRecentTradeOpen</code> - number of months that
+have elapsed since last opened trade</p></li>
 <li><p><code>AverageMInFile</code> - average months in file</p></li>
-<li><p><code>NumSatisfactoryTrades</code> - number of satisfactory trades</p></li>
-<li><p><code>NumTrades60Ever2DerogPubRec</code> - number of trades which are more than 60 past due</p></li>
-<li><p><code>NumTrades90Ever2DerogPubRec</code> - number of trades which are more than 90 past due</p></li>
-<li><p><code>PercentTradesNeverDelq</code> - percent of trades, that were not delinquent</p></li>
-<li><p><code>MSinceMostRecentDelq</code> - number of months that have elapsed since last delinquent trade</p></li>
-<li><p><code>MaxDelq2PublicRecLast12M</code> - the longest delinquency period in last 12 months</p></li>
-<li><p><code>MaxDelqEver</code> - the longest delinquency period</p></li>
+<li><p><code>NumSatisfactoryTrades</code> - number of satisfactory
+trades</p></li>
+<li><p><code>NumTrades60Ever2DerogPubRec</code> - number of trades which
+are more than 60 past due</p></li>
+<li><p><code>NumTrades90Ever2DerogPubRec</code> - number of trades which
+are more than 90 past due</p></li>
+<li><p><code>PercentTradesNeverDelq</code> - percent of trades, that
+were not delinquent</p></li>
+<li><p><code>MSinceMostRecentDelq</code> - number of months that have
+elapsed since last delinquent trade</p></li>
+<li><p><code>MaxDelq2PublicRecLast12M</code> - the longest delinquency
+period in last 12 months</p></li>
+<li><p><code>MaxDelqEver</code> - the longest delinquency
+period</p></li>
 <li><p><code>NumTotalTrades</code> - total number of trades</p></li>
-<li><p><code>NumTradesOpeninLast12M</code> - number of trades opened in last 12 months</p></li>
-<li><p><code>PercentInstallTrades</code> - percent of installments trades</p></li>
-<li><p><code>MSinceMostRecentInqexcl7days</code> - months since last inquiry (excluding last 7 days)</p></li>
-<li><p><code>NumInqLast6M</code> - number of inquiries in last 6 months</p></li>
-<li><p><code>NumInqLast6Mexcl7days</code> - number of inquiries in last 6 months (excluding last 7 days)</p></li>
-<li><p><code>NetFractionRevolvingBurden</code> - revolving balance divided by credit limit</p></li>
-<li><p><code>NetFractionInstallBurden</code> - installment balance divided by original loan amount</p></li>
-<li><p><code>NumRevolvingTradesWBalance</code> - number of revolving trades with balance</p></li>
-<li><p><code>NumInstallTradesWBalance</code> - number of installment trades with balance</p></li>
-<li><p><code>NumBank2NatlTradesWHighUtilization</code> - number of trades with high utilization ratio (credit utilization ratio - the amount of a credit card balance compared to the credit limit)</p></li>
-<li><p><code>PercentTradesWBalance</code> - percent of trades with balance</p></li>
+<li><p><code>NumTradesOpeninLast12M</code> - number of trades opened in
+last 12 months</p></li>
+<li><p><code>PercentInstallTrades</code> - percent of installments
+trades</p></li>
+<li><p><code>MSinceMostRecentInqexcl7days</code> - months since last
+inquiry (excluding last 7 days)</p></li>
+<li><p><code>NumInqLast6M</code> - number of inquiries in last 6
+months</p></li>
+<li><p><code>NumInqLast6Mexcl7days</code> - number of inquiries in last
+6 months (excluding last 7 days)</p></li>
+<li><p><code>NetFractionRevolvingBurden</code> - revolving balance
+divided by credit limit</p></li>
+<li><p><code>NetFractionInstallBurden</code> - installment balance
+divided by original loan amount</p></li>
+<li><p><code>NumRevolvingTradesWBalance</code> - number of revolving
+trades with balance</p></li>
+<li><p><code>NumInstallTradesWBalance</code> - number of installment
+trades with balance</p></li>
+<li><p><code>NumBank2NatlTradesWHighUtilization</code> - number of
+trades with high utilization ratio (credit utilization ratio - the
+amount of a credit card balance compared to the credit limit)</p></li>
+<li><p><code>PercentTradesWBalance</code> - percent of trades with
+balance</p></li>
 </ul>
 </div>
 </div>
 </div>
 <div id="missing-values" class="section level2">
 <h2>Missing Values</h2>
-<p>A negative numeric indicates a missing value. Remove rows with all missing values</p>
+<p>A negative numeric indicates a missing value. Remove rows with all
+missing values</p>
 <pre><code>[1] 588</code></pre>
 <p>588 rows, that had all negative values, were removed</p>
 <div id="variables-containing-missing-values" class="section level3">
@@ -1098,7 +1257,8 @@ Attaching package: &#39;VIM&#39;</code></pre>
  [9] &quot;NumBank2NatlTradesWHighUtilization&quot; &quot;PercentTradesWBalance&quot;             </code></pre>
 <p><img src="figure/HELOC-data-dictionary.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Columns 3, 4, 6, and 8 have most missing values<br />
-“MSinceMostRecentDelq”, “MSinceMostRecentInqexcl7days”, and “NetFractionInstallBurden”</p>
+“MSinceMostRecentDelq”, “MSinceMostRecentInqexcl7days”, and
+“NetFractionInstallBurden”</p>
 <pre><code>  ExternalRiskEstimate MSinceOldestTradeOpen MSinceMostRecentDelq
 1                    0                     0                    0
 2                    0                     0                    1
@@ -1123,20 +1283,29 @@ Attaching package: &#39;VIM&#39;</code></pre>
 3                                  0                     0
 4                                  0                     0
 5                                  0                     0</code></pre>
-<p>Plot correlations between variables with missing values, ranked by r value.</p>
+<p>Plot correlations between variables with missing values, ranked by r
+value.</p>
 <pre><code>Returning only the top 10. You may override with the &#39;top&#39; argument</code></pre>
 <pre><code>Warning in .font_global(font, quiet = FALSE): Font &#39;Arial Narrow&#39; is not
 installed, has other name, or can&#39;t be found</code></pre>
 <p><img src="figure/HELOC-data-dictionary.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p><em>NetFractionRevolvingBurden</em> and <em>NumRevolvingTradesWBalance</em> have highest correlation for missing values. This is due to absence of data on the revolving balance.</p>
+<p><em>NetFractionRevolvingBurden</em> and
+<em>NumRevolvingTradesWBalance</em> have highest correlation for missing
+values. This is due to absence of data on the revolving balance.</p>
 </div>
-<div id="justification-for-using-missforest-package-for-imputation" class="section level3">
-<h3>Justification for using <code>missForest</code> package for imputation</h3>
-<p>Similar to other imputation methods, it uses <em>predictive mean matching</em>. This calculates the predicted mean for each observation. It then imputes using the observed value for the instance with the predicted mean that is the closest match to the missing instance.</p>
+<div id="justification-for-using-missforest-package-for-imputation"
+class="section level3">
+<h3>Justification for using <code>missForest</code> package for
+imputation</h3>
+<p>Similar to other imputation methods, it uses <em>predictive mean
+matching</em>. This calculates the predicted mean for each observation.
+It then imputes using the observed value for the instance with the
+predicted mean that is the closest match to the missing instance.</p>
 <p>Functionality unique to <code>mi</code> includes:</p>
 <ol style="list-style-type: decimal">
 <li>detection of high collinearity</li>
-<li>adding noise to the prediction process do handle additive constraints between variables.</li>
+<li>adding noise to the prediction process do handle additive
+constraints between variables.</li>
 <li>dealing with semi-continuous data.</li>
 </ol>
 <pre><code>Warning: Formatting options are now in print() or as function arguments in
@@ -1633,63 +1802,67 @@ PercentTradesWBalance
 <h2>References</h2>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-XAIStories" class="csl-entry">
-Kurzelewski, T. and Radzikowski, T. (2020) <span>‘<span>Chapter 9 Story HELOC Credits</span>’</span>. Available at: <a href="https://pbiecek.github.io/xai_stories/story-heloc-credits.html">https://pbiecek.github.io/xai_stories/story-heloc-credits.html</a> (Accessed: 14 January 2022).
+Kurzelewski, T. and Radzikowski, T. (2020) <span>‘<span>Chapter 9 Story
+HELOC Credits</span>’</span>. Available at: <a
+href="https://pbiecek.github.io/xai_stories/story-heloc-credits.html">https://pbiecek.github.io/xai_stories/story-heloc-credits.html</a>
+(Accessed: 14 January 2022).
 </div>
 </div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
-<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
 </button>
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
-<pre><code>R version 4.1.2 (2021-11-01)
+<pre><code>R version 4.2.1 (2022-06-23 ucrt)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 Running under: Windows 10 x64 (build 22000)
 
 Matrix products: default
 
 locale:
-[1] LC_COLLATE=English_United States.1252 
-[2] LC_CTYPE=English_United States.1252   
-[3] LC_MONETARY=English_United States.1252
+[1] LC_COLLATE=English_United States.utf8 
+[2] LC_CTYPE=English_United States.utf8   
+[3] LC_MONETARY=English_United States.utf8
 [4] LC_NUMERIC=C                          
-[5] LC_TIME=English_United States.1252    
+[5] LC_TIME=English_United States.utf8    
 
 attached base packages:
 [1] grid      stats     graphics  grDevices utils     datasets  methods  
 [8] base     
 
 other attached packages:
- [1] skimr_2.1.3       lares_5.0.6       VIM_6.1.1         colorspace_2.0-3 
- [5] kableExtra_1.3.4  data.table_1.14.2 purrr_0.3.4       dplyr_1.0.8      
- [9] ggplot2_3.3.5     workflowr_1.7.0  
+ [1] skimr_2.1.4       lares_5.1.2       VIM_6.1.1         colorspace_2.0-3 
+ [5] kableExtra_1.3.4  data.table_1.14.2 purrr_0.3.5       dplyr_1.0.10     
+ [9] ggplot2_3.3.6     workflowr_1.7.0  
 
 loaded via a namespace (and not attached):
- [1] bitops_1.0-7      fs_1.5.2          lubridate_1.8.0   webshot_0.5.2    
- [5] httr_1.4.2        rprojroot_2.0.2   repr_1.1.4        tools_4.1.2      
- [9] bslib_0.3.1       utf8_1.2.2        R6_2.5.1          rpart_4.1-15     
-[13] DBI_1.1.2         nnet_7.3-17       withr_2.4.3       sp_1.4-6         
-[17] tidyselect_1.1.2  processx_3.5.2    compiler_4.1.2    git2r_0.29.0     
-[21] cli_3.2.0         rvest_1.0.2       xml2_1.3.3        labeling_0.4.2   
-[25] sass_0.4.0        scales_1.1.1      lmtest_0.9-39     DEoptimR_1.0-10  
-[29] robustbase_0.93-9 callr_3.7.0       proxy_0.4-26      systemfonts_1.0.4
-[33] stringr_1.4.0     digest_0.6.29     rmarkdown_2.11    svglite_2.1.0    
+ [1] bitops_1.0-7      fs_1.5.2          lubridate_1.8.0   webshot_0.5.3    
+ [5] httr_1.4.3        rprojroot_2.0.3   repr_1.1.4        tools_4.2.1      
+ [9] bslib_0.3.1       utf8_1.2.2        R6_2.5.1          rpart_4.1.16     
+[13] DBI_1.1.3         nnet_7.3-17       withr_2.5.0       sp_1.5-0         
+[17] tidyselect_1.2.0  processx_3.7.0    compiler_4.2.1    git2r_0.30.1     
+[21] cli_3.3.0         rvest_1.0.2       xml2_1.3.3        labeling_0.4.2   
+[25] sass_0.4.1        scales_1.2.1      lmtest_0.9-40     DEoptimR_1.0-11  
+[29] robustbase_0.95-0 callr_3.7.2       proxy_0.4-27      systemfonts_1.0.4
+[33] stringr_1.4.1     digest_0.6.29     rmarkdown_2.14    svglite_2.1.0    
 [37] base64enc_0.1-3   pkgconfig_2.0.3   htmltools_0.5.2   fastmap_1.1.0    
-[41] highr_0.9         rlang_1.0.1       rstudioapi_0.13   farver_2.1.0     
-[45] jquerylib_0.1.4   generics_0.1.2    zoo_1.8-9         jsonlite_1.7.3   
-[49] zip_2.2.0         car_3.0-12        RCurl_1.98-1.6    magrittr_2.0.2   
-[53] patchwork_1.1.1   Matrix_1.4-0      Rcpp_1.0.8        munsell_0.5.0    
-[57] fansi_1.0.2       abind_1.4-5       lifecycle_1.0.1   stringi_1.7.6    
+[41] highr_0.9         rlang_1.0.6       rstudioapi_0.13   farver_2.1.1     
+[45] jquerylib_0.1.4   generics_0.1.3    zoo_1.8-11        jsonlite_1.8.2   
+[49] zip_2.2.0         car_3.1-0         RCurl_1.98-1.7    magrittr_2.0.3   
+[53] patchwork_1.1.1   Matrix_1.4-1      Rcpp_1.0.9        munsell_0.5.0    
+[57] fansi_1.0.3       abind_1.4-5       lifecycle_1.0.3   stringi_1.7.8    
 [61] whisker_0.4       pROC_1.18.0       yaml_2.3.5        carData_3.0-5    
-[65] MASS_7.3-55       plyr_1.8.6        promises_1.2.0.1  crayon_1.5.0     
-[69] lattice_0.20-45   knitr_1.37        ps_1.6.0          pillar_1.7.0     
-[73] ranger_0.13.1     boot_1.3-28       glue_1.6.1        evaluate_0.15    
-[77] getPass_0.2-2     rpart.plot_3.1.0  laeken_0.5.2      vcd_1.4-9        
-[81] vctrs_0.3.8       httpuv_1.6.5      tidyr_1.2.0       gtable_0.3.0     
-[85] assertthat_0.2.1  xfun_0.29         openxlsx_4.2.5    h2o_3.36.0.3     
-[89] e1071_1.7-9       later_1.3.0       class_7.3-20      viridisLite_0.4.0
-[93] tibble_3.1.6      ellipsis_0.3.2   </code></pre>
+[65] MASS_7.3-57       plyr_1.8.7        promises_1.2.0.1  lattice_0.20-45  
+[69] knitr_1.39        ps_1.7.1          pillar_1.8.1      ranger_0.14.1    
+[73] boot_1.3-28       glue_1.6.2        evaluate_0.17     getPass_0.2-2    
+[77] rpart.plot_3.1.1  laeken_0.5.2      vcd_1.4-10        vctrs_0.4.1      
+[81] httpuv_1.6.5      gtable_0.3.1      tidyr_1.2.1       assertthat_0.2.1 
+[85] xfun_0.31         openxlsx_4.2.5    h2o_3.36.1.2      e1071_1.7-11     
+[89] later_1.3.0       class_7.3-20      viridisLite_0.4.1 tibble_3.1.8     
+[93] ellipsis_0.3.2   </code></pre>
 </div>
 </div>
 </div>
