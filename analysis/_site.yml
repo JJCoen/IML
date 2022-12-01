@@ -8,8 +8,12 @@ navbar:
     icon: fa-bar-chart
     href: index.html
   - text: Methodology
-    icon: fa-clipboard-list
-    href: methodology.html
+    menu:
+    - text: Methodology
+      icon: fa-clipboard-list
+      href: methodology.html
+    - text: Presentation
+      href: Interpretable-ML-Models.html
   - text: Dataset
     menu:
     - text: HELOC Data Dictionary
